@@ -157,9 +157,8 @@ static BOOL isAuthenticationShowed = FALSE;
 %hook IGRootViewController
 - (void)viewDidLoad {
     %orig;
-    /* if ([BHIManager profileImageSave]) { */
-        [self addHandleLongPress];
-    /* } */
+    
+    [self addHandleLongPress];
 }
 %new - (void)addHandleLongPress {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
