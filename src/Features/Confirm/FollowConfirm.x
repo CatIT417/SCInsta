@@ -1,13 +1,23 @@
 #import "../../Manager.h"
 #import "../../Utils.h"
+#import "../../InstagramHeaders.h"
 
 // Follow button on profile page
 %hook IGFollowController
 - (void)_didPressFollowButton {
+    // Get user follow status (check if already following user)
+    NSInteger UserFollowStatus = self.user.followStatus;
+
     if ([BHIManager followConfirmation]) {
         NSLog(@"[BHInsta] Confirm follow triggered");
 
-        [BHIUtils showConfirmation:^(void) { %orig; }];
+        // Only show confirm dialog if user is not already following
+        if (UserFollowStatus == 2) {
+            [BHIUtils showConfirmation:^(void) { %orig; }];
+        }
+        else {
+            return %orig;
+        }
     } else {
         return %orig;
     }

@@ -195,6 +195,7 @@
  * For HD profile picture
  */
 @interface IGUser : NSObject
+@property NSInteger followStatus;
 @property(copy) NSString *username;
 @property BOOL followsCurrentUser;
 - (NSURL *)HDProfilePicURL;
