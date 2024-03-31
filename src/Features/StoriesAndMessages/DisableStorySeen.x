@@ -1,16 +1,22 @@
 #import "../../InstagramHeaders.h"
 #import "../../Manager.h"
-#import "../../Tweak.h"
 
-%hook IGStoryViewerViewController
-- (void)fullscreenSectionController:(id)arg1 didMarkItemAsSeen:(id)arg2 {
+%hook IGStorySeenStateUploader
+- (id)initWithUserSessionPK:(id)arg1 networker:(id)arg2 {
     if ([BHIManager noSeenReceipt]) {
-        %orig;
+        NSLog(@"[BHInsta] Prevented seen receipt from being sent");
 
-        // Currently not working (dunno why and im lazy too fix)
-        /* if (shouldBeSeen) {
-            shouldBeSeen = false;
-        } */
+        return nil;
+    } else {
+        return %orig;
+    }
+}
+
+- (id)networker {
+    if ([BHIManager noSeenReceipt]) {
+        NSLog(@"[BHInsta] Prevented seen receipt from being sent");
+
+        return nil;
     } else {
         return %orig;
     }
