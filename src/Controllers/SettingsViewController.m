@@ -94,7 +94,6 @@
         _specifiers = [NSMutableArray arrayWithArray:@[
             // Section 1: General
             [self newSectionWithTitle:@"General" footer:nil],
-            [self newSwitchCellWithTitle:@"Show like count" detailTitle:@"Show like count in the post" key:@"show_like_count" defaultValue:true changeAction:nil],
             [self newSwitchCellWithTitle:@"Copy description" detailTitle:@"Copy the post description with a long press" key:@"copy_description" defaultValue:true changeAction:nil],
             [self newSwitchCellWithTitle:@"Do not save recent searches" detailTitle:@"Search bars will no longer save your recent searches" key:@"no_recent_searches" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Hide explore posts grid" detailTitle:@"Hides the grid of suggested posts on the explore/search tab" key:@"hide_explore_grid" defaultValue:false changeAction:nil],

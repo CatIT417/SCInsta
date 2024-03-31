@@ -23,9 +23,6 @@
 + (BOOL)removeSuggestedThreads {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"no_suggested_threads"];
 }
-+ (BOOL)showLikeCount {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"show_like_count"];
-}
 + (BOOL)postLikeConfirmation {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"like_confirm"];
 }

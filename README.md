@@ -12,7 +12,6 @@ A feature-rich tweak for Instagram on iOS!\
 
 # Features
 ### General
-- Show like count
 - Copy description
 - Do not save recent searches
 
@@ -43,6 +42,9 @@ A feature-rich tweak for Instagram on iOS!\
 
 ### Security
 - Padlock (biometric requirement to access app)
+
+### Built-in Tweak Settings
+Long press on the Instagram settings button to bring up the BHInsta tweak settings.
 
 # Building
 ## Prerequisites

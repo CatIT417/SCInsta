@@ -10,7 +10,6 @@
 + (BOOL)removeSuggestedAccounts;
 + (BOOL)removeSuggestedReels;
 + (BOOL)removeSuggestedThreads;
-+ (BOOL)showLikeCount;
 + (BOOL)postLikeConfirmation;
 + (BOOL)reelsLikeConfirmation;
 + (BOOL)followConfirmation;
