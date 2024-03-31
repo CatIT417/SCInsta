@@ -85,3 +85,16 @@
     }
 }
 %end
+
+// Follow button on suggested friends (in story section)
+%hook IGStorySectionController
+- (void)followButtonTapped:(id)arg1 cell:(id)arg2 {
+    if ([BHIManager followConfirmation]) {
+        NSLog(@"[BHInsta] Confirm follow triggered");
+        
+        [BHIUtils showConfirmation:^(void) { %orig; }];
+    } else {
+        return %orig;
+    }
+}
+%end
