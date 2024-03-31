@@ -1,14 +1,6 @@
 # BHInsta
 A feature-rich tweak for Instagram on iOS!\
-`Version v0.2.2` | `Tested on Instagram v322.1.0`
-
----
-
-> [!IMPORTANT]  
-> As of a recent Instagram update, the settings menu no longer shows the dropdown.
-> As a temporary workaround, clicking the Instagram logo on the home tab will open BHInsta settings.
-
----
+`Version v0.2.2` | `Tested on Instagram v324.0.0`
 
 # Features
 ### General
@@ -44,7 +36,7 @@ A feature-rich tweak for Instagram on iOS!\
 - Padlock (biometric requirement to access app)
 
 ### Built-in Tweak Settings
-Long press on the Instagram settings button to bring up the BHInsta tweak settings.
+> Long press on the Instagram settings button to bring up the BHInsta tweak settings.
 
 # Building
 ## Prerequisites
