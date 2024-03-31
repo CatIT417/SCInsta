@@ -82,7 +82,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %end
 
 
-// Instagram DM visual messages
+// Instagram DM visual messages / IG stories
 %hook IGDirectVisualMessageViewerSession
 - (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 {
     if ([BHIManager noScreenShotAlert]) {
@@ -123,6 +123,30 @@ static BOOL isAuthenticationShowed = FALSE;
 
 - (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 {
     if ([BHIManager unlimitedReplay]) {
+        return nil;
+    }
+    return %orig;
+}
+%end
+%hook IGDirectVisualMessageViewerController
+- (void)screenshotObserverDidSeeScreenshotTaken:(id)arg1 {
+    if ([BHIManager noScreenShotAlert]) {
+        return;
+    }
+    return %orig;
+}
+- (void)screenshotObserverDidSeeActiveScreenCapture:(id)arg1 event:(NSInteger)arg2 {
+    if ([BHIManager noScreenShotAlert]) {
+        return;
+    }
+    return %orig;
+}
+%end
+
+// Instagram Screenshot Observer
+%hook IGScreenshotObserver
+- (id)initForController:(id)arg1 {
+    if ([BHIManager noScreenShotAlert]) {
         return nil;
     }
     return %orig;
