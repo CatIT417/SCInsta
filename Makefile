@@ -6,7 +6,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = BHInsta
 
-BHInsta_FILES = $(shell find src -type f \( -iname \*.x -o -iname \*.m \)) $(wildcard modules/JGProgressHUD/*.m)
+BHInsta_FILES = $(shell find src -type f \( -iname \*.x -o -iname \*.xm -o -iname \*.m \)) $(wildcard modules/JGProgressHUD/*.m)
 BHInsta_FRAMEWORKS = UIKit Foundation CoreGraphics Photos CoreServices SystemConfiguration SafariServices Security QuartzCore
 BHInsta_PRIVATE_FRAMEWORKS = Preferences
 BHInsta_EXTRA_FRAMEWORKS = Cephei CepheiPrefs CepheiUI

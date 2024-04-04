@@ -21,6 +21,11 @@
 
 @interface IGBadgedNavigationButton : UIView
 - (void)handleLongPress; // new
+
+@interface IGShimmeringGridView : UIView
+@end
+
+@interface IGExploreGridViewController : IGViewController
 @end
 
 @interface IGFeedGroupHeaderCell : UICollectionViewCell
