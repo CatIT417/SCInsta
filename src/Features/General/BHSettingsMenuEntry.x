@@ -19,7 +19,7 @@
     NSLog(@"[BHInsta] Tweak settings gesture activated");
 
     UIViewController *rootController = [[UIApplication sharedApplication] delegate].window.rootViewController;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[SettingsViewController new]];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[BHSettingsViewController new]];
     
     [rootController presentViewController:navigationController animated:YES completion:nil];
 }

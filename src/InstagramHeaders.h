@@ -6,38 +6,47 @@
 #import "Controllers/SecurityViewController.h"
 #import "../modules/JGProgressHUD/JGProgressHUD.h"
 
-@interface IGRootViewController: UIViewController
+@interface IGRootViewController : UIViewController
 - (void)addHandleLongPress; // new
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
 @end
 
-@interface IGViewController: UIViewController
+@interface IGViewController : UIViewController
 - (void)_superPresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(id)completion;
 @end
 
-@interface IGMainFeedAppHeaderController: UIViewController
+@interface IGMainFeedAppHeaderController : UIViewController
 - (void)_superPresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(id)completion; // new
 @end
 
-@interface IGBadgedNavigationButton: UIView
+@interface IGBadgedNavigationButton : UIView
 - (void)handleLongPress; // new
+@end
+
+@interface IGFeedGroupHeaderCell : UICollectionViewCell
+@end
+
+@interface IGShimmeringGridView : UIView
+@end
+
+@interface IGExploreGridViewController : IGViewController
 @end
 
 @interface UIImage ()
 - (NSString *)ig_imageName;
 @end
 
-@interface IGProfileMenuSheetViewController: IGViewController
+@interface IGProfileMenuSheetViewController :  IGViewController
 @end
 
 @interface IGTableViewCell: UITableViewCell
 - (id)initWithReuseIdentifier:(NSString *)identifier;
 @end
 
-@interface IGProfileSheetTableViewCell: IGTableViewCell
+@interface IGProfileSheetTableViewCell : IGTableViewCell
 @end
 
-@interface IGTallNavigationBarView: UIView
+@interface IGTallNavigationBarView : UIView
 @end
 
 @interface UIView (RCTViewUnmounting)
@@ -61,12 +70,12 @@
 @interface IGPhoto: NSObject
 @end
 
-@interface IGPostItem: NSObject
+@interface IGPostItem : NSObject
 @property(readonly) IGVideo *video;
 @property(readonly) IGPhoto *photo;
 @end
 
-@interface IGPageMediaView: UIView
+@interface IGPageMediaView : UIView
 @property(readonly) NSMutableArray <IGPostItem *> *items;
 - (IGPostItem *)currentMediaItem;
 @end
@@ -82,11 +91,11 @@
 @property(retain, nonatomic) IGImageSpecifier *imageSpecifier;
 @end
 
-@interface IGFeedItemPagePhotoCell: UICollectionViewCell
+@interface IGFeedItemPagePhotoCell : UICollectionViewCell
 @property (nonatomic, strong) id post;
 @end
 
-@interface IGProfilePicturePreviewViewController: UIViewController
+@interface IGProfilePicturePreviewViewController : UIViewController
 {
     IGImageView *_profilePictureView;
 }
@@ -98,22 +107,22 @@
 @interface IGProfilePicturePreviewViewController () <BHIDownloadDelegate>
 @end
 
-@interface IGFeedItemMediaCell: UICollectionViewCell
+@interface IGFeedItemMediaCell : UICollectionViewCell
 @property(retain, nonatomic) IGMedia *post;
 - (UIImage *)mediaCellCurrentlyDisplayedImage;
 @end
 
-@interface IGFeedItemPhotoCell: IGFeedItemMediaCell
+@interface IGFeedItemPhotoCell : IGFeedItemMediaCell
 @end
 
-@interface IGFeedPhotoView: UIView
+@interface IGFeedPhotoView : UIView
 @property (nonatomic, strong) id delegate;
 @property (nonatomic, strong) JGProgressHUD *hud;
 @end
 @interface IGFeedPhotoView () <BHIDownloadDelegate>
 @end
 
-@interface IGSundialViewerVideoCell: UIView
+@interface IGSundialViewerVideoCell : UIView
 - (void)addHandleLongPress; // new
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
 @property (nonatomic, strong) JGProgressHUD *hud;
@@ -158,18 +167,18 @@
 @property(retain, nonatomic) IGVideoPlayer *videoPlayer;
 @end
 
-@interface IGStoryFullscreenDefaultFooterView: UIView
+@interface IGStoryFullscreenDefaultFooterView : UIView
 @end
 
-@interface IGStoryFullscreenFooterContainerView: UIView
+@interface IGStoryFullscreenFooterContainerView : UIView
 @property(nonatomic) IGStoryFullscreenDefaultFooterView *defaultFooterView;
 @end
 
-@interface IGStoryFullscreenOverlayView: UIView
+@interface IGStoryFullscreenOverlayView : UIView
 @property(retain, nonatomic) IGStoryFullscreenFooterContainerView *footerContainerView;
 @end
 
-@interface IGStoryFullscreenCell: UICollectionViewCell
+@interface IGStoryFullscreenCell : UICollectionViewCell
 @end
 
 @interface IGStoryViewerViewController : UIViewController
@@ -181,11 +190,11 @@
 @property (nonatomic) UIView *contentViewForSnapshot;
 @end
 
-@interface IGStoryFullscreenSectionController: NSObject
+@interface IGStoryFullscreenSectionController : NSObject
 @property (nonatomic) id delegate;
 @end
 
-@interface IGStoryViewerContainerView: UIView
+@interface IGStoryViewerContainerView : UIView
 @property(retain, nonatomic) UIView<IGStoryPlayerMediaViewType> *mediaView;
 @property(nonatomic) IGStoryFullscreenOverlayView *overlayView;
 @property (nonatomic, weak) id delegate;
@@ -214,7 +223,7 @@
 @property IGUser *user;
 @end
 
-@interface IGCoreTextView: UIView
+@interface IGCoreTextView : UIView
 @property(nonatomic, strong) NSString *text;
 - (void)addHandleLongPress; // new
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new

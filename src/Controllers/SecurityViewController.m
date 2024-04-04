@@ -1,6 +1,6 @@
 #import "SecurityViewController.h"
 
-@implementation SecurityViewController
+@implementation BHSecurityViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

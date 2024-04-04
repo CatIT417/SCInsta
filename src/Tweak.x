@@ -40,7 +40,7 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
         // Display settings modal on screen
         NSLog(@"[BHInsta] Displaying BHInsta first-time settings modal");
         UIViewController *rootController = [[self window] rootViewController];
-        SettingsViewController *settingsViewController = [SettingsViewController new];
+        BHSettingsViewController *settingsViewController = [BHSettingsViewController new];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
         
         [rootController presentViewController:navigationController animated:YES completion:nil];
@@ -61,7 +61,7 @@ static BOOL isAuthenticationShowed = FALSE;
     // Padlock (biometric auth)
     if ([BHIManager Padlock] && !isAuthenticationShowed) {
         UIViewController *rootController = [[self window] rootViewController];
-        SecurityViewController *securityViewController = [SecurityViewController new];
+        BHSecurityViewController *securityViewController = [BHSecurityViewController new];
         securityViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [rootController presentViewController:securityViewController animated:YES completion:nil];
 
