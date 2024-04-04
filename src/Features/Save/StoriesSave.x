@@ -60,7 +60,7 @@
       }
     }
 
-    // Currently not working (dunno why and im lazy too fix)
+    // !! Currently not working (dunno why and im lazy too fix)
     /* if (self.delegate != nil) {
       [alert addAction:[UIAlertAction actionWithTitle:@"Mark as Seen" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             shouldBeSeen = true;
