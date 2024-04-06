@@ -80,40 +80,13 @@
 
 
 + (void)cleanCache {
-    // Document/media files
-    NSArray <NSURL *> *documentFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:[NSURL fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject] includingPropertiesForKeys:@[] options:NSDirectoryEnumerationSkipsHiddenFiles error:NULL];
+    // Temp folder
+    BOOL tempFolderSuccess = [[NSFileManager defaultManager] removeItemAtURL:[NSURL fileURLWithPath:NSTemporaryDirectory()] error:nil];
+    if (!tempFolderSuccess) NSLog(@"[BHInsta] Error deleting temp folder");
 
-    for (NSURL *file in documentFiles) {
-        if ([file.pathExtension.lowercaseString isEqualToString:@"mp4"] || [file.pathExtension.lowercaseString isEqualToString:@"png"]) {
-            NSString *fileName = [file lastPathComponent];
-            NSLog(@"[BHInsta] Deleting document file: %@", fileName);
-
-            [[NSFileManager defaultManager] removeItemAtURL:file error:NULL];
-        }
-    }
-    
-    // Temp files
-    NSArray <NSURL *> *tempFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:[NSURL fileURLWithPath:NSTemporaryDirectory()] includingPropertiesForKeys:@[] options:NSDirectoryEnumerationSkipsHiddenFiles error:NULL];
-
-    for (NSURL *file in tempFiles) {
-        NSString *fileName = [file lastPathComponent];
-        NSLog(@"[BHInsta] Deleting temp file: %@", fileName);
-
-        [[NSFileManager defaultManager] removeItemAtURL:file error:NULL];
-    }
-
-    // Cache files
-    NSString *cacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSArray <NSString *> *cacheFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cacheDir error:NULL];
-
-    for (NSString *fileString in cacheFiles) {
-        NSURL *file = [NSURL URLWithString:fileString];
-        
-        NSString *fileName = [file lastPathComponent];
-        NSLog(@"[BHInsta] Deleting cache file: %@", fileName);
-
-        [[NSFileManager defaultManager] removeItemAtURL:file error:NULL];
-    }
+    // Cache folder
+    BOOL cacheFolderSuccess = [[NSFileManager defaultManager] removeItemAtPath:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] error:nil];
+    if (!cacheFolderSuccess) NSLog(@"[BHInsta] Error deleting cache folder");
 
 }
 + (BOOL)isEmpty:(NSURL *)url {
