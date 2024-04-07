@@ -1,16 +1,20 @@
 # BHInsta
 A feature-rich tweak for Instagram on iOS!\
-`Version v0.2.3-dev` | `Tested on Instagram v324.0.0`
+`Version v0.3.0` | `Tested on Instagram v325.0.0`
 
 # Features
 ### General
 - Copy description
 - Do not save recent searches
+- Hide explore posts grid
+- Hide trending searches
 
 ### Feed
 - Hide ads
 - No suggested posts
 - No suggested for you (accounts)
+- No suggested reels
+- No suggested threads posts
 
 ### Confirm actions
 - Confirm like: Posts
@@ -21,8 +25,8 @@ A feature-rich tweak for Instagram on iOS!\
 - Confirm sticker interaction
 - Confirm posting comment
 
-### Save media
-- Download videos
+### Save media (partially broken)
+- Download images/videos
 - Save profile image
 
 ### Story and messages
