@@ -124,6 +124,17 @@
     }
 }
 %end
+%hook IGFeedItemPreviewCommentCell
+- (void)_didTapLikeButton {
+    if ([BHIManager postLikeConfirmation]) {
+        NSLog(@"[BHInsta] Confirm post like triggered");
+        
+        [BHIUtils showConfirmation:^(void) { %orig; }];
+    } else {
+        return %orig;
+    }
+}
+%end
 
 // Liking stories
 %hook IGStoryFullscreenDefaultFooterView
