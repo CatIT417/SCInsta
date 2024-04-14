@@ -14,4 +14,4 @@ BHInsta_CFLAGS = -fobjc-arc -Wno-unsupported-availability-guard -Wno-unused-valu
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
-SUBPROJECTS += libflex
+BHInsta_SUBPROJECTS += modules/libflex
