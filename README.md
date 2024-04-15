@@ -12,6 +12,7 @@ A feature-rich tweak for Instagram on iOS!\
 
 ### Feed
 - Hide ads
+- Hide stories tray
 - No suggested posts
 - No suggested for you (accounts)
 - No suggested reels
