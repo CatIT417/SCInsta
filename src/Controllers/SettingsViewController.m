@@ -102,11 +102,11 @@
 
             // Section 2: Feed
             [self newSectionWithTitle:@"Feed" footer:nil],
-            [self newSwitchCellWithTitle:@"Hide Ads" detailTitle:@"Remove all ads from the Instagram app" key:@"hide_ads" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested posts" detailTitle:@"Remove suggested posts from your feed" key:@"no_suggested_post" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested for you" detailTitle:@"Hide suggested accounts for you to follow" key:@"no_suggested_account" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested reels" detailTitle:@"Hide suggested reels to watch" key:@"no_suggested_reels" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"No suggested threads posts" detailTitle:@"Hide suggested threads posts" key:@"no_suggested_threads" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Hide Ads" detailTitle:@"Removes all ads from the Instagram app" key:@"hide_ads" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"No suggested posts" detailTitle:@"Removes suggested posts from your feed" key:@"no_suggested_post" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"No suggested for you" detailTitle:@"Hides suggested accounts for you to follow" key:@"no_suggested_account" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"No suggested reels" detailTitle:@"Hides suggested reels to watch" key:@"no_suggested_reels" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"No suggested threads posts" detailTitle:@"Hides suggested threads posts" key:@"no_suggested_threads" defaultValue:true changeAction:nil],
             
             // Section 3: Confirm actions
             [self newSectionWithTitle:@"Confirm actions" footer:nil],
@@ -120,20 +120,20 @@
 
             // Section 4: Save media
             [self newSectionWithTitle:@"Save media" footer:nil],
-            [self newSwitchCellWithTitle:@"Download images/videos" detailTitle:@"Download images/videos by long press" key:@"dw_videos" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Save profile image" detailTitle:@"Save profile image by long press" key:@"save_profile" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Download images/videos" detailTitle:@"Download images/videos on long press" key:@"dw_videos" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Save profile image" detailTitle:@"Save profile image on long press" key:@"save_profile" defaultValue:true changeAction:nil],
 
             // Section 5: Stories and Messages
             [self newSectionWithTitle:@"Story and Messages" footer:nil],
-            [self newSwitchCellWithTitle:@"Keep deleted message" detailTitle:@"Keep deleted direct messages in the chat" key:@"keep_deleted_message" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Unlimited replay of direct stories" detailTitle:@"Replay direct messages normal/once stories unlimited times" key:@"unlimited_replay" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"Keep deleted message" detailTitle:@"Keeps deleted direct messages in the chat" key:@"keep_deleted_message" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Unlimited replay of direct stories" detailTitle:@"Replays direct messages normal/once stories unlimited times" key:@"unlimited_replay" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Disable sending read receipts" detailTitle:@"Removes the seen text for others when you view a message" key:@"remove_lastseen" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Remove screenshot alert" detailTitle:@"Removes the alert notifying others that you screenshotted a direct story" key:@"remove_screenshot_alert" defaultValue:true changeAction:nil],
             [self newSwitchCellWithTitle:@"Disable story seen receipt" detailTitle:@"Hides the notification for others when you view their story" key:@"no_seen_receipt" defaultValue:false changeAction:nil],
 
             // Section 6: Security
             [self newSectionWithTitle:@"Security" footer:nil],
-            [self newSwitchCellWithTitle:@"Padlock" detailTitle:@"Lock Instagram with biometrics/password" key:@"padlock" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"Padlock" detailTitle:@"Locks Instagram with biometrics/password" key:@"padlock" defaultValue:false changeAction:nil],
 
             // Section 7: Debugging
             [self newSectionWithTitle:@"Debugging" footer:nil],
