@@ -50,6 +50,9 @@
 + (BOOL)copyDecription {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"copy_description"];
 }
++ (BOOL)hideReelsTab {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"hide_reels_tab"];
+}
 + (BOOL)noRecentSearches {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"no_recent_searches"];
 }

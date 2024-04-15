@@ -5,6 +5,7 @@ A feature-rich tweak for Instagram on iOS!\
 # Features
 ### General
 - Copy description
+- Hide reels tab
 - Do not save recent searches
 - Hide explore posts grid
 - Hide trending searches
