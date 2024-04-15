@@ -21,6 +21,7 @@
 + (BOOL)noRecentSearches;
 + (BOOL)hideExploreGrid;
 + (BOOL)hideTrendingSearches;
++ (BOOL)noSuggestedChats;
 + (BOOL)Padlock;
 + (BOOL)keepDeletedMessage;
 + (BOOL)hideLastSeen;

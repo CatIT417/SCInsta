@@ -264,13 +264,30 @@
 @interface IGInstagramAppDelegate : NSObject <UIApplicationDelegate>
 @end
 
+@interface IGLabelItemViewModel : NSObject
+- (id)labelTitle;
+@end
+
+@interface IGDirectRecipientCellViewModel : NSObject
+- (id)recipient;
+@end
+
+@interface IGDirectShareRecipient : NSObject
+- (BOOL)isBroadcastChannel;
+@end
+
+
+
+////////////////////////////////////
+
+
+
 static BOOL is_iPad() {
     if ([(NSString *)[UIDevice currentDevice].model hasPrefix:@"iPad"]) {
         return YES;
     }
     return NO;
 }
-
 
 
 

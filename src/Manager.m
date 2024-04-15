@@ -56,6 +56,9 @@
 + (BOOL)hideTrendingSearches {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"hide_trending_searches"];
 }
++ (BOOL)noSuggestedChats {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"no_suggested_chats"];
+}
 + (BOOL)Padlock {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"padlock"];
 }

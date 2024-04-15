@@ -8,6 +8,7 @@ A feature-rich tweak for Instagram on iOS!\
 - Do not save recent searches
 - Hide explore posts grid
 - Hide trending searches
+- No suggested chats (in dms)
 
 ### Feed
 - Hide ads
