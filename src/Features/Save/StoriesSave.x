@@ -75,6 +75,7 @@
       }]];
     } */
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    [BHIUtils prepareAlertPopoverIfNeeded:alert inView:self.mediaView];
 
     NSLog(@"[BHInsta] Save story: Displaying alert");
 
