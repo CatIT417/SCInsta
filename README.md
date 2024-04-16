@@ -56,7 +56,7 @@ A feature-rich tweak for Instagram on iOS!\
 ## Setup
 1. Install iOS 14.5 frameworks for theos
    1. [Click to download iOS SDKs](https://github.com/xybp888/iOS-SDKs/archive/refs/heads/master.zip)
-   2. Unzip, then copy `iPhoneOS14.5.sdk` folder into `~/theos/sdks`
+   2. Unzip, then copy the `iPhoneOS14.5.sdk` folder into `~/theos/sdks`
 2. Clone BHInsta repo from GitHub: `git clone --recurse-submodules https://github.com/SoCuul/BHInsta --branch v0.3.0`
 3. [Download decrypted Instagram IPA](https://armconverter.com/decryptedappstore/us/instagram), and place it inside the `packages` folder with the name `com.burbn.instagram.ipa`
 
