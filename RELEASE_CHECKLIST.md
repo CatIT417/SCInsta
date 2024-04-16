@@ -6,6 +6,7 @@
 - [ ] Update version string at top of `README.md` 
 - [ ] Update version string in git clone command within `README.md` 
 - [ ] Update compatible Instagram app version at top of `README.md`
+- [ ] (Optional) Update screenshots
 
 ### Creating new release
 - [ ] Ensure new tag is created with proper format
