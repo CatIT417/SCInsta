@@ -1,6 +1,6 @@
 # BHInsta
 A feature-rich tweak for Instagram on iOS!\
-`Version v0.3.1-dev` | `Tested on Instagram v326.0.0`
+`Version v0.3.1-dev` | `Tested on Instagram v327.1.0`
 
 # Features
 ### General
