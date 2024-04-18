@@ -9,7 +9,7 @@
 #import "Controllers/SettingsViewController.h"
 
 // * Tweak version *
-NSString *BHIVersionString = @"v0.3.1";
+NSString *BHIVersionString = @"v0.4.0 (dev)";
 
 // Variables that work across features
 BOOL seenButtonEnabled = false;
