@@ -9,5 +9,6 @@
 // Functions
 + (BOOL)isNotch;
 + (BOOL)showConfirmation:(void(^)(void))okHandler;
++ (void)prepareAlertPopoverIfNeeded:(UIAlertController*)alert inView:(UIView*)view;
 
 @end
