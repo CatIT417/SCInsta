@@ -7,11 +7,15 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
         // Remove suggested posts
         if (isFeed && [BHIManager removeSuggestedPost]) {
             if ([obj respondsToSelector:@selector(explorePostInFeed)] && [obj performSelector:@selector(explorePostInFeed)]) {
+                NSLog(@"[BHInsta] Removing suggested posts");
+
                 [orig removeObjectAtIndex:idx];
             }
         }
 
         if (([obj isKindOfClass:%c(IGFeedItem)] && ([obj isSponsored] || [obj isSponsoredApp])) || [obj isKindOfClass:%c(IGAdItem)]) {
+            NSLog(@"[BHInsta] Removing ads");
+
             [orig removeObjectAtIndex:idx];
         }
     }];
@@ -54,6 +58,8 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 %hook IGStoryAdPool
 - (id)initWithUserSession:(id)arg1 {
     if ([BHIManager hideAds]) {
+        NSLog(@"[BHInsta] Removing ads");
+
         return nil;
     }
     return %orig;
@@ -62,6 +68,8 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 %hook IGStoryAdsManager
 - (id)initWithUserSession:(id)arg1 storyViewerLoggingContext:(id)arg2 storyFullscreenSectionLoggingContext:(id)arg3 viewController:(id)arg4 {
     if ([BHIManager hideAds]) {
+        NSLog(@"[BHInsta] Removing ads");
+
         return nil;
     }
     return %orig;
@@ -70,6 +78,8 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 %hook IGStoryAdsFetcher
 - (id)initWithUserSession:(id)arg1 delegate:(id)arg2 {
     if ([BHIManager hideAds]) {
+        NSLog(@"[BHInsta] Removing ads");
+
         return nil;
     }
     return %orig;
@@ -79,12 +89,16 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 %hook IGStoryAdsResponseParser
 - (id)parsedObjectFromResponse:(id)arg1 {
     if ([BHIManager hideAds]) {
+        NSLog(@"[BHInsta] Removing ads");
+
         return nil;
     }
     return %orig;
 }
 - (id)initWithReelStore:(id)arg1 {
     if ([BHIManager hideAds]) {
+        NSLog(@"[BHInsta] Removing ads");
+
         return nil;
     }
     return %orig;
@@ -93,6 +107,8 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 %hook IGStoryAdsOptInTextView
 - (id)initWithBrandedContentStyledString:(id)arg1 sponsoredPostLabel:(id)arg2 {
     if ([BHIManager hideAds]) {
+        NSLog(@"[BHInsta] Removing ads");
+
         return nil;
     }
     return %orig;
@@ -101,12 +117,16 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 %hook IGSundialAdsResponseParser
 - (id)parsedObjectFromResponse:(id)arg1 {
     if ([BHIManager hideAds]) {
+        NSLog(@"[BHInsta] Removing ads");
+
         return nil;
     }
     return %orig;
 }
 - (id)initWithMediaStore:(id)arg1 userStore:(id)arg2 {
     if ([BHIManager hideAds]) {
+        NSLog(@"[BHInsta] Removing ads");
+        
         return nil;
     }
     return %orig;

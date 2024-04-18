@@ -24,5 +24,13 @@
 
     return nil;
 };
++ (void)prepareAlertPopoverIfNeeded:(UIAlertController*)alert inView:(UIView*)view {
+    if (alert.popoverPresentationController) {
+        // UIAlertController is a popover on iPad. Display it in the center of a view.
+        alert.popoverPresentationController.sourceView = view;
+        alert.popoverPresentationController.sourceRect = CGRectMake(view.bounds.size.width / 2.0, view.bounds.size.height / 2.0, 1.0, 1.0);
+        alert.popoverPresentationController.permittedArrowDirections = 0;
+    }
+};
 
 @end

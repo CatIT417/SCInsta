@@ -1,5 +1,6 @@
 #import "../../InstagramHeaders.h"
 #import "../../Manager.h"
+#import "../../Utils.h"
 
 // Download photos
 %hook IGFeedPhotoView
@@ -49,6 +50,7 @@
                 }]];
             }
             [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+            [BHIUtils prepareAlertPopoverIfNeeded:alert inView:self];
 
             NSLog(@"[BHInsta] Save media: Displaying alert");
 
@@ -119,6 +121,7 @@
                 }]];
             }
             [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+            [BHIUtils prepareAlertPopoverIfNeeded:alert inView:self];
 
             NSLog(@"[BHInsta] Save media: Displaying alert");
 
@@ -143,6 +146,7 @@
                 }]];
             }
             [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+            [BHIUtils prepareAlertPopoverIfNeeded:alert inView:self];
 
             NSLog(@"[BHInsta] Save media: Displaying alert");
 
@@ -207,6 +211,7 @@
         }
 
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        [BHIUtils prepareAlertPopoverIfNeeded:alert inView:self];
         [self.viewController presentViewController:alert animated:YES completion:nil];
     }
 }

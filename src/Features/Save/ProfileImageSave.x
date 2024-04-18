@@ -1,5 +1,6 @@
 #import "../../InstagramHeaders.h"
 #import "../../Manager.h"
+#import "../../Utils.h"
 
 %hook IGProfilePicturePreviewViewController
 %property (nonatomic, strong) JGProgressHUD *hud;
@@ -33,6 +34,7 @@
             [self.hud showInView:topMostController().view];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        [BHIUtils prepareAlertPopoverIfNeeded:alert inView:profilePictureView];
         
         NSLog(@"[BHInsta] Save pfp: Displaying alert");
 

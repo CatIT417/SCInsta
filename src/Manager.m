@@ -5,6 +5,9 @@
 + (BOOL)hideAds {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"hide_ads"];
 }
++ (BOOL)hideStoriesTray {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"hide_stories_tray"];
+}
 + (BOOL)downloadMedia {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"dw_videos"];
 }
@@ -47,6 +50,9 @@
 + (BOOL)copyDecription {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"copy_description"];
 }
++ (BOOL)hideReelsTab {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"hide_reels_tab"];
+}
 + (BOOL)noRecentSearches {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"no_recent_searches"];
 }
@@ -55,6 +61,9 @@
 }
 + (BOOL)hideTrendingSearches {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"hide_trending_searches"];
+}
++ (BOOL)noSuggestedChats {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"no_suggested_chats"];
 }
 + (BOOL)Padlock {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"padlock"];

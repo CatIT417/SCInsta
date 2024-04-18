@@ -9,7 +9,7 @@
 #import "Controllers/SettingsViewController.h"
 
 // * Tweak version *
-NSString *BHIVersionString = @"v0.3.0";
+NSString *BHIVersionString = @"v0.3.1";
 
 // Variables that work across features
 BOOL seenButtonEnabled = false;
@@ -35,6 +35,7 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"copy_description"];
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"call_confirm"];
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_trending_searches"];
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_chats"];
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_threads"];
 
         // Display settings modal on screen
