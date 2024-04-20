@@ -75,7 +75,12 @@ You can install the tweaked IPA file like any other sideloaded iOS app. If you h
 - [UDID Registrations](https://www.udidregistrations.com/buy) ($9.99/year, Receives notifications)
 
 # In-App Screenshots
-![BHInsta Settings](https://i.imgur.com/55ervgv.jpg)
+> Note: These screenshots are slightly outdated, but still demonstrate the tweak's settings
+
+![SCInsta Settings](https://i.imgur.com/55ervgv.jpg)
 
 # Contributing
 Contributions to this tweak are greatly appreciated. Feel free to create a pull request if you would like to contribute.
+
+# Credits
+- Huge thanks to [@BandarHL](https://github.com/BandarHL) for creating the original BHInstagram/BHInsta project, which SCInsta is based upon.
