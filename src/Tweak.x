@@ -22,33 +22,48 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
 
     NSLog(@"[SCInsta] First run, initializing");
 
-    // Set default config values
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BHInstaFirstRun"] == nil) {
-        NSLog(@"[SCInsta] Setting default values");
+    // Set default config values (if first-run key doesn't exist)
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SCInstaFirstRun"] == nil) {
 
-        [[NSUserDefaults standardUserDefaults] setValue:@"BHInstaFirstRun" forKey:@"BHInstaFirstRun"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_ads"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"dw_videos"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"save_profile"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"remove_screenshot_alert"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"show_like_count"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"copy_description"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"call_confirm"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_trending_searches"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_chats"];
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_threads"];
+        // Legacy (BHInsta) user migration
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BHInstaFirstRun"] != nil) {
 
-        // Display settings modal on screen
-        NSLog(@"[BHInsta] Displaying BHInsta first-time settings modal");
-        UIViewController *rootController = [[self window] rootViewController];
-        BHSettingsViewController *settingsViewController = [BHSettingsViewController new];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-        
-        [rootController presentViewController:navigationController animated:YES completion:nil];
+            // Set new first-run key
+            [[NSUserDefaults standardUserDefaults] setValue:@"SCInstaFirstRun" forKey:@"SCInstaFirstRun"];
+
+            // Remove deprecated first-run key
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"BHInstaFirstRun"];
+
+        }
+
+        else {
+            NSLog(@"[SCInsta] Setting default values");
+
+            [[NSUserDefaults standardUserDefaults] setValue:@"SCInstaFirstRun" forKey:@"SCInstaFirstRun"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_ads"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"dw_videos"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"save_profile"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"remove_screenshot_alert"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"show_like_count"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"copy_description"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"call_confirm"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_trending_searches"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_chats"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_threads"];
+
+            // Display settings modal on screen
+            NSLog(@"[SCInsta] Displaying SCInsta first-time settings modal");
+            UIViewController *rootController = [[self window] rootViewController];
+            SCISettingsViewController *settingsViewController = [SCISettingsViewController new];
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+            
+            [rootController presentViewController:navigationController animated:YES completion:nil];
+        }
+
     }
 
-    NSLog(@"[BHInsta] Cleaning cache...");
-    [BHIManager cleanCache];
+    NSLog(@"[SCInsta] Cleaning cache...");
+    [SCIManager cleanCache];
 
     return true;
 }
@@ -60,15 +75,15 @@ static BOOL isAuthenticationShowed = FALSE;
     %orig;
 
     // Padlock (biometric auth)
-    if ([BHIManager Padlock] && !isAuthenticationShowed) {
+    if ([SCIManager Padlock] && !isAuthenticationShowed) {
         UIViewController *rootController = [[self window] rootViewController];
-        BHSecurityViewController *securityViewController = [BHSecurityViewController new];
+        SCISecurityViewController *securityViewController = [SCISecurityViewController new];
         securityViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         [rootController presentViewController:securityViewController animated:YES completion:nil];
 
         isAuthenticationShowed = TRUE;
 
-        NSLog(@"[BHInsta] Padlock authentication: App enabled");
+        NSLog(@"[SCInsta] Padlock authentication: App enabled");
     }
 }
 
@@ -78,7 +93,7 @@ static BOOL isAuthenticationShowed = FALSE;
     // Reset padlock status
     isAuthenticationShowed = FALSE;
 
-    NSLog(@"[BHInsta] Padlock authentication: App disabled");
+    NSLog(@"[SCInsta] Padlock authentication: App disabled");
 }
 %end
 
@@ -86,14 +101,14 @@ static BOOL isAuthenticationShowed = FALSE;
 // Instagram DM visual messages / IG stories
 %hook IGDirectVisualMessageViewerSession
 - (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 {
-    if ([BHIManager noScreenShotAlert]) {
+    if ([SCIManager noScreenShotAlert]) {
         return nil;
     }
     return %orig;
 }
 
 - (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 {
-    if ([BHIManager unlimitedReplay]) {
+    if ([SCIManager unlimitedReplay]) {
         return nil;
     }
     return %orig;
@@ -101,14 +116,14 @@ static BOOL isAuthenticationShowed = FALSE;
 %end
 %hook IGDirectVisualMessageReplayService
 - (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 {
-    if ([BHIManager noScreenShotAlert]) {
+    if ([SCIManager noScreenShotAlert]) {
         return nil;
     }
     return %orig;
 }
 
 - (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 {
-    if ([BHIManager unlimitedReplay]) {
+    if ([SCIManager unlimitedReplay]) {
         return nil;
     }
     return %orig;
@@ -116,14 +131,14 @@ static BOOL isAuthenticationShowed = FALSE;
 %end
 %hook IGDirectVisualMessageReportService
 - (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 {
-    if ([BHIManager noScreenShotAlert]) {
+    if ([SCIManager noScreenShotAlert]) {
         return nil;
     }
     return %orig;
 }
 
 - (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 {
-    if ([BHIManager unlimitedReplay]) {
+    if ([SCIManager unlimitedReplay]) {
         return nil;
     }
     return %orig;
@@ -131,13 +146,13 @@ static BOOL isAuthenticationShowed = FALSE;
 %end
 %hook IGDirectVisualMessageViewerController
 - (void)screenshotObserverDidSeeScreenshotTaken:(id)arg1 {
-    if ([BHIManager noScreenShotAlert]) {
+    if ([SCIManager noScreenShotAlert]) {
         return;
     }
     return %orig;
 }
 - (void)screenshotObserverDidSeeActiveScreenCapture:(id)arg1 event:(NSInteger)arg2 {
-    if ([BHIManager noScreenShotAlert]) {
+    if ([SCIManager noScreenShotAlert]) {
         return;
     }
     return %orig;
@@ -147,7 +162,7 @@ static BOOL isAuthenticationShowed = FALSE;
 // Instagram Screenshot Observer
 %hook IGScreenshotObserver
 - (id)initForController:(id)arg1 {
-    if ([BHIManager noScreenShotAlert]) {
+    if ([SCIManager noScreenShotAlert]) {
         return nil;
     }
     return %orig;
