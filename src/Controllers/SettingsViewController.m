@@ -1,15 +1,15 @@
 #import "SettingsViewController.h"
 
-@interface BHSettingsViewController ()
+@interface SCISettingsViewController ()
 @property (nonatomic, assign) BOOL hasDynamicSpecifiers;
 @property (nonatomic, retain) NSMutableDictionary *dynamicSpecifiers;
 @end
 
-@implementation BHSettingsViewController
+@implementation SCISettingsViewController
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.title = @"BHInsta";
+        self.title = @"SCInsta";
         [self.navigationController.navigationBar setPrefersLargeTitles:false];
     }
     return self;
@@ -35,7 +35,7 @@
     [switchCell setProperty:keyText forKey:@"key"];
     [switchCell setProperty:keyText forKey:@"id"];
     [switchCell setProperty:@YES forKey:@"big"];
-    [switchCell setProperty:BHSwitchTableCell.class forKey:@"cellClass"];
+    [switchCell setProperty:SCISwitchTableCell.class forKey:@"cellClass"];
     [switchCell setProperty:NSBundle.mainBundle.bundleIdentifier forKey:@"defaults"];
     [switchCell setProperty:@(defValue) forKey:@"default"];
     [switchCell setProperty:NSStringFromSelector(changeAction) forKey:@"switchAction"];
@@ -51,7 +51,7 @@
     
     [buttonCell setButtonAction:action];
     [buttonCell setProperty:@YES forKey:@"big"];
-    [buttonCell setProperty:BHButtonTableViewCell.class forKey:@"cellClass"];
+    [buttonCell setProperty:SCIButtonTableViewCell.class forKey:@"cellClass"];
     if (detailText != nil ){
         [buttonCell setProperty:detailText forKey:@"subtitle"];
     }
@@ -142,10 +142,10 @@
             [self newSwitchCellWithTitle:@"Enable FLEX gesture" detailTitle:@"Allows you to hold 5 fingers on the screen to open the FLEX explorer" key:@"flex_instagram" defaultValue:false changeAction:@selector(FLEXAction:)],
 
             // Section 8: Credits
-            [self newSectionWithTitle:@"Credits" footer:[NSString stringWithFormat:@"BHInsta %@", BHIVersionString]],
+            [self newSectionWithTitle:@"Credits" footer:[NSString stringWithFormat:@"SCInsta %@", SCIVersionString]],
             [self newHBTwitterCellWithTitle:@"Maintainer" twitterUsername:@"SoVeryCuul" customAvatarURL:@"https://unavatar.io/twitter/SoVeryCuul"],
             [self newHBTwitterCellWithTitle:@"Original Author" twitterUsername:@"BandarHL" customAvatarURL:@"https://unavatar.io/twitter/BandarHL"],
-            [self newHBLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/SoCuul/BHInsta"]
+            [self newHBLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/SoCuul/SCInsta"]
         ]];
         
         [self collectDynamicSpecifiersFromArray:_specifiers];
@@ -267,7 +267,7 @@
     NSUserDefaults *Prefs = [NSUserDefaults standardUserDefaults];
     [Prefs setValue:value forKey:[specifier identifier]];
 
-    NSLog(@"[BHInsta] Set user default. Key: %@ | Value: %@", [specifier identifier], value);
+    NSLog(@"[SCInsta] Set user default. Key: %@ | Value: %@", [specifier identifier], value);
     
     if (self.hasDynamicSpecifiers) {
         NSString *specifierID = [specifier propertyForKey:PSIDKey];
@@ -288,16 +288,16 @@
     if (sender.isOn) {
         [[objc_getClass("FLEXManager") sharedManager] showExplorer];
 
-        NSLog(@"[BHInsta] FLEX explorer: Enabled");
+        NSLog(@"[SCInsta] FLEX explorer: Enabled");
     } else {
         [[objc_getClass("FLEXManager") sharedManager] hideExplorer];
 
-        NSLog(@"[BHInsta] FLEX explorer: Disabled");
+        NSLog(@"[SCInsta] FLEX explorer: Disabled");
     }
 }
 @end
 
-@implementation BHButtonTableViewCell
+@implementation SCIButtonTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
     self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier];
     if (self) {
@@ -312,7 +312,7 @@
 
 @end
 
-@implementation BHSwitchTableCell
+@implementation SCISwitchTableCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
     if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier])) {
         NSString *subTitle = [specifier.properties[@"subtitle"] copy];

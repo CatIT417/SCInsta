@@ -11,24 +11,24 @@
     NSMutableArray *new_items = [items mutableCopy];
 
     // Messages seen
-    if ([BHIManager hideLastSeen]) {
+    if ([SCIManager hideLastSeen]) {
         UIBarButtonItem *seenButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"checkmark.message"] style:UIBarButtonItemStylePlain target:self action:@selector(seenButtonHandler:)];
         [new_items addObject:seenButton];
 
         if (seenButtonEnabled) {
-            [seenButton setTintColor:BHIUtils.BHIColour_Primary];
+            [seenButton setTintColor:SCIUtils.SCIColour_Primary];
         } else {
             [seenButton setTintColor:UIColor.labelColor];
         }
     }
 
     // DM visual messages viewed
-    if ([BHIManager unlimitedReplay]) {
+    if ([SCIManager unlimitedReplay]) {
         UIBarButtonItem *dmVisualMsgsViewedButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"photo.badge.checkmark"] style:UIBarButtonItemStylePlain target:self action:@selector(dmVisualMsgsViewedButtonHandler:)];
         [new_items addObject:dmVisualMsgsViewedButton];
 
         if (dmVisualMsgsViewedButtonEnabled) {
-            [dmVisualMsgsViewedButton setTintColor:BHIUtils.BHIColour_Primary];
+            [dmVisualMsgsViewedButton setTintColor:SCIUtils.SCIColour_Primary];
         } else {
             [dmVisualMsgsViewedButton setTintColor:UIColor.labelColor];
         }
@@ -44,7 +44,7 @@
         [sender setTintColor:UIColor.labelColor];
     } else {
         seenButtonEnabled = true;
-        [sender setTintColor:BHIUtils.BHIColour_Primary];
+        [sender setTintColor:SCIUtils.SCIColour_Primary];
     }
 }
 // DM visual messages viewed button
@@ -54,7 +54,7 @@
         [sender setTintColor:UIColor.labelColor];
     } else {
         dmVisualMsgsViewedButtonEnabled = true;
-        [sender setTintColor:BHIUtils.BHIColour_Primary];
+        [sender setTintColor:SCIUtils.SCIColour_Primary];
     }
 }
 %end
@@ -62,7 +62,7 @@
 // Messages seen logic
 %hook IGDirectThreadViewListAdapterDataSource
 - (BOOL)shouldUpdateLastSeenMessage {
-    if ([BHIManager hideLastSeen]) {
+    if ([SCIManager hideLastSeen]) {
         // Check if messages should be shown as seen
         if (seenButtonEnabled) {
             return %orig;
@@ -77,7 +77,7 @@
 // DM stories viewed logic
 %hook IGStoryPhotoView
 - (void)progressImageView:(id)arg1 didLoadImage:(id)arg2 loadSource:(id)arg3 networkRequestSummary:(id)arg4 {
-    if ([BHIManager unlimitedReplay]) {
+    if ([SCIManager unlimitedReplay]) {
         // Check if dm stories should be marked as viewed
         if (dmVisualMsgsViewedButtonEnabled) {}
         else return;

@@ -1,7 +1,7 @@
 #import "Manager.h"
 #import "InstagramHeaders.h"
 
-@implementation BHIManager
+@implementation SCIManager
 + (BOOL)hideAds {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"hide_ads"];
 }
@@ -91,11 +91,11 @@
 + (void)cleanCache {
     // Temp folder
     BOOL tempFolderSuccess = [[NSFileManager defaultManager] removeItemAtURL:[NSURL fileURLWithPath:NSTemporaryDirectory()] error:nil];
-    if (!tempFolderSuccess) NSLog(@"[BHInsta] Error deleting temp folder");
+    if (!tempFolderSuccess) NSLog(@"[SCInsta] Error deleting temp folder");
 
     // Cache folder
     BOOL cacheFolderSuccess = [[NSFileManager defaultManager] removeItemAtPath:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] error:nil];
-    if (!cacheFolderSuccess) NSLog(@"[BHInsta] Error deleting cache folder");
+    if (!cacheFolderSuccess) NSLog(@"[SCInsta] Error deleting cache folder");
 
 }
 + (BOOL)isEmpty:(NSURL *)url {

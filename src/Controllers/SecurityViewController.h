@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
-@interface BHSecurityViewController : UIViewController
+@interface SCISecurityViewController : UIViewController
 @end

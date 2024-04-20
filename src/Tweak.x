@@ -9,7 +9,7 @@
 #import "Controllers/SettingsViewController.h"
 
 // * Tweak version *
-NSString *BHIVersionString = @"v0.4.0 (dev)";
+NSString *SCIVersionString = @"v0.4.0 (dev)";
 
 // Variables that work across features
 BOOL seenButtonEnabled = false;
@@ -20,11 +20,11 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
 - (_Bool)application:(UIApplication *)application didFinishLaunchingWithOptions:(id)arg2 {
     %orig;
 
-    NSLog(@"[BHInsta] First run, initializing");
+    NSLog(@"[SCInsta] First run, initializing");
 
     // Set default config values
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BHInstaFirstRun"] == nil) {
-        NSLog(@"[BHInsta] Setting default values");
+        NSLog(@"[SCInsta] Setting default values");
 
         [[NSUserDefaults standardUserDefaults] setValue:@"BHInstaFirstRun" forKey:@"BHInstaFirstRun"];
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_ads"];

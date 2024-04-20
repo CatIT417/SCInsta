@@ -1,4 +1,4 @@
-# BHInsta
+# SCInsta (previously BHInsta)
 A feature-rich tweak for Instagram on iOS!\
 `Version v0.4.0-dev` | `Tested on Instagram v327.1.0`
 
@@ -43,7 +43,7 @@ A feature-rich tweak for Instagram on iOS!\
 - Padlock (biometric requirement to access app)
 
 ### Built-in Tweak Settings
-> Long press on the Instagram settings button to bring up the BHInsta tweak settings
+> Long press on the Instagram settings button to bring up the SCInsta tweak settings
 
 # Building
 ## Prerequisites
@@ -57,7 +57,7 @@ A feature-rich tweak for Instagram on iOS!\
 1. Install iOS 14.5 frameworks for theos
    1. [Click to download iOS SDKs](https://github.com/xybp888/iOS-SDKs/archive/refs/heads/master.zip)
    2. Unzip, then copy the `iPhoneOS14.5.sdk` folder into `~/theos/sdks`
-2. Clone BHInsta repo from GitHub: `git clone --recurse-submodules https://github.com/SoCuul/BHInsta --branch v0.3.0`
+2. Clone SCInsta repo from GitHub: `git clone --recurse-submodules https://github.com/SoCuul/SCInsta --branch v0.3.0`
 3. [Download decrypted Instagram IPA](https://armconverter.com/decryptedappstore/us/instagram), and place it inside the `packages` folder with the name `com.burbn.instagram.ipa`
 
 ## Build IPA

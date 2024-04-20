@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, DynamicSpecifierOperatorType) {
     LessThanOperatorType,
 };
 
-@interface BHSettingsViewController : HBListController
+@interface SCISettingsViewController : HBListController
 - (instancetype)init;
 - (PSSpecifier *)newSectionWithTitle:(NSString *)header footer:(NSString *)footer;
 - (PSSpecifier *)newSwitchCellWithTitle:(NSString *)titleText detailTitle:(NSString *)detailText key:(NSString *)keyText defaultValue:(BOOL)defValue changeAction:(SEL)changeAction;
@@ -34,8 +34,8 @@ typedef NS_ENUM(NSInteger, DynamicSpecifierOperatorType) {
 - (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier;
 @end
 
-@interface BHButtonTableViewCell : HBTintedTableCell
+@interface SCIButtonTableViewCell : HBTintedTableCell
 @end
 
-@interface BHSwitchTableCell : PSSwitchTableCell
+@interface SCISwitchTableCell : PSSwitchTableCell
 @end

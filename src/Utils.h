@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface BHIUtils : NSObject
+@interface SCIUtils : NSObject
 
 // Colours
-+ (UIColor *)BHIColour_Primary;
++ (UIColor *)SCIColour_Primary;
 
 // Functions
 + (BOOL)isNotch;

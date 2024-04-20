@@ -3,8 +3,8 @@
 
 %hook IGExploreGridViewController
 - (void)viewDidLoad {
-    if ([BHIManager hideExploreGrid]) {
-        NSLog(@"[BHInsta] Hiding explore grid");
+    if ([SCIManager hideExploreGrid]) {
+        NSLog(@"[SCInsta] Hiding explore grid");
 
         [[self view] removeFromSuperview];
 
@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     %orig;
 
-    if ([BHIManager hideExploreGrid]) {
-        NSLog(@"[BHInsta] Hiding explore grid");
+    if ([SCIManager hideExploreGrid]) {
+        NSLog(@"[SCInsta] Hiding explore grid");
 
         IGShimmeringGridView *shimmeringGridView = MSHookIvar<IGShimmeringGridView *>(self, "_shimmeringGridView");
         [shimmeringGridView removeFromSuperview];

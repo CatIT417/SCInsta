@@ -4,8 +4,8 @@
 // Most in-app search bars
 %hook IGRecentSearchStore
 - (BOOL)addItem:(id)arg1 {
-    if ([BHIManager noRecentSearches]) {
-        NSLog(@"[BHInsta] Disabling recent searches");
+    if ([SCIManager noRecentSearches]) {
+        NSLog(@"[SCInsta] Disabling recent searches");
 
         return nil;
     } else {
@@ -17,8 +17,8 @@
 // Recent dm message recipients search bar
 %hook IGDirectRecipientRecentSearchStorage
 - (id)initWithDiskManager:(id)arg1 directCache:(id)arg2 userStore:(id)arg3 currentUser:(id)arg4 featureSets:(id)arg5 {
-    if ([BHIManager noRecentSearches]) {
-        NSLog(@"[BHInsta] Disabling recent searches");
+    if ([SCIManager noRecentSearches]) {
+        NSLog(@"[SCInsta] Disabling recent searches");
 
         return nil;
     } else {

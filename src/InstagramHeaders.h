@@ -104,7 +104,7 @@
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
 @end
 
-@interface IGProfilePicturePreviewViewController () <BHIDownloadDelegate>
+@interface IGProfilePicturePreviewViewController () <SCIDownloadDelegate>
 @end
 
 @interface IGFeedItemMediaCell : UICollectionViewCell
@@ -119,7 +119,7 @@
 @property (nonatomic, strong) id delegate;
 @property (nonatomic, strong) JGProgressHUD *hud;
 @end
-@interface IGFeedPhotoView () <BHIDownloadDelegate>
+@interface IGFeedPhotoView () <SCIDownloadDelegate>
 @end
 
 @interface IGSundialViewerVideoCell : UIView
@@ -129,7 +129,7 @@
 @property(readonly, nonatomic) IGMedia *video;
 @end
 
-@interface IGSundialViewerVideoCell () <BHIDownloadDelegate>
+@interface IGSundialViewerVideoCell () <SCIDownloadDelegate>
 @end
 
 @interface IGModernFeedVideoCell : IGFeedItemMediaCell
@@ -139,7 +139,7 @@
 @property (nonatomic, strong) id delegate;
 @end
 
-@interface IGModernFeedVideoCell () <BHIDownloadDelegate>
+@interface IGModernFeedVideoCell () <SCIDownloadDelegate>
 @end
 
 @interface IGVideoPlayer : NSObject {
@@ -204,7 +204,7 @@
 - (void)hDownloadButtonPressed:(UIButton *)sender;
 @end
 
-@interface IGStoryViewerContainerView () <BHIDownloadDelegate>
+@interface IGStoryViewerContainerView () <SCIDownloadDelegate>
 @end
 
 

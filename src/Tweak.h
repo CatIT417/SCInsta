@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 // * Tweak version *
-extern NSString *BHIVersionString;
+extern NSString *SCIVersionString;
 
 // Variables that work across features
 extern BOOL seenButtonEnabled; // Whether dm message seen button is enabled

@@ -6,7 +6,7 @@
 %property (nonatomic, strong) JGProgressHUD *hud;
 - (void)viewDidLoad {
     %orig;
-    if ([BHIManager profileImageSave]) {
+    if ([SCIManager profileImageSave]) {
         [self addHandleLongPress];
     }
 }
@@ -18,14 +18,14 @@
 
 %new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"[BHInsta] Save pfp: Preparing alert");
+        NSLog(@"[SCInsta] Save pfp: Preparing alert");
 
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"BHInsta Downloader" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"SCInsta Downloader" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         IGImageView *profilePictureView = [self valueForKey:@"_profilePictureView"];
         NSURL *url = profilePictureView.imageSpecifier.url;
 
         [alert addAction:[UIAlertAction actionWithTitle:@"Download HD Profile Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            BHIDownload *dwManager = [[BHIDownload alloc] init];
+            SCIDownload *dwManager = [[SCIDownload alloc] init];
             [dwManager downloadFileWithURL:url];
             [dwManager setDelegate:self];
 
@@ -34,16 +34,16 @@
             [self.hud showInView:topMostController().view];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-        [BHIUtils prepareAlertPopoverIfNeeded:alert inView:profilePictureView];
+        [SCIUtils prepareAlertPopoverIfNeeded:alert inView:profilePictureView];
         
-        NSLog(@"[BHInsta] Save pfp: Displaying alert");
+        NSLog(@"[SCInsta] Save pfp: Displaying alert");
 
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
 %new - (void)downloadProgress:(float)progress {
-    self.hud.detailTextLabel.text = [BHIManager getDownloadingPersent:progress];
+    self.hud.detailTextLabel.text = [SCIManager getDownloadingPersent:progress];
 }
 %new - (void)downloadDidFinish:(NSURL *)filePath Filename:(NSString *)fileName {
     NSString *DocPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
@@ -53,9 +53,9 @@
 
     [self.hud dismiss];
 
-    NSLog(@"[BHInsta] Save pfp: Displaying save dialog");
+    NSLog(@"[SCInsta] Save pfp: Displaying save dialog");
 
-    [BHIManager showSaveVC:newFilePath];
+    [SCIManager showSaveVC:newFilePath];
 }
 %new - (void)downloadDidFailureWithError:(NSError *)error {
     if (error) {

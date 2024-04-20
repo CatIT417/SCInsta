@@ -2,10 +2,10 @@
 #import "Utils.h"
 #import "InstagramHeaders.h"
 
-@implementation BHIUtils
+@implementation SCIUtils
 
 // Colours
-+ (UIColor *)BHIColour_Primary {
++ (UIColor *)SCIColour_Primary {
     return [UIColor colorWithRed:0/255.0 green:152/255.0 blue:254/255.0 alpha:1];
 };
 

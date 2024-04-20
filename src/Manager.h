@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface BHIManager : NSObject
+@interface SCIManager : NSObject
 
 + (BOOL)hideAds;
 + (BOOL)hideStoriesTray;

@@ -3,14 +3,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol BHIDownloadDelegate <NSObject>
+@protocol SCIDownloadDelegate <NSObject>
 @optional
 - (void)downloadProgress:(float)progress;
 - (void)downloadDidFinish:(NSURL *)filePath Filename:(NSString *)fileName;
 - (void)downloadDidFailureWithError:(NSError *)error;
 @end
 
-@interface BHIDownload : NSObject
+@interface SCIDownload : NSObject
 {
    id delegate;
 }
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *fileName;
 @end
 
-@interface BHIDownload () <NSURLSessionDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSURLSessionStreamDelegate>
+@interface SCIDownload () <NSURLSessionDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate, NSURLSessionStreamDelegate>
 @property (nonatomic, strong) NSURLSession *Session;
 @end
 

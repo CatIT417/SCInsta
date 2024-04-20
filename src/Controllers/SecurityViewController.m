@@ -1,6 +1,6 @@
 #import "SecurityViewController.h"
 
-@implementation BHSecurityViewController
+@implementation SCISecurityViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,7 +27,7 @@
     LAContext *context = [[LAContext alloc] init];
     NSError *error = nil;
 
-    NSLog(@"[BHInsta] Padlock authentication: Prompting for unlock");
+    NSLog(@"[SCInsta] Padlock authentication: Prompting for unlock");
 
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&error]) {
         NSString *reason = @"Authenticate to unlock app";
@@ -37,14 +37,14 @@
                 if (success) {
                     [self dismissViewControllerAnimated:YES completion:nil];
 
-                    NSLog(@"[BHInsta] Padlock authentication: Unlock success");
+                    NSLog(@"[SCInsta] Padlock authentication: Unlock success");
                 } else {
-                    NSLog(@"[BHInsta] Padlock authentication: Unlock failed");
+                    NSLog(@"[SCInsta] Padlock authentication: Unlock failed");
                 }
             });
         }];
     } else {
-        NSLog(@"[BHInsta] Padlock authentication: Device authentication not available");
+        NSLog(@"[SCInsta] Padlock authentication: Device authentication not available");
     }
 }
 

@@ -1,9 +1,9 @@
-Package: com.socuul.bhinsta
-Name: BHInsta
+Package: com.socuul.scinsta
+Name: SCInsta
 Version: 0.4.0
 Architecture: iphoneos-arm
 Description: A feature-rich tweak for Instagram on iOS!
 Maintainer: SoCuul
-Author: Bandar Alruwaili
+Author: SoCuul
 Section: Tweaks
 Depends: mobilesubstrate, ws.hbang.common

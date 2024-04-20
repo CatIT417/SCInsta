@@ -9,8 +9,8 @@ sourceModule:(id)arg3
 config:(id)arg4
 forceDarkMode:(BOOL)arg5
 netegoImpressionStrategy:(id)arg6 {
-    if ([BHIManager removeSuggestedReels]) {
-        NSLog(@"[BHInsta] Hiding suggested reels");
+    if ([SCIManager removeSuggestedReels]) {
+        NSLog(@"[SCInsta] Hiding suggested reels");
 
         return nil;
     }

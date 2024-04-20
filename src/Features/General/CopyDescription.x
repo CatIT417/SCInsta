@@ -5,7 +5,7 @@
 %hook IGCoreTextView
 - (id)initWithWidth:(CGFloat)width {
     self = %orig;
-    if ([BHIManager copyDecription]) {
+    if ([SCIManager copyDecription]) {
         [self addHandleLongPress];
     }
     return self;
@@ -18,7 +18,7 @@
 
 %new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"[BHInsta] Copying description");
+        NSLog(@"[SCInsta] Copying description");
 
         // Copy text to system clipboard
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];

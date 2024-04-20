@@ -6,10 +6,10 @@
 - (void)didMoveToWindow {
     %orig;
 
-    if ([BHIManager hideReelsTab]) { // !! change to "hideReelsTab" before commit
+    if ([SCIManager hideReelsTab]) { // !! change to "hideReelsTab" before commit
         NSMutableArray *tabButtons = [self valueForKey:@"_tabButtons"];
 
-        NSLog(@"[BHInsta] Hiding reels tab");
+        NSLog(@"[SCInsta] Hiding reels tab");
 
         if ([tabButtons count] == 5) {
             [tabButtons removeObjectAtIndex:3];

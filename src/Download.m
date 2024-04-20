@@ -1,6 +1,6 @@
 #import "Download.h"
 
-@implementation BHIDownload
+@implementation SCIDownload
 - (instancetype)init {
     self = [super init];
     if (self) {

@@ -7,7 +7,7 @@ echo
 ./build.sh --dev
 
 # Install to device
-cp -fr ./packages/BHInsta-sideloaded.ipa ~/Documents/Signing/BHInsta/ipas/UNSIGNED.ipa
+cp -fr ./packages/SCInsta-sideloaded.ipa ~/Documents/Signing/SCInsta/ipas/UNSIGNED.ipa
 cd ~/Documents/Signing
-./sign.sh BHInsta
-./deploy.sh BHInsta #true
+./sign.sh SCInsta
+./deploy.sh SCInsta #true

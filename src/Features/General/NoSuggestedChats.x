@@ -6,8 +6,8 @@
 - (id)viewModel {
     if ([[%orig title] isEqualToString:@"Suggested"]) {
 
-        if ([BHIManager noSuggestedChats]) {
-            NSLog(@"[BHInsta] Hiding suggested chats");
+        if ([SCIManager noSuggestedChats]) {
+            NSLog(@"[SCInsta] Hiding suggested chats");
 
             return nil;
         }
@@ -24,8 +24,8 @@
 // Channels dms tab (recipients)
 %hook IGDirectInboxSuggestedThreadSectionController
 - (id)initWithUserSession:(id)arg1 analyticsModule:(id)arg2 delegate:(id)arg3 igvpController:(id)arg4 viewPointActionBlock:(id)arg5 entryPointProvider:(id)arg6 {
-    if ([BHIManager noSuggestedChats]) {
-        NSLog(@"[BHInsta] Hiding suggested chats");
+    if ([SCIManager noSuggestedChats]) {
+        NSLog(@"[SCInsta] Hiding suggested chats");
 
         return nil;
     }
@@ -38,7 +38,7 @@
 // Dms search (sponsored section)
 %hook IGDirectInboxSearchListAdapterDataSource
 - (id)objectsForListAdapter:(id)arg1 {
-    if ([BHIManager noSuggestedChats]) {
+    if ([SCIManager noSuggestedChats]) {
 
         NSMutableArray *newObjs = [%orig mutableCopy];
 
@@ -47,7 +47,7 @@
             // Section header 
             if ([obj isKindOfClass:%c(IGLabelItemViewModel)]) {
                 if ([[obj labelTitle] isEqualToString:@"Suggested channels"]) {
-                    NSLog(@"[BHInsta] Hiding suggested chats (header)");
+                    NSLog(@"[SCInsta] Hiding suggested chats (header)");
 
                     [newObjs removeObjectAtIndex:idx];
                 }
@@ -56,7 +56,7 @@
             // Broadcast channel recipient
             else if ([obj isKindOfClass:%c(IGDirectRecipientCellViewModel)]) {
                 if ([[obj recipient] isBroadcastChannel]) {
-                    NSLog(@"[BHInsta] Hiding suggested chats (recipients)");
+                    NSLog(@"[SCInsta] Hiding suggested chats (recipients)");
 
                     [newObjs removeObjectAtIndex:idx];
                 }
