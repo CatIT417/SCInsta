@@ -143,8 +143,8 @@
 
             // Section 8: Credits
             [self newSectionWithTitle:@"Credits" footer:[NSString stringWithFormat:@"SCInsta %@", SCIVersionString]],
-            [self newHBTwitterCellWithTitle:@"Maintainer" twitterUsername:@"SoVeryCuul" customAvatarURL:@"https://unavatar.io/twitter/SoVeryCuul"],
-            [self newHBTwitterCellWithTitle:@"Original Author" twitterUsername:@"BandarHL" customAvatarURL:@"https://unavatar.io/twitter/BandarHL"],
+            [self newHBTwitterCellWithTitle:@"Developer" twitterUsername:@"SoVeryCuul" customAvatarURL:@"https://unavatar.io/twitter/SoVeryCuul"],
+            [self newHBTwitterCellWithTitle:@"Upstream Dev" twitterUsername:@"BandarHL" customAvatarURL:@"https://unavatar.io/twitter/BandarHL"],
             [self newHBLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/SoCuul/SCInsta"]
         ]];
         
