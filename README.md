@@ -91,5 +91,12 @@ You can install the tweaked IPA file like any other sideloaded iOS app. If you h
 # Contributing
 Contributions to this tweak are greatly appreciated. Feel free to create a pull request if you would like to contribute.
 
+If you do not have the technical knowledge to contribute to the codebase, improvements to the documentation are always welcome!
+
+# Supporting
+SCInsta takes a lot of time to develop, as the Instagram app is ever-changing and hard to keep up with. Additionally, I'm still a student which doesn't leave me much time to work on this tweak.
+
+If you'd like to support my hard work, just share a link to this tweak with others who would like it! Seeing people use this tweak is what keeps me motivated to keep working on it ❤️
+
 # Credits
 - Huge thanks to [@BandarHL](https://github.com/BandarHL) for creating the original BHInstagram/BHInsta project, which SCInsta is based upon.
