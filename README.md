@@ -2,6 +2,15 @@
 A feature-rich tweak for Instagram on iOS!\
 `Version v0.4.0-dev` | `Tested on Instagram v327.1.0`
 
+---
+
+> [!NOTE]  
+> &nbsp;&nbsp;❓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you have any questions, visit the [Discussions](https://github.com/SoCuul/SCInsta/discussions) tab
+> 
+> ✨ 🐛 &nbsp; If you want to submit a feature request/bug report, visit the [Issues](https://github.com/SoCuul/SCInsta/issues) tab
+
+---
+
 # Features
 ### General
 - Copy description
