@@ -1,6 +1,6 @@
 # SCInsta (previously BHInsta)
 A feature-rich tweak for Instagram on iOS!\
-`Version v0.4.0-dev` | `Tested on Instagram v327.1.0`
+`Version v0.4.0-dev` | `Tested on Instagram v328.1.3`
 
 ---
 
