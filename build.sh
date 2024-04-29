@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 CMAKE_OSX_ARCHITECTURES="arm64e;arm64"
 
 ipaFile="$(find ./packages/*com.burbn.instagram*.ipa -type f -exec basename {} \;)"
