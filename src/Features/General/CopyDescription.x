@@ -28,6 +28,7 @@
         JGProgressHUD *HUD = [[JGProgressHUD alloc] init];
         HUD.textLabel.text = @"Copied text to clipboard!";
         HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+        
         [HUD showInView:topMostController().view];
         [HUD dismissAfterDelay:2.0];
     }
