@@ -96,9 +96,10 @@
     BOOL tempFolderSuccess = [[NSFileManager defaultManager] removeItemAtURL:[NSURL fileURLWithPath:NSTemporaryDirectory()] error:nil];
     if (!tempFolderSuccess) NSLog(@"[SCInsta] Error deleting temp folder");
 
-    // Cache folder
-    BOOL cacheFolderSuccess = [[NSFileManager defaultManager] removeItemAtPath:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] error:nil];
-    if (!cacheFolderSuccess) NSLog(@"[SCInsta] Error deleting cache folder");
+    // Analytics folder
+    NSString *analyticsFolder = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"Application Support/com.burbn.instagram/analytics"];
+    BOOL analyticsFolderSuccess = [[NSFileManager defaultManager] removeItemAtURL:[[NSURL alloc] initFileURLWithPath:analyticsFolder] error:nil];
+    if (!analyticsFolderSuccess) NSLog(@"[SCInsta] Error deleting analytics folder");
 
 }
 + (BOOL)isEmpty:(NSURL *)url {
