@@ -104,7 +104,7 @@
 
             // Section 2: Feed
             [self newSectionWithTitle:@"Feed" footer:nil],
-            [self newSwitchCellWithTitle:@"Hide Ads" detailTitle:@"Removes all ads from the Instagram app" key:@"hide_ads" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Hide ads" detailTitle:@"Removes all ads from the Instagram app" key:@"hide_ads" defaultValue:true changeAction:nil],
             [self newSwitchCellWithTitle:@"Hide stories tray" detailTitle:@"Hides the story tray at the top and within your feed" key:@"hide_stories_tray" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"No suggested posts" detailTitle:@"Removes suggested posts from your feed" key:@"no_suggested_post" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"No suggested for you" detailTitle:@"Hides suggested accounts for you to follow" key:@"no_suggested_account" defaultValue:false changeAction:nil],
@@ -127,7 +127,7 @@
             [self newSwitchCellWithTitle:@"Save profile image" detailTitle:@"Save profile image on long press" key:@"save_profile" defaultValue:true changeAction:nil],
 
             // Section 5: Stories and Messages
-            [self newSectionWithTitle:@"Story and Messages" footer:nil],
+            [self newSectionWithTitle:@"Story and messages" footer:nil],
             [self newSwitchCellWithTitle:@"Keep deleted message" detailTitle:@"Keeps deleted direct messages in the chat" key:@"keep_deleted_message" defaultValue:true changeAction:nil],
             [self newSwitchCellWithTitle:@"Unlimited replay of direct stories" detailTitle:@"Replays direct messages normal/once stories unlimited times" key:@"unlimited_replay" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Disable sending read receipts" detailTitle:@"Removes the seen text for others when you view a message" key:@"remove_lastseen" defaultValue:false changeAction:nil],
@@ -145,7 +145,6 @@
             // Section 8: Credits
             [self newSectionWithTitle:@"Credits" footer:[NSString stringWithFormat:@"SCInsta %@", SCIVersionString]],
             [self newHBTwitterCellWithTitle:@"Developer" twitterUsername:@"SoVeryCuul" customAvatarURL:@"https://unavatar.io/twitter/SoVeryCuul"],
-            [self newHBTwitterCellWithTitle:@"Upstream Dev" twitterUsername:@"BandarHL" customAvatarURL:@"https://unavatar.io/twitter/BandarHL"],
             [self newHBLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/SoCuul/SCInsta"]
         ]];
         
