@@ -3,14 +3,23 @@
 
 // Most in-app search bars
 %hook IGRecentSearchStore
+- (id)initWithDiskManager:(id)arg1 recentSearchStoreConfiguration:(id)arg2 {
+    if ([SCIManager noRecentSearches]) {
+        NSLog(@"[SCInsta] Disabling recent searches");
+
+        return nil;
+    }
+
+    return %orig;
+}
 - (BOOL)addItem:(id)arg1 {
     if ([SCIManager noRecentSearches]) {
         NSLog(@"[SCInsta] Disabling recent searches");
 
         return nil;
-    } else {
-        return %orig;
     }
+
+    return %orig;
 }
 %end
 
@@ -21,8 +30,8 @@
         NSLog(@"[SCInsta] Disabling recent searches");
 
         return nil;
-    } else {
-        return %orig;
     }
+
+    return %orig;
 }
 %end
