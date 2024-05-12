@@ -19,10 +19,6 @@
 - (void)_superPresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(id)completion; // new
 @end
 
-@interface IGBadgedNavigationButton : UIView
-- (void)handleLongPress; // new
-@end
-
 @interface IGShimmeringGridView : UIView
 @end
 
@@ -365,62 +361,62 @@ typedef FLEXAlertAction * _Nonnull (^FLEXAlertActionHandler)(void(^handler)(NSAr
 
 @interface FLEXAlert : NSObject
 
-/// Shows a simple alert with one button which says "Dismiss"
+// Shows a simple alert with one button which says "Dismiss"
 + (void)showAlert:(NSString * _Nullable)title message:(NSString * _Nullable)message from:(UIViewController *)viewController;
 
-/// Shows a simple alert with no buttons and only a title, for half a second
+// Shows a simple alert with no buttons and only a title, for half a second
 + (void)showQuickAlert:(NSString *)title from:(UIViewController *)viewController;
 
-/// Construct and display an alert
+// Construct and display an alert
 + (void)makeAlert:(FLEXAlertBuilder)block showFrom:(UIViewController *)viewController;
-/// Construct and display an action sheet-style alert
+// Construct and display an action sheet-style alert
 + (void)makeSheet:(FLEXAlertBuilder)block
          showFrom:(UIViewController *)viewController
            source:(id)viewOrBarItem;
 
-/// Construct an alert
+// Construct an alert
 + (UIAlertController *)makeAlert:(FLEXAlertBuilder)block;
-/// Construct an action sheet-style alert
+// Construct an action sheet-style alert
 + (UIAlertController *)makeSheet:(FLEXAlertBuilder)block;
 
-/// Set the alert's title.
+// Set the alert's title.
 ///
-/// Call in succession to append strings to the title.
+// Call in succession to append strings to the title.
 @property (nonatomic, readonly) FLEXAlertStringProperty title;
-/// Set the alert's message.
+// Set the alert's message.
 ///
-/// Call in succession to append strings to the message.
+// Call in succession to append strings to the message.
 @property (nonatomic, readonly) FLEXAlertStringProperty message;
-/// Add a button with a given title with the default style and no action.
+// Add a button with a given title with the default style and no action.
 @property (nonatomic, readonly) FLEXAlertAddAction button;
-/// Add a text field with the given (optional) placeholder text.
+// Add a text field with the given (optional) placeholder text.
 @property (nonatomic, readonly) FLEXAlertStringArg textField;
-/// Add and configure the given text field.
+// Add and configure the given text field.
 ///
-/// Use this if you need to more than set the placeholder, such as
-/// supply a delegate, make it secure entry, or change other attributes.
+// Use this if you need to more than set the placeholder, such as
+// supply a delegate, make it secure entry, or change other attributes.
 @property (nonatomic, readonly) FLEXAlertTextField configuredTextField;
 
 @end
 
 @interface FLEXAlertAction : NSObject
 
-/// Set the action's title.
+// Set the action's title.
 ///
-/// Call in succession to append strings to the title.
+// Call in succession to append strings to the title.
 @property (nonatomic, readonly) FLEXAlertActionStringProperty title;
-/// Make the action destructive. It appears with red text.
+// Make the action destructive. It appears with red text.
 @property (nonatomic, readonly) FLEXAlertActionProperty destructiveStyle;
-/// Make the action cancel-style. It appears with a bolder font.
+// Make the action cancel-style. It appears with a bolder font.
 @property (nonatomic, readonly) FLEXAlertActionProperty cancelStyle;
-/// Enable or disable the action. Enabled by default.
+// Enable or disable the action. Enabled by default.
 @property (nonatomic, readonly) FLEXAlertActionBOOLProperty enabled;
-/// Give the button an action. The action takes an array of text field strings.
+// Give the button an action. The action takes an array of text field strings.
 @property (nonatomic, readonly) FLEXAlertActionHandler handler;
-/// Access the underlying UIAlertAction, should you need to change it while
-/// the encompassing alert is being displayed. For example, you may want to
-/// enable or disable a button based on the input of some text fields in the alert.
-/// Do not call this more than once per instance.
+// Access the underlying UIAlertAction, should you need to change it while
+// the encompassing alert is being displayed. For example, you may want to
+// enable or disable a button based on the input of some text fields in the alert.
+// Do not call this more than once per instance.
 @property (nonatomic, readonly) UIAlertAction *action;
 
 @end

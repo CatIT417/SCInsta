@@ -11,13 +11,10 @@
 
             return nil;
         }
-        else {
-            return %orig;
-        }
 
-    } else {
-        return %orig;
     }
+
+    return %orig;
 }
 %end
 
@@ -29,46 +26,7 @@
 
         return nil;
     }
-    else {
-        return %orig;
-    }
-}
-%end
 
-// Dms search (sponsored section)
-%hook IGDirectInboxSearchListAdapterDataSource
-- (id)objectsForListAdapter:(id)arg1 {
-    if ([SCIManager noSuggestedChats]) {
-
-        NSMutableArray *newObjs = [%orig mutableCopy];
-
-        [newObjs enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-
-            // Section header 
-            if ([obj isKindOfClass:%c(IGLabelItemViewModel)]) {
-                if ([[obj labelTitle] isEqualToString:@"Suggested channels"]) {
-                    NSLog(@"[SCInsta] Hiding suggested chats (header)");
-
-                    [newObjs removeObjectAtIndex:idx];
-                }
-            }
-
-            // Broadcast channel recipient
-            else if ([obj isKindOfClass:%c(IGDirectRecipientCellViewModel)]) {
-                if ([[obj recipient] isBroadcastChannel]) {
-                    NSLog(@"[SCInsta] Hiding suggested chats (recipients)");
-
-                    [newObjs removeObjectAtIndex:idx];
-                }
-            }
-
-        }];
-
-        return [newObjs copy];
-
-    }
-    else {
-        return %orig;
-    }
+    return %orig;
 }
 %end

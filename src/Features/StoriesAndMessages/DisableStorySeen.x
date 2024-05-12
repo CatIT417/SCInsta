@@ -7,9 +7,9 @@
         NSLog(@"[SCInsta] Prevented seen receipt from being sent");
 
         return nil;
-    } else {
-        return %orig;
     }
+    
+    return %orig;
 }
 
 - (id)networker {
@@ -17,8 +17,8 @@
         NSLog(@"[SCInsta] Prevented seen receipt from being sent");
 
         return nil;
-    } else {
-        return %orig;
     }
+    
+    return %orig;
 }
 %end
