@@ -24,6 +24,7 @@
 + (BOOL)hideExploreGrid;
 + (BOOL)hideTrendingSearches;
 + (BOOL)noSuggestedChats;
++ (BOOL)noSuggestedUsers;
 + (BOOL)hideMetaAI;
 + (BOOL)Padlock;
 + (BOOL)keepDeletedMessage;

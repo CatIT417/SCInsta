@@ -65,6 +65,9 @@
 + (BOOL)noSuggestedChats {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"no_suggested_chats"];
 }
++ (BOOL)noSuggestedUsers {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"no_suggested_users"];
+}
 + (BOOL)hideMetaAI {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"hide_meta_ai"];
 }
