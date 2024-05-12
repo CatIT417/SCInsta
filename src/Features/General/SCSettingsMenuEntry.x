@@ -2,15 +2,13 @@
 #import "../../Manager.h"
 #import "../../Controllers/SettingsViewController.h"
 
-// Show SCInsta tweak settings by holding on the settings icon for ~1 second
-%hook IGBadgedNavigationButton
-- (instancetype)initWithIcon:(UIImage *)icon target:(id)target action:(SEL)action buttonType:(NSUInteger)type {
+// Show SCInsta tweak settings by holding on the Instagram lgoo for ~1 second
+%hook IGImageWithAccessoryButton
+- (id)initWithAccessoryImage:(id)arg1 {
     self = %orig;
 
-    if ([[icon ig_imageName] isEqualToString:@"ig_icon_menu_pano_outline_24"]) {
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress)];
-        [self addGestureRecognizer:longPress];
-    }
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress)];
+    [self addGestureRecognizer:longPress];
 
     return self;
 }
@@ -24,62 +22,3 @@
     [rootController presentViewController:navigationController animated:YES completion:nil];
 }
 %end
-
-// TODO: Possibly add SCInsta settings button to profile header navbar icons
-/* %hook IGStackLayout
-// Display Settings Modal
-%new - (void)displaySettingsModal:(id)sender {
-    // Display settings modal
-    NSLog(@"[SCInsta] Displaying SCInsta settings modal");
-
-    UIViewController *rootController = [[UIApplication sharedApplication] delegate].window.rootViewController;
-    SettingsViewController *settingsViewController = [SettingsViewController new];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-    
-    [rootController presentViewController:navigationController animated:YES completion:nil];
-
-    return;
-}
-
-// test to get icon info
-- (id)initWithIcon:(id)arg1 target:(id)arg2 action:(SEL)arg3 buttonType:(NSUInteger)arg4 {
-    NSLog(@"[SCInsta] Icon: %@", arg1);
-
-    return %orig;
-}
-
-- (id)initWithChildren:(id)children {
-    // Check if children contain badged icons (only used on profile page)
-    BOOL containsClass = NO;
-
-    for (id child in children) {
-        if ([child isKindOfClass:%c(IGBadgedNavigationButton)]) {
-            containsClass = YES;
-            break;
-        }
-    }
-
-    if (!containsClass) {
-        return %orig;
-    }
-
-    NSMutableArray *newChildren = [children mutableCopy];
-
-    // Add button to children array
-    //UIBarButtonItem *scSettingsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"gear.circle"] style:UIBarButtonItemStylePlain target:self action:@selector(displaySettingsModal)];
-    // IGBadgedNavigationButton *badgedNavButton = [IGBadgedNavigationButton new];
-
-    //UIButton *newButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    //[badgedNavButton ]
-
-    //[newChildren addObject:badgedNavButton];
-
-    // Make children array immutable
-    //NSArray *immutableNewChildren = [newChildren copy]; 
-    NSLog(@"[SCInsta] Old Children: %@", children); 
-    NSLog(@"[SCInsta] New Children: %@", newChildren);
-    
-
-    return %orig(newChildren);
-}
-%end */
