@@ -6,6 +6,7 @@
     if ([SCIManager keepDeletedMessage]) {
         arg1 = NULL;
     }
+
     return %orig(arg1);
 }
 %end
@@ -15,6 +16,7 @@
     if ([SCIManager keepDeletedMessage]) {
         arg1 = NULL;
     }
+    
     return %orig(arg1);
 }
 %end

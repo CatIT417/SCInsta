@@ -19,6 +19,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
             [orig removeObjectAtIndex:idx];
         }
     }];
+
     return [orig copy];
 }
 
@@ -28,6 +29,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
     if ([SCIManager hideAds]) {
         return removeAdsItemsInList(%orig, YES);
     }
+
     return %orig;
 }
 %end
@@ -36,6 +38,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
     if ([SCIManager hideAds]) {
         return removeAdsItemsInList(%orig, NO);
     }
+
     return %orig;
 }
 %end
@@ -44,6 +47,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
     if ([SCIManager hideAds]) {
         return removeAdsItemsInList(%orig, NO);
     }
+
     return %orig;
 }
 %end
@@ -52,6 +56,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
     if ([SCIManager hideAds]) {
         return removeAdsItemsInList(%orig, NO);
     }
+
     return %orig;
 }
 %end
@@ -62,6 +67,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 
         return nil;
     }
+
     return %orig;
 }
 %end
@@ -72,6 +78,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 
         return nil;
     }
+
     return %orig;
 }
 %end
@@ -82,6 +89,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 
         return nil;
     }
+
     return %orig;
 }
 %end
@@ -93,6 +101,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 
         return nil;
     }
+
     return %orig;
 }
 - (id)initWithReelStore:(id)arg1 {
@@ -101,6 +110,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 
         return nil;
     }
+
     return %orig;
 }
 %end
@@ -111,6 +121,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 
         return nil;
     }
+
     return %orig;
 }
 %end
@@ -121,6 +132,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 
         return nil;
     }
+
     return %orig;
 }
 - (id)initWithMediaStore:(id)arg1 userStore:(id)arg2 {
@@ -129,6 +141,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
         
         return nil;
     }
+    
     return %orig;
 }
 %end
