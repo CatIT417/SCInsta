@@ -10,6 +10,7 @@
 
         return;
     }
+    
     return %orig;
 }
 %end
@@ -22,7 +23,9 @@
         NSLog(@"[SCInsta] Hiding explore grid");
 
         IGShimmeringGridView *shimmeringGridView = MSHookIvar<IGShimmeringGridView *>(self, "_shimmeringGridView");
-        [shimmeringGridView removeFromSuperview];
+        if (shimmeringGridView) {
+            [shimmeringGridView removeFromSuperview];
+        }
     }
 }
 %end
