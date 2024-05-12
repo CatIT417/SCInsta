@@ -44,10 +44,7 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"dw_videos"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"save_profile"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"remove_screenshot_alert"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"show_like_count"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"copy_description"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"call_confirm"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_trending_searches"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_chats"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_threads"];
 
@@ -92,8 +89,6 @@ static BOOL isAuthenticationShowed = FALSE;
 
     // Reset padlock status
     isAuthenticationShowed = FALSE;
-
-    NSLog(@"[SCInsta] Padlock authentication: App disabled");
 }
 %end
 
