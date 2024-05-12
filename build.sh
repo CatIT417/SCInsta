@@ -36,7 +36,7 @@ then
     else
         FLEXPATH='.theos/obj/debug/libbhFLEX.dylib'
 
-        make
+        make "SIDELOAD=1"
     fi
 
     # Create IPA File
@@ -58,6 +58,8 @@ then
     export THEOS_PACKAGE_SCHEME=rootless
     make package
 
+    echo -e "\033[1m\033[32mDone, we hope you enjoy SCInsta!\033[0m\n\nYou can find the deb file at: $(pwd)/packages"
+
 elif [ "$1" == "rootful" ];
 then
 
@@ -69,6 +71,8 @@ then
 
     unset THEOS_PACKAGE_SCHEME
     make package
+
+    echo -e "\033[1m\033[32mDone, we hope you enjoy SCInsta!\033[0m\n\nYou can find the deb file at: $(pwd)/packages"
 
 else
     echo '+--------------------+'
