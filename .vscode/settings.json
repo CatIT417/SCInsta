@@ -10,5 +10,10 @@
         "*.xmi": "logos",
         "*.m": "objective-c",
         "*.h": "objective-c"
+    },
+
+    "search.exclude": {
+        "modules/": true,
+        "dump/": true
     }
 }
