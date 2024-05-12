@@ -169,6 +169,98 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %end
 
+// Direct suggested chats (in search bar)
+%hook IGDirectInboxSearchListAdapterDataSource
+- (id)objectsForListAdapter:(id)arg1 {
+    NSMutableArray *newObjs = [%orig mutableCopy];
+
+    [newObjs enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+
+        // Section header 
+        if ([obj isKindOfClass:%c(IGLabelItemViewModel)]) {
+
+            // Broadcast channels
+            if ([[obj labelTitle] isEqualToString:@"Suggested channels"]) {
+                if ([SCIManager noSuggestedChats]) {
+                    NSLog(@"[SCInsta] Hiding suggested chats (header)");
+
+                    [newObjs removeObjectAtIndex:idx];
+                }
+            }
+
+            // Ask Meta AI
+            else if ([[obj labelTitle] isEqualToString:@"Ask Meta AI"]) {
+                if ([SCIManager hideMetaAI]) {
+                    NSLog(@"[SCInsta] Hiding meta ai suggested chats (header)");
+
+                    [newObjs removeObjectAtIndex:idx];
+                }
+            }
+
+            // AI
+            else if ([[obj labelTitle] isEqualToString:@"AI"]) {
+                if ([SCIManager hideMetaAI]) {
+                    NSLog(@"[SCInsta] Hiding ai suggested chats (header)");
+
+                    [newObjs removeObjectAtIndex:idx];
+                }
+            }
+            
+        }
+
+        // AI agents section
+        else if (
+            [obj isKindOfClass:%c(IGDirectInboxSearchAIAgentsPillsSectionViewModel)]
+            || [obj isKindOfClass:%c(IGDirectInboxSearchAIAgentsSuggestedPromptLoggingViewModel)]
+        ) {
+
+            if ([SCIManager hideMetaAI]) {
+                NSLog(@"[SCInsta] Hiding suggested chats (ai agents)");
+
+                [newObjs removeObjectAtIndex:idx];
+            }
+
+        }
+
+        // Recipients list
+        else if ([obj isKindOfClass:%c(IGDirectRecipientCellViewModel)]) {
+
+            // Broadcast channels
+            if ([[obj recipient] isBroadcastChannel]) {
+                if ([SCIManager noSuggestedChats]) {
+                    NSLog(@"[SCInsta] Hiding suggested chats (broadcast channels recipient)");
+
+                    [newObjs removeObjectAtIndex:idx];
+                }
+            }
+            
+            // Meta AI (special section types)
+            else if (([obj sectionType] == 20) || [obj sectionType] == 18) {
+                if ([SCIManager hideMetaAI]) {
+                    NSLog(@"[SCInsta] Hiding meta ai suggested chats (meta ai recipient)");
+
+                    [newObjs removeObjectAtIndex:idx];
+                }
+            }
+
+            // Meta AI (catch-all)
+            else if ([[[obj recipient] threadName] isEqualToString:@"Meta AI"]) {
+                if ([SCIManager hideMetaAI]) {
+                    NSLog(@"[SCInsta] Hiding meta ai suggested chats (meta ai recipient)");
+
+                    [newObjs removeObjectAtIndex:idx];
+                }
+            }
+        }
+
+    }];
+
+    return [newObjs copy];
+}
+%end
+
+/////////////////////////////////////////////////////////////////////////////
+
 // FLEX explorer gesture handler
 %hook IGRootViewController
 - (void)viewDidLoad {
@@ -190,7 +282,7 @@ static BOOL isAuthenticationShowed = FALSE;
 %end
 
 
-//////////
+/////////////////////////////////////////////////////////////////////////////
 
 %hook HBForceCepheiPrefs
 + (BOOL)forceCepheiPrefsWhichIReallyNeedToAccessAndIKnowWhatImDoingISwear {

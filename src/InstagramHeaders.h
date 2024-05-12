@@ -195,10 +195,10 @@
 @end
 
 @interface IGStoryViewerContainerView : UIView
-@property(retain, nonatomic) UIView<IGStoryPlayerMediaViewType> *mediaView;
-@property(nonatomic) IGStoryFullscreenOverlayView *overlayView;
+@property (retain, nonatomic) UIView<IGStoryPlayerMediaViewType> *mediaView;
+@property (nonatomic) IGStoryFullscreenOverlayView *overlayView;
 @property (nonatomic, weak) id delegate;
-@property(nonatomic, retain) UIButton *hDownloadButton; // new property
+@property (nonatomic, retain) UIButton *hDownloadButton; // new property
 @property (nonatomic, strong) JGProgressHUD *hud;
 @property (nonatomic, retain) NSString *fileextension;
 - (void)hDownloadButtonPressed:(UIButton *)sender;
@@ -233,7 +233,7 @@
  * Determine If User Is Following You
  */
 @interface IGProfileBioModel
-@property(readonly, copy, nonatomic) IGUser *user;
+@property (readonly, copy, nonatomic) IGUser *user;
 @end
 
 @interface IGProfileViewController : UIViewController {
@@ -242,46 +242,76 @@
 @end
 
 @interface IGProfileSimpleAvatarStatsCell : UICollectionViewCell
-@property(nonatomic, retain) UIView *isFollowingYouBadge; // new property
-@property(nonatomic, retain) UILabel *isFollowingYouLabel; // new property
+@property (nonatomic, retain) UIView *isFollowingYouBadge; // new property
+@property (nonatomic, retain) UILabel *isFollowingYouLabel; // new property
 - (void)addIsFollowingYouBadgeView; // new
 @end
 
 @interface IGUserSession : NSObject
-@property(readonly, nonatomic) IGUser *user;
+@property (readonly, nonatomic) IGUser *user;
 @end
 
 @interface IGWindow : UIWindow
-@property(nonatomic) __weak IGUserSession *userSession;
+@property (nonatomic) __weak IGUserSession *userSession;
 @end
 
 @interface IGShakeWindow : UIWindow
-@property(nonatomic) __weak IGUserSession *userSession;
+@property (nonatomic) __weak IGUserSession *userSession;
 @end
 
 @interface IGStyledString : NSObject
-@property(retain, nonatomic) NSMutableAttributedString *attributedString;
+@property (retain, nonatomic) NSMutableAttributedString *attributedString;
 - (void)appendString:(id)arg1;
 @end
 
 @interface IGInstagramAppDelegate : NSObject <UIApplicationDelegate>
 @end
 
+@interface IGDirectInboxSearchAIAgentsPillsContainerCell : UIView
+@end
+
+@interface IGTapButton : UIButton
+@end
+
+@interface IGLabel : UILabel
+@end
+
 @interface IGLabelItemViewModel : NSObject
 - (id)labelTitle;
 @end
 
-@interface IGDirectRecipientCellViewModel : NSObject
-- (id)recipient;
+@interface IGSearchResultViewModel : NSObject
+- (NSUInteger)itemType;
 @end
 
 @interface IGDirectShareRecipient : NSObject
+- (NSString *)threadName;
 - (BOOL)isBroadcastChannel;
+@end
+
+@interface IGDirectRecipientCellViewModel : NSObject
+- (id)recipient;
+- (NSInteger)sectionType;
+@end
+
+@interface IGDirectInboxSearchAIAgentsSuggestedPromptRowCell : UIView
+@end
+
+@interface IGDSSegmentedPillBarView : UIView
+- (id)delegate;
+@end
+
+@interface IGBadgedNavigationButton : UIView
+- (id)initWithIcon:(UIImage *)icon target:(id)target action:(SEL)action buttonType:(NSUInteger)buttonType;
+- (void)handleLongPress; // new
+@end
+
+@interface IGImageWithAccessoryButton : IGTapButton
 @end
 
 
 
-////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -294,7 +324,7 @@ static BOOL is_iPad() {
 
 
 
-////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 
 
 
