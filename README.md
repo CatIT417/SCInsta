@@ -71,7 +71,8 @@ A feature-rich tweak for Instagram on iOS!\
    1. [Click to download iOS SDKs](https://github.com/xybp888/iOS-SDKs/archive/refs/heads/master.zip)
    2. Unzip, then copy the `iPhoneOS14.5.sdk` folder into `~/theos/sdks`
 2. Clone SCInsta repo from GitHub: `git clone --recurse-submodules https://github.com/SoCuul/SCInsta --branch v0.4.0`
-3. **For sideloading**: Download a decrypted Instagram IPA from a trusted source, and place it inside the `packages` folder with the name `com.burbn.instagram.ipa`
+3. **For sideloading**: Download a decrypted Instagram IPA from a trusted source, making sure to rename it to `com.burbn.instagram.ipa`.
+   Then create a folder called `packages` inside of the `SCInsta` folder, and move the Instagram IPA file into it. 
 
 ## Run build script
 ```sh
