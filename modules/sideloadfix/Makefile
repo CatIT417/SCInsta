@@ -6,8 +6,8 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = sideloadfix
 
-sideloadfix_FILES = SideloadFix.x
-sideloadfix_FRAMEWORKS = Foundation
-sideloadfix_CFLAGS = -fobjc-arc
+$(TWEAK_NAME)_FILES = SideloadFix.x
+$(TWEAK_NAME)_FRAMEWORKS = Foundation
+$(TWEAK_NAME)_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk
