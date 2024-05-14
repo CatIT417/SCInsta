@@ -30,11 +30,11 @@ then
     # Check if building with dev mode
     if [ "$2" == "--dev" ];
     then
-        FLEXPATH='packages/libbhFLEX.dylib'
+        FLEXPATH='packages/libsciFLEX.dylib'
 
         make "DEV=1"
     else
-        FLEXPATH='.theos/obj/debug/libbhFLEX.dylib'
+        FLEXPATH='.theos/obj/debug/libsciFLEX.dylib'
 
         make "SIDELOAD=1"
     fi
