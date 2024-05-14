@@ -11,3 +11,4 @@
 ### Creating new release
 - [ ] Ensure new tag is created with proper format
 - [ ] Make sure to include full changelog in release notes
+- [ ] Include rootful & rootless deb files in release
