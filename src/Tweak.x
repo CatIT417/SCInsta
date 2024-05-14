@@ -261,9 +261,7 @@ static BOOL isAuthenticationShowed = FALSE;
 - (void)viewDidLoad {
     %orig;
     
-    [self addHandleLongPress];
-}
-%new - (void)addHandleLongPress {
+    // Recognize 5-finger long press
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     longPress.minimumPressDuration = 1;
     longPress.numberOfTouchesRequired = 5;
