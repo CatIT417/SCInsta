@@ -4,10 +4,12 @@ A feature-rich tweak for Instagram on iOS!\
 
 ---
 
-> [!NOTE]  
-> &nbsp;&nbsp;❓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you have any questions, visit the [Discussions](https://github.com/SoCuul/SCInsta/discussions) tab
+> [!NOTE]
+> ❓ &nbsp;If you have any questions or need help with the tweak, visit the [Discussions](https://github.com/SoCuul/SCInsta/discussions) tab
+>
+> ✨ &nbsp;If you have a feature request, [click here](https://github.com/SoCuul/SCInsta/issues/new?labels=enhancement&title=feat:%20replace%20this%20text%20with%20your%20feature%20request)\
+> 🐛 &nbsp;If you have a bug report, [click here](https://github.com/SoCuul/SCInsta/issues/new?labels=bug&title=bug:%20replace%20this%20with%20a%20summary%20of%20the%20issue%20you're%20experiencing)
 > 
-> ✨ 🐛 &nbsp; If you want to submit a feature request/bug report, visit the [Issues](https://github.com/SoCuul/SCInsta/issues) tab
 
 ---
 
