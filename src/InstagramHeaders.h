@@ -276,7 +276,15 @@
 - (id)labelTitle;
 @end
 
+@interface IGDirectInboxSuggestedThreadCellViewModel : NSObject
+@end
+
+@interface IGDirectInboxHeaderCellViewModel : NSObject
+- (id)title;
+@end
+
 @interface IGSearchResultViewModel : NSObject
+- (id)title;
 - (NSUInteger)itemType;
 @end
 
@@ -297,13 +305,16 @@
 - (id)delegate;
 @end
 
-@interface IGBadgedNavigationButton : UIView
-- (id)initWithIcon:(UIImage *)icon target:(id)target action:(SEL)action buttonType:(NSUInteger)buttonType;
-- (void)handleLongPress; // new
-@end
-
 @interface IGImageWithAccessoryButton : IGTapButton
 @end
+
+@interface IGSearchBarDonutButton : UIView
+@end
+
+@interface IGAnimatablePlaceholderTextField : UITextField
+@end
+
+
 
 
 

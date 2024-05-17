@@ -123,7 +123,7 @@ accessibilityTraits:(NSUInteger)arg5
 
 // Explore
 
-// Meta AI search bar: explore search results data
+// Meta AI search bar: explore/user search results data
 %hook IGSearchListKitDataSource
 - (id)objectsForListAdapter:(id)arg1 {
     NSMutableArray *newObjs = [%orig mutableCopy];
@@ -157,6 +157,15 @@ accessibilityTraits:(NSUInteger)arg5
                     [newObjs removeObjectAtIndex:idx];
                 }
                 
+            }
+
+            // Meta AI user account in search results
+            else if ([[[obj title] string] isEqualToString:@"meta.ai"]) {
+                if ([SCIManager hideMetaAI]) {
+                    NSLog(@"[SCInsta] Hiding meta ai: explore search results meta ai user account suggestion");
+
+                    [newObjs removeObjectAtIndex:idx];
+                }
             }
 
         }
@@ -231,6 +240,19 @@ accessibilityTraits:(NSUInteger)arg5
     }
 
     return %orig;
+}
+%end
+
+// Search bar donut button
+%hook IGSearchBarDonutButton
+- (void)didMoveToWindow {
+    %orig;
+
+    if ([SCIManager hideMetaAI]) {
+        NSLog(@"[SCInsta] Hiding meta ai: search bar donut button");
+
+        [self removeFromSuperview];
+    }
 }
 %end
 
