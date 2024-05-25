@@ -284,7 +284,8 @@
         [[objc_getClass("FLEXManager") sharedManager] showExplorer];
 
         NSLog(@"[SCInsta] FLEX explorer: Enabled");
-    } else {
+    }
+    else {
         [[objc_getClass("FLEXManager") sharedManager] hideExplorer];
 
         NSLog(@"[SCInsta] FLEX explorer: Disabled");

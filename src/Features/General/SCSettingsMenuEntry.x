@@ -2,7 +2,7 @@
 #import "../../Manager.h"
 #import "../../Controllers/SettingsViewController.h"
 
-// Show SCInsta tweak settings by holding on the Instagram lgoo for ~1 second
+// Show SCInsta tweak settings by holding on the Instagram logo for ~1 second
 %hook IGImageWithAccessoryButton
 - (id)initWithAccessoryImage:(id)arg1 {
     self = %orig;
