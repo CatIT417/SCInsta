@@ -8,6 +8,18 @@
 #import "Controllers/SecurityViewController.h"
 #import "Controllers/SettingsViewController.h"
 
+///////////////////////////////////////////////////////////
+
+// Direct story & screenshot handlers
+
+#define VOID_HANDLESCREENSHOT(orig) [SCIManager noScreenShotAlert] ? nil : orig;
+#define NONVOID_HANDLESCREENSHOT(orig) return VOID_HANDLESCREENSHOT(orig)
+
+#define VOID_HANDLEREPLAY(orig) [SCIManager unlimitedReplay] ? nil : orig;
+#define NONVOID_HANDLEREPLAY(orig) return VOID_HANDLEREPLAY(orig)
+
+///////////////////////////////////////////////////////////
+
 // * Tweak version *
 NSString *SCIVersionString = @"v0.4.1";
 
@@ -95,73 +107,28 @@ static BOOL isAuthenticationShowed = FALSE;
 
 // Instagram DM visual messages / IG stories
 %hook IGDirectVisualMessageViewerSession
-- (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 {
-    if ([SCIManager noScreenShotAlert]) {
-        return nil;
-    }
-    return %orig;
-}
-
-- (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 {
-    if ([SCIManager unlimitedReplay]) {
-        return nil;
-    }
-    return %orig;
-}
+- (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 { NONVOID_HANDLESCREENSHOT(%orig); }
+- (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 { NONVOID_HANDLEREPLAY(%orig); }
 %end
+
 %hook IGDirectVisualMessageReplayService
-- (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 {
-    if ([SCIManager noScreenShotAlert]) {
-        return nil;
-    }
-    return %orig;
-}
-
-- (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 {
-    if ([SCIManager unlimitedReplay]) {
-        return nil;
-    }
-    return %orig;
-}
+- (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 { NONVOID_HANDLESCREENSHOT(%orig); }
+- (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 { NONVOID_HANDLEREPLAY(%orig); }
 %end
+
 %hook IGDirectVisualMessageReportService
-- (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 {
-    if ([SCIManager noScreenShotAlert]) {
-        return nil;
-    }
-    return %orig;
-}
-
-- (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 {
-    if ([SCIManager unlimitedReplay]) {
-        return nil;
-    }
-    return %orig;
-}
+- (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 { NONVOID_HANDLESCREENSHOT(%orig); }
+- (id)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 forNavType:(NSInteger)arg4 { NONVOID_HANDLEREPLAY(%orig); }
 %end
+
 %hook IGDirectVisualMessageViewerController
-- (void)screenshotObserverDidSeeScreenshotTaken:(id)arg1 {
-    if ([SCIManager noScreenShotAlert]) {
-        return;
-    }
-    return %orig;
-}
-- (void)screenshotObserverDidSeeActiveScreenCapture:(id)arg1 event:(NSInteger)arg2 {
-    if ([SCIManager noScreenShotAlert]) {
-        return;
-    }
-    return %orig;
-}
+- (void)screenshotObserverDidSeeScreenshotTaken:(id)arg1 { VOID_HANDLESCREENSHOT(%orig); }
+- (void)screenshotObserverDidSeeActiveScreenCapture:(id)arg1 event:(NSInteger)arg2 { VOID_HANDLESCREENSHOT(%orig); }
 %end
 
 // Instagram Screenshot Observer
 %hook IGScreenshotObserver
-- (id)initForController:(id)arg1 {
-    if ([SCIManager noScreenShotAlert]) {
-        return nil;
-    }
-    return %orig;
-}
+- (id)initForController:(id)arg1 { NONVOID_HANDLESCREENSHOT(%orig); }
 %end
 
 // Direct suggested chats (in search bar)

@@ -1,172 +1,102 @@
 #import "../../Manager.h"
 #import "../../Utils.h"
 
+///////////////////////////////////////////////////////////
+
+// Confirmation handlers
+
+#define CONFIRMPOSTLIKE(orig)                             \
+    if ([SCIManager postLikeConfirmation]) {              \
+        NSLog(@"[SCInsta] Confirm post like triggered");  \
+                                                          \
+        [SCIUtils showConfirmation:^(void) { orig; }];    \
+    }                                                     \
+    else {                                                \
+        return orig;                                      \
+    }                                                     \
+
+#define CONFIRMREELSLIKE(orig)                            \
+    if ([SCIManager reelsLikeConfirmation]) {             \
+        NSLog(@"[SCInsta] Confirm reels like triggered"); \
+                                                          \
+        [SCIUtils showConfirmation:^(void) { orig; }];    \
+    }                                                     \
+    else {                                                \
+        return orig;                                      \
+    }                                                     \
+
+///////////////////////////////////////////////////////////
+
 // Liking posts
 %hook IGUFIButtonBarView
 - (void)_onLikeButtonPressed:(id)arg1 {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 %end
 %hook IGFeedPhotoView
 - (void)_onDoubleTap:(id)arg1 {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 %end
 %hook IGVideoPlayerOverlayContainerView
 - (void)_handleDoubleTapGesture:(id)arg1 {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 %end
 
 // Liking reels
 %hook IGSundialViewerVideoCell
 - (void)controlsOverlayControllerDidTapLikeButton:(id)arg1 {
-    if ([SCIManager reelsLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm reels like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMREELSLIKE(%orig);
 }
 - (void)controlsOverlayControllerDidLongPressLikeButton:(id)arg1 gestureRecognizer:(id)arg2 {
-    if ([SCIManager reelsLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm reels like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMREELSLIKE(%orig);
 }
 - (void)controlsOverlayControllerDidTapLikedBySocialContextButton:(id)arg1 button:(id)arg2 {
-    if ([SCIManager reelsLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm reels like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMREELSLIKE(%orig);
 }
 - (void)gestureController:(id)arg1 didObserveDoubleTap:(id)arg2 {
-    if ([SCIManager reelsLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm reels like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMREELSLIKE(%orig);
 }
 %end
 
 // Liking comments
 %hook IGCommentCellController
 - (void)commentCell:(id)arg1 didTapLikeButton:(id)arg2 {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 - (void)commentCell:(id)arg1 didTapLikedByButtonForUser:(id)arg2 {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 - (void)commentCellDidLongPressOnLikeButton:(id)arg1 {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 - (void)commentCellDidEndLongPressOnLikeButton:(id)arg1 {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 - (void)commentCellDidDoubleTap:(id)arg1 {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-        
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 %end
 %hook IGFeedItemPreviewCommentCell
 - (void)_didTapLikeButton {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-        
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 %end
 
 // Liking stories
 %hook IGStoryFullscreenDefaultFooterView
 - (void)_likeTapped {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 - (void)inputView:(id)arg1 didTapLikeButton:(id)arg2 {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-        
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 %end
 
 // DM like button (seems to be hidden)
 %hook IGDirectThreadViewController
 - (void)_didTapLikeButton {
-    if ([SCIManager postLikeConfirmation]) {
-        NSLog(@"[SCInsta] Confirm post like triggered");
-
-        [SCIUtils showConfirmation:^(void) { %orig; }];
-    } else {
-        return %orig;
-    }
+    CONFIRMPOSTLIKE(%orig);
 }
 %end
