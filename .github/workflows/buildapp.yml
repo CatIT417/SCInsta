@@ -138,3 +138,17 @@ jobs:
           name: SCInsta_${{ github.run_number }}
           path: /Users/runner/work/SCInsta/SCInsta/SCInsta/packages/SCInsta-sideloaded.ipa
           if-no-files-found: error
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2.0.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v0.4.1
+          name: v0.4.1
+          files: |
+            /Users/runner/work/SCInsta/SCInsta/SCInsta/packages/*.ipa
+            /Users/runner/work/SCInsta/SCInsta/SCInsta/packages/*.deb
+
+          
