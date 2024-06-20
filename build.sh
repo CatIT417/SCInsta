@@ -19,7 +19,11 @@ then
     rm -rf .theos
 
     # Check for decrypted instagram ipa
-    ipaFile="$(find ../packages/*com.burbn.instagram*.ipa -type f -exec basename {} \;)"
+
+    ipaFile="/Users/runner/work/SCInsta/SCInsta/packages/com.burbn.instagram.ipa"
+    echo "IPA File: $ipaFile"
+    
+    #ipaFile="$(find ../packages/*com.burbn.instagram*.ipa -type f -exec basename {} \;)"
     if [ -z "${ipaFile}" ]; then
         echo -e '\033[1m\033[0;31m./packages/com.burbn.instagram.ipa not found.\nPlease put a decrypted Instagram IPA in its path.\033[0m'
         exit 1
