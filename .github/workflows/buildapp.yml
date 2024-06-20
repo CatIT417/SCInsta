@@ -114,7 +114,9 @@ jobs:
           cd $PROJECT_PATH
           
           CMAKE_OSX_ARCHITECTURES="arm64e;arm64"
-          
+
+          bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
+
           ipaFile="/Users/runner/work/SCInsta/SCInsta/packages/com.burbn.instagram.ipa"
           echo "IPA File: $ipaFile"
 
