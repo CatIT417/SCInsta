@@ -47,6 +47,9 @@
 + (BOOL)postCommentConfirmation {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"post_comment_confirm"];
 }
++ (BOOL)changeDirectThemeConfirmation {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"change_direct_theme_confirm"];
+}
 + (BOOL)copyDecription {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"copy_description"];
 }

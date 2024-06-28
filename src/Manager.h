@@ -18,6 +18,7 @@
 + (BOOL)voiceMessageConfirmation;
 + (BOOL)stickerInteractConfirmation;
 + (BOOL)postCommentConfirmation;
++ (BOOL)changeDirectThemeConfirmation;
 + (BOOL)copyDecription;
 + (BOOL)hideReelsTab;
 + (BOOL)noRecentSearches;
