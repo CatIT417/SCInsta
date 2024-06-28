@@ -46,7 +46,7 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 
         // Remove suggested threads posts (carousel)
         if (isFeed && [SCIManager removeSuggestedThreads]) {
-            if ([obj isKindOfClass:%c(IGBloksFeedUnitModel)]) {
+            if ([obj isKindOfClass:%c(IGBloksFeedUnitModel)] || [obj isKindOfClass:objc_getClass("IGThreadsInFeedModels.IGThreadsInFeedModel")]) {
                 NSLog(@"[SCInsta] Hiding threads posts");
 
                 [orig removeObjectAtIndex:idx];
@@ -183,6 +183,38 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
         return nil;
     }
     
+    return %orig;
+}
+%end
+
+// End of feed item
+/* !! WIP: make sure to fix */
+/* !! */
+/* !! */
+%hook IGEndOfFeedDemarcatorModel
+- (id)initWithIdentifier:(id)arg1
+title:(id)title
+subtitle:(id)arg3
+style:(NSInteger)arg4
+interactionStyle:(NSInteger)arg5
+backgroundColor:(id)arg6
+groupSet:(id)arg7
+group:(id)arg8
+expandBottomMargin:(BOOL)arg9
+viewStateItemType:(NSUInteger)arg10
+demarcatorType:(NSInteger)arg11
+actionConfig:(id)arg12 
+brandSafetySeverity:(id)arg13
+{
+    if ([SCIManager removeSuggestedPost]) {
+        NSLog(@"[SCInsta] Hiding end of feed message");
+
+        // Hide suggested for you text
+        title = @"";
+
+        return %orig(arg1, title, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
+    }
+
     return %orig;
 }
 %end
