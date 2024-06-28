@@ -72,10 +72,10 @@
 // Meta AI direct search suggested topics header
 %hook IGLabelItemViewModel
 - (id)initWithLabelTitle:(id)arg1
-tag:(NSInteger)arg2
-uniqueIdentifier:(id)arg3
-configuration:(id)arg4
-accessibilityTraits:(NSUInteger)arg5
+                     tag:(NSInteger)arg2
+        uniqueIdentifier:(id)arg3
+           configuration:(id)arg4
+     accessibilityTraits:(NSUInteger)arg5
 {
     self = %orig;
 
