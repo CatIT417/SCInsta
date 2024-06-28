@@ -1,8 +1,8 @@
 #import "../../Manager.h"
 #import "../../Utils.h"
 
-%hook IGCommentComposingController
-- (void)_onSendButtonTapped:(id)arg1 {
+%hook IGCommentComposer.IGCommentComposerController
+- (void)onSendButtonTap {
     if ([SCIManager postCommentConfirmation]) {
         NSLog(@"[SCInsta] Confirm post comment triggered");
 
