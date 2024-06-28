@@ -187,34 +187,19 @@ static NSArray *removeAdsItemsInList(NSArray *list, BOOL isFeed) {
 }
 %end
 
-// End of feed item
-/* !! WIP: make sure to fix */
-/* !! */
-/* !! */
-%hook IGEndOfFeedDemarcatorModel
-- (id)initWithIdentifier:(id)arg1
-title:(id)title
-subtitle:(id)arg3
-style:(NSInteger)arg4
-interactionStyle:(NSInteger)arg5
-backgroundColor:(id)arg6
-groupSet:(id)arg7
-group:(id)arg8
-expandBottomMargin:(BOOL)arg9
-viewStateItemType:(NSUInteger)arg10
-demarcatorType:(NSInteger)arg11
-actionConfig:(id)arg12 
-brandSafetySeverity:(id)arg13
-{
+// Hide "suggested for you" text at end of feed
+%hook IGEndOfFeedDemarcatorCellTopOfFeed
+- (void)configureWithViewConfig:(id)arg1 {
+    %orig;
+
     if ([SCIManager removeSuggestedPost]) {
         NSLog(@"[SCInsta] Hiding end of feed message");
 
         // Hide suggested for you text
-        title = @"";
-
-        return %orig(arg1, title, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
+        UILabel *_titleLabel = MSHookIvar<UILabel *>(self, "_titleLabel");
+        [_titleLabel setText:@""];
     }
 
-    return %orig;
+    return;
 }
 %end
