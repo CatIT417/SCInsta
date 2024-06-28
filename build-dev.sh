@@ -12,4 +12,4 @@ echo
 cp -fr ./packages/SCInsta-sideloaded.ipa ~/Documents/Signing/SCInsta/ipas/UNSIGNED.ipa
 cd ~/Documents/Signing
 ./sign.sh SCInsta
-./deploy.sh SCInsta #true
+./deploy.sh SCInsta $1
