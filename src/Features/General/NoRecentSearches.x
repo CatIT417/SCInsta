@@ -1,6 +1,19 @@
 #import "../../InstagramHeaders.h"
 #import "../../Manager.h"
 
+// Disable logging of searches at server-side
+%hook IGSearchEntityRouter
+- (id)initWithUserSession:(id)arg1 analyticsModule:(id)arg2 shouldAddToRecents:(BOOL)shouldAddToRecents {
+    if ([SCIManager noRecentSearches]) {
+        NSLog(@"[SCInsta] Disabling recent searches");
+
+        shouldAddToRecents = false;
+    }
+    
+    return %orig(arg1, arg2, shouldAddToRecents);
+}
+%end
+
 // Most in-app search bars
 %hook IGRecentSearchStore
 - (id)initWithDiskManager:(id)arg1 recentSearchStoreConfiguration:(id)arg2 {
