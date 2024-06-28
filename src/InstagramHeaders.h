@@ -314,6 +314,18 @@
 @interface IGAnimatablePlaceholderTextField : UITextField
 @end
 
+@interface IGDirectCommandSystemViewModel : NSObject
+- (id)row;
+@end
+
+@interface IGDirectCommandSystemRow : NSObject
+@end
+
+@interface IGDirectCommandSystemResult : NSObject
+- (id)title;
+- (id)commandString;
+@end
+
 
 
 

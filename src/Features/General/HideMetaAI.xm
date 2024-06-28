@@ -119,6 +119,48 @@ accessibilityTraits:(NSUInteger)arg5
 }
 %end
 
+// Meta AI in message composer
+%hook IGDirectCommandSystemListViewController
+- (id)objectsForListAdapter:(id)arg1 {
+    NSMutableArray *newObjs = [%orig mutableCopy];
+
+    [newObjs enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+
+        if ([obj isKindOfClass:%c(IGDirectCommandSystemViewModel)]) {
+
+            IGDirectCommandSystemViewModel *typedObj = (IGDirectCommandSystemViewModel *)obj;
+            IGDirectCommandSystemRow *cmdSystemRow = (IGDirectCommandSystemRow *)[typedObj row];
+
+            IGDirectCommandSystemResult *_commandResult_command = MSHookIvar<IGDirectCommandSystemResult *>(cmdSystemRow, "_commandResult_command");
+
+            // Meta AI
+            if ([[_commandResult_command title] isEqualToString:@"Meta AI"]) {
+                if ([SCIManager hideMetaAI]) {
+                    NSLog(@"[SCInsta] Hiding meta ai: direct message composer suggestion");
+
+                    [newObjs removeObjectAtIndex:idx];
+                }
+                
+            }
+
+            // Meta AI (Imagine)
+            if ([[_commandResult_command commandString] isEqualToString:@"/imagine"]) {
+                if ([SCIManager hideMetaAI]) {
+                    NSLog(@"[SCInsta] Hiding meta ai: direct message composer /imagine suggestion");
+
+                    [newObjs removeObjectAtIndex:idx];
+                }
+                
+            }
+
+        }
+        
+    }];
+
+    return [newObjs copy];
+}
+%end
+
 /////////////////////////////////////////////////////////////////////////////
 
 // Explore
