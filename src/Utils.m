@@ -10,6 +10,9 @@
 };
 
 // Functions
++ (NSString *)IGVersionString {
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+};
 + (BOOL)isNotch {
     return [[[UIApplication sharedApplication] keyWindow] safeAreaInsets].bottom > 0;
 };
