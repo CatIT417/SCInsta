@@ -173,7 +173,7 @@ static BOOL isAuthenticationShowed = FALSE;
         // AI agents section
         else if (
             [obj isKindOfClass:%c(IGDirectInboxSearchAIAgentsPillsSectionViewModel)]
-            || [obj isKindOfClass:%c(IGDirectInboxSearchAIAgentsSuggestedPromptLoggingViewModel)]
+         || [obj isKindOfClass:%c(IGDirectInboxSearchAIAgentsSuggestedPromptLoggingViewModel)]
         ) {
 
             if ([SCIManager hideMetaAI]) {

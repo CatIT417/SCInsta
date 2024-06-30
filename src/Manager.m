@@ -135,14 +135,6 @@
     }
 
 }
-+ (BOOL)isEmpty:(NSURL *)url {
-    NSArray *folderFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:url includingPropertiesForKeys:@[] options:NSDirectoryEnumerationSkipsHiddenFiles error:nil];
-    if (folderFiles.count == 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
 + (void)showSaveVC:(id)item {
     UIActivityViewController *acVC = [[UIActivityViewController alloc] initWithActivityItems:@[item] applicationActivities:nil];
     if (is_iPad()) {
