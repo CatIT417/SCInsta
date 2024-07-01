@@ -1,6 +1,6 @@
 # SCInsta
 A feature-rich tweak for Instagram on iOS!\
-`Version v0.5.0-dev` | `Tested on Instagram v332.0.0`
+`Version v0.5.0` | `Tested on Instagram v337.0.2`
 
 ---
 
@@ -39,6 +39,7 @@ A feature-rich tweak for Instagram on iOS!\
 - Confirm voice messages
 - Confirm sticker interaction
 - Confirm posting comment
+- Confirm changing theme
 
 ### Save media (partially broken)
 - Download images/videos
@@ -60,29 +61,35 @@ A feature-rich tweak for Instagram on iOS!\
 ### Built-in Tweak Settings
 > Long press on the **large Instagram logo** at the top of your feed to bring up the SCInsta tweak settings
 
-# Building
-## Prerequisites
+# Installation
+>[!IMPORTANT]
+> Which type of device are you planning on installing this tweak on?
+> - Jailbroken/TrollStore device -> [Download pre-built tweak](https://github.com/SoCuul/SCInsta/releases/latest)
+> - Standard iOS device -> Read "Building" section below
+
+## Building
+### Prerequisites
 - XCode + Command-Line Developer Tools
 - [Homebrew](https://brew.sh/#install)
 - [CMake](https://formulae.brew.sh/formula/cmake#default) (`brew install cmake`)
 - [Theos](https://theos.dev/docs/installation)
 - [pyzule](https://github.com/asdfzxcvbn/pyzule?tab=readme-ov-file#installation) **\*only required for sideloading**
 
-## Setup
+### Setup
 1. Install iOS 14.5 frameworks for theos
    1. [Click to download iOS SDKs](https://github.com/xybp888/iOS-SDKs/archive/refs/heads/master.zip)
    2. Unzip, then copy the `iPhoneOS14.5.sdk` folder into `~/theos/sdks`
-2. Clone SCInsta repo from GitHub: `git clone --recurse-submodules https://github.com/SoCuul/SCInsta --branch dev`
+2. Clone SCInsta repo from GitHub: `git clone --recurse-submodules https://github.com/SoCuul/SCInsta`
 3. **For sideloading**: Download a decrypted Instagram IPA from a trusted source, making sure to rename it to `com.burbn.instagram.ipa`.
    Then create a folder called `packages` inside of the `SCInsta` folder, and move the Instagram IPA file into it. 
 
-## Run build script
+### Run build script
 ```sh
 $ chmod +x build.sh
 $ ./build.sh <sideload/rootless/rootful>
 ```
 
-## Sideloading
+### Sideloading
 After building the tweak for sideloading, you can install the tweaked IPA file like any other sideloaded iOS app. If you have not done this before, here are some suggestions to get started.
 
 - [AltStore](https://altstore.io/#Downloads) (Free, No notifications*) *Notifications require $99/year Apple Developer Program
@@ -94,8 +101,8 @@ After building the tweak for sideloading, you can install the tweaked IPA file l
 
 |                                             |                                             |                                             |
 |:-------------------------------------------:|:-------------------------------------------:|:-------------------------------------------:|
-| <img src="https://i.imgur.com/AIAzNuR.png"> | <img src="https://i.imgur.com/CDdWQaD.png"> | <img src="https://i.imgur.com/Pm6xYCA.png"> |
-| <img src="https://i.imgur.com/XROKmKf.png"> |
+| <img src="https://i.imgur.com/w7k0Zh3.png"> | <img src="https://i.imgur.com/vKhM5hj.png"> | <img src="https://i.imgur.com/L6SPBgv.png"> |
+| <img src="https://i.imgur.com/E844fYy.png"> |
 
 # Contributing
 Contributions to this tweak are greatly appreciated. Feel free to create a pull request if you would like to contribute.
