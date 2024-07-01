@@ -37,7 +37,6 @@
 
 + (void)showSaveVC:(id)item;
 + (void)cleanCache;
-+ (BOOL)isEmpty:(NSURL *)url;
 + (NSString *)getDownloadingPersent:(float)per;
 
 @end
