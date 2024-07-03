@@ -4,7 +4,7 @@
 // Disable story data source
 %hook IGMainStoryTrayDataSource
 - (id)initWithUserSession:(id)arg1 {
-    if ([SCIManager hideStoriesTray]) {
+    if ([SCIManager getPref:@"hide_stories_tray"]) {
         NSLog(@"[SCInsta] Hiding story tray");
 
         return nil;
@@ -29,7 +29,7 @@ isForcedDarkModeImmersiveNetEgo:(BOOL)arg10
  immersiveAccessibilityExpanded:(BOOL)arg11
            supportsVerticalTray:(BOOL)arg12
 {
-    if ([SCIManager hideStoriesTray]) {
+    if ([SCIManager getPref:@"hide_stories_tray"]) {
         NSLog(@"[SCInsta] Hiding story tray");
 
         return nil;
