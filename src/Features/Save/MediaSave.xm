@@ -1,20 +1,83 @@
 #import "../../InstagramHeaders.h"
 #import "../../Manager.h"
 #import "../../Utils.h"
+#import "../../Downloader/Download.h"
+
+// Download images
+%hook IGFeedPhotoView
+%property (nonatomic, strong) JGProgressHUD *hud;
+
+- (void)didMoveToWindow {
+    %orig;
+
+    if ([SCIManager getPref:@"dw_videos"]) {
+        // Check if self already has a UILongPressGestureRecognizer
+        BOOL hasLongPressGestureRecognizer = false;
+        for (UIGestureRecognizer *recognizer in self.gestureRecognizers) {
+            if ([recognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
+                hasLongPressGestureRecognizer = true;
+                break;
+            }
+        }
+
+        if (!hasLongPressGestureRecognizer) {
+            // Create new long press gesture recognizer
+            UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+            longPress.minimumPressDuration = 0.5;
+
+            [self addGestureRecognizer:longPress];
+            NSLog(@"[SCInsta Test] added gesture recognizer lol");
+        }
+    }
+}
+
+%new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+
+        IGPhoto *photo = nil;
+
+        // Get photo instance
+        if ([self.delegate isKindOfClass:%c(IGFeedItemPhotoCell)]) {
+            IGFeedItemPhotoCellConfiguration *_configuration = MSHookIvar<IGFeedItemPhotoCellConfiguration *>(self.delegate, "_configuration");
+
+            photo = MSHookIvar<IGPhoto *>(_configuration, "_photo");
+        }
+        else if ([self.delegate isKindOfClass:%c(IGFeedItemPagePhotoCell)]) {
+            IGFeedItemPagePhotoCell *pagePhotoCell = self.delegate;
+
+            photo = pagePhotoCell.pagePhotoPost.photo;
+        }
+
+        // Get highest quality photo link
+        NSURL *photoURL = [photo imageURLForWidth:100000.00];
+
+        // Send photo url to downloader
+        NSLog(@"[SCInsta] Save media: Sending url to downloader -> %@", photoURL.absoluteString);
+
+        SCIDownload *dwManager = [[SCIDownload alloc] init];
+        [dwManager downloadFileWithURL:photoURL fileExtension:@"png"];
+
+    }
+}
+
+%end
+
+/////////////////////////////////////////////////////////////////////////////
+
 
 // Download photos
-%hook IGFeedPhotoView
+/* %hook IGFeedPhotoView
 %property (nonatomic, strong) JGProgressHUD *hud;
 - (id)initWithFrame:(CGRect)arg1 {
     id orig = %orig;
-    if ([SCIManager downloadMedia]) {
+    if ([SCIManager getPref:@"dw_videos"]) {
         [orig addHandleLongPress];
     }
     return orig;
 }
 %new - (void)addHandleLongPress {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPress.minimumPressDuration = 0.3;
+    longPress.minimumPressDuration = 0.5;
     [self addGestureRecognizer:longPress];
 }
 %new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
@@ -80,21 +143,21 @@
     }
 }
 %end
-
+ */
 
 // Download videos
-%hook IGModernFeedVideoCell
+/* %hook IGModernFeedVideoCell
 %property (nonatomic, strong) JGProgressHUD *hud;
 - (id)initWithFrame:(CGRect)arg1 {
     id orig = %orig;
-    if ([SCIManager downloadMedia]) {
+    if ([SCIManager getPref:@"dw_videos"]) {
         [orig addHandleLongPress];
     }
     return orig;
 }
 %new - (void)addHandleLongPress {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPress.minimumPressDuration = 0.3;
+    longPress.minimumPressDuration = 0.5;
     [self addGestureRecognizer:longPress];
 }
 %new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
@@ -109,7 +172,7 @@
             
             for (int i = 0; i < [videoURLArray count]; i++) {
                 [alert addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Download Video: Link %d (%@)", i + 1, i == 0 ? @"HD" : @"SD"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    // [[[HDownloadMediaWithProgress alloc] init] checkPermissionToPhotosAndDownloadURL:[videoURLArray objectAtIndex:i] appendExtension:nil mediaType:Video toAlbum:@"Instagram" view:self];
+                    // [[[HgetPref:@"dw_videos"WithProgress alloc] init] checkPermissionToPhotosAndDownloadURL:[videoURLArray objectAtIndex:i] appendExtension:nil mediaType:Video toAlbum:@"Instagram" view:self];
                     SCIDownload *dwManager = [[SCIDownload alloc] init];
                     [dwManager downloadFileWithURL:[videoURLArray objectAtIndex:i]];
                     [dwManager setDelegate:self];
@@ -134,7 +197,7 @@
             
             for (int i = 0; i < [videoURLArray count]; i++) {
                 [alert addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Download Video: Link %d (%@)", i + 1, i == 0 ? @"HD" : @"SD"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    // [[[HDownloadMediaWithProgress alloc] init] checkPermissionToPhotosAndDownloadURL:[videoURLArray objectAtIndex:i] appendExtension:nil mediaType:Video toAlbum:@"Instagram" view:self];
+                    // [[[HgetPref:@"dw_videos"WithProgress alloc] init] checkPermissionToPhotosAndDownloadURL:[videoURLArray objectAtIndex:i] appendExtension:nil mediaType:Video toAlbum:@"Instagram" view:self];
                     SCIDownload *dwManager = [[SCIDownload alloc] init];
                     [dwManager downloadFileWithURL:[videoURLArray objectAtIndex:i]];
                     [dwManager setDelegate:self];
@@ -175,62 +238,4 @@
         [self.hud dismiss];
     }
 }
-%end
-
-
-// Download reels
-%hook IGSundialViewerVideoCell
-%property (nonatomic, strong) JGProgressHUD *hud;
-- (id)initWithFrame:(CGRect)arg1 {
-    id orig = %orig;
-    if ([SCIManager downloadMedia]) {
-        [orig addHandleLongPress];
-    }
-    return orig;
-}
-%new - (void)addHandleLongPress {
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPress.minimumPressDuration = 0.3;
-    [self addGestureRecognizer:longPress];
-}
-%new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"SCInsta Downloader" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        NSArray *videoURLArray = [self.video.video.allVideoURLs allObjects];
-        
-        for (int i = 0; i < [videoURLArray count]; i++) {
-            [alert addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Download Video: Link %d (%@)", i + 1, i == 0 ? @"HD" : @"SD"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                // [[[HDownloadMediaWithProgress alloc] init] checkPermissionToPhotosAndDownloadURL:[videoURLArray objectAtIndex:i] appendExtension:nil mediaType:Video toAlbum:@"Instagram" view:self];
-                SCIDownload *dwManager = [[SCIDownload alloc] init];
-                [dwManager downloadFileWithURL:[videoURLArray objectAtIndex:i]];
-                [dwManager setDelegate:self];
-                self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-                self.hud.textLabel.text = @"Downloading";
-                [self.hud showInView:topMostController().view];
-            }]];
-        }
-
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-        [SCIUtils prepareAlertPopoverIfNeeded:alert inView:self];
-        [self.viewController presentViewController:alert animated:YES completion:nil];
-    }
-}
-
-%new - (void)downloadProgress:(float)progress {
-    self.hud.detailTextLabel.text = [SCIManager getDownloadingPersent:progress];
-}
-%new - (void)downloadDidFinish:(NSURL *)filePath Filename:(NSString *)fileName {
-    NSString *DocPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-    NSFileManager *manager = [NSFileManager defaultManager];
-    NSURL *newFilePath = [[NSURL fileURLWithPath:DocPath] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4", NSUUID.UUID.UUIDString]];
-    [manager moveItemAtURL:filePath toURL:newFilePath error:nil];
-
-    [self.hud dismiss];
-    [SCIManager showSaveVC:newFilePath];
-}
-%new - (void)downloadDidFailureWithError:(NSError *)error {
-    if (error) {
-        [self.hud dismiss];
-    }
-}
-%end
+%end */

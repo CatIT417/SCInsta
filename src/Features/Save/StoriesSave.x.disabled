@@ -35,9 +35,9 @@
         self.fileextension = @"png";
 
         [alert addAction:[UIAlertAction actionWithTitle:@"Download Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            SCIDownload *dwManager = [[SCIDownload alloc] init];
-            [dwManager downloadFileWithURL:url];
-            [dwManager setDelegate:self];
+            SCIDownload *dlManager = [[SCIDownload alloc] init];
+            [dlManager downloadFileWithURL:url];
+            [dlManager setDelegate:self];
 
             self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             self.hud.textLabel.text = @"Downloading";
@@ -50,9 +50,9 @@
 
         for (int i = 0; i < [videoURLArray count]; i++) {
             [alert addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Download Video: Link %d (%@)", i + 1, i == 0 ? @"HD" : @"SD"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                SCIDownload *dwManager = [[SCIDownload alloc] init];
-                [dwManager downloadFileWithURL:[videoURLArray objectAtIndex:i]];
-                [dwManager setDelegate:self];
+                SCIDownload *dlManager = [[SCIDownload alloc] init];
+                [dlManager downloadFileWithURL:[videoURLArray objectAtIndex:i]];
+                [dlManager setDelegate:self];
                 self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
                 self.hud.textLabel.text = @"Downloading";
                 [self.hud showInView:topMostController().view];

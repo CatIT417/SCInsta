@@ -6,13 +6,13 @@
 %property (nonatomic, strong) JGProgressHUD *hud;
 - (void)viewDidLoad {
     %orig;
-    if ([SCIManager profileImageSave]) {
+    if ([SCIManager getPref:@"save_profile"]) {
         [self addHandleLongPress];
     }
 }
 %new - (void)addHandleLongPress {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPress.minimumPressDuration = 0.3;
+    longPress.minimumPressDuration = 0.5;
     [self.view addGestureRecognizer:longPress];
 }
 
@@ -25,9 +25,9 @@
         NSURL *url = profilePictureView.imageSpecifier.url;
 
         [alert addAction:[UIAlertAction actionWithTitle:@"Download HD Profile Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            SCIDownload *dwManager = [[SCIDownload alloc] init];
-            [dwManager downloadFileWithURL:url];
-            [dwManager setDelegate:self];
+            SCIDownload *dlManager = [[SCIDownload alloc] init];
+            [dlManager downloadFileWithURL:url];
+            [dlManager setDelegate:self];
 
             self.hud = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             self.hud.textLabel.text = @"Downloading";
