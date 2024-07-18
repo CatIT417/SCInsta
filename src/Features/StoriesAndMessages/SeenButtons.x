@@ -67,6 +67,7 @@
         if (seenButtonEnabled) {
             return %orig;
         }
+        
         return false;
     }
     
