@@ -1,5 +1,6 @@
 #import "Handler.h"
 #import "Download.h"
+#import "../Utils.h"
 
 @implementation SCIDownloadHandler
 
@@ -22,8 +23,7 @@
     // Check if required parameters are missing
     if (!url || !fileExtension) {
 
-        NSError *error = [NSError errorWithDomain:@"com.socuul.scinsta" code:1 userInfo:@{NSLocalizedDescriptionKey: @"Required parameters are missing"}];
-        [delegate downloadDidFailureWithError:error];
+        [delegate downloadDidFailureWithError:[SCIUtils errorWithDescription:@"Required parameters are missing"]];
 
         return;
     }
@@ -34,29 +34,8 @@
     NSLog(@"[SCInsta] Download Handler: Starting download of url: %@", url);
 
     // Create & start download
-    [[self.Session downloadTaskWithURL:(NSURL *)url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-        
-        // Errors
-        if (error) {
-            NSLog(@"[SCInsta] Download Handler: Error while downloading url: %@", url.absoluteString);
-            NSLog(@"[SCInsta] Download Handler: %@", error);
-
-            [delegate downloadDidFailureWithError:error];
-
-            return;
-        }
-
-        // Success
-        NSLog(@"[SCInsta] Download Handler: Finished download for url: \"%@\"", url.absoluteString);
-    
-        // Move downloaded file to cache directory
-        NSURL *filePath = [self moveFileToCacheDir:location];
-
-        [delegate downloadDidFinish:filePath];
-
-        return;
-        
-    }] resume];
+    NSURLSessionDownloadTask *downloadTask = [self.Session downloadTaskWithURL:(NSURL *)url];
+    [downloadTask resume];
 }
 
 // Download Progress
@@ -71,6 +50,24 @@
     [delegate downloadProgress:prog];
 }
 
+// Success
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(nonnull NSURL *)location
+{
+    NSLog(@"[SCInsta] Download Handler: Finished download for url: \"%@\"", downloadTask.currentRequest.URL.absoluteString);
+    
+    // Move downloaded file to cache directory
+    NSURL *filePath = [self moveFileToCacheDir:location];
+
+    [delegate downloadDidFinish:filePath];
+}
+
+// Failure
+- (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
+    NSLog(@"[SCInsta] Download Handler: Download aborted: %@", error);
+    
+    [delegate downloadDidFailureWithError:error];
+}
+
 
 // Rename downloaded file & move from documents dir -> cache dir
 - (NSURL *)moveFileToCacheDir:(NSURL *)oldPath {
@@ -80,8 +77,7 @@
     if (![fileManager fileExistsAtPath:oldPath.path]) {
         NSLog(@"[SCInsta] Download Handler: File does not exist at path: %@", oldPath.absoluteString);
 
-        NSError *error = [NSError errorWithDomain:@"com.socuul.scinsta" code:1 userInfo:@{NSLocalizedDescriptionKey: @"File does not exist at requested path"}];
-        [delegate downloadDidFailureWithError:error];
+        [delegate downloadDidFailureWithError:[SCIUtils errorWithDescription:@"File does not exist at requested path"]];
 
         return nil;
     }
