@@ -9,6 +9,15 @@
     return [UIColor colorWithRed:0/255.0 green:152/255.0 blue:254/255.0 alpha:1];
 };
 
+// Errors
++ (NSError *)errorWithDescription:(NSString *)errorDesc {
+    return [self errorWithDescription:errorDesc code:1];
+}
++ (NSError *)errorWithDescription:(NSString *)errorDesc code:(NSInteger)errorCode {
+    NSError *error = [ NSError errorWithDomain:@"com.socuul.scinsta" code:errorCode userInfo:@{NSLocalizedDescriptionKey: errorDesc} ];
+    return error;
+}
+
 // Functions
 + (NSString *)IGVersionString {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
@@ -16,6 +25,7 @@
 + (BOOL)isNotch {
     return [[[UIApplication sharedApplication] keyWindow] safeAreaInsets].bottom > 0;
 };
+
 + (BOOL)showConfirmation:(void(^)(void))okHandler {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Are you sure?" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
