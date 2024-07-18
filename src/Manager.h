@@ -7,6 +7,5 @@
 
 + (void)showSaveVC:(id)item;
 + (void)cleanCache;
-+ (NSString *)getDownloadingPersent:(float)per;
 
 @end

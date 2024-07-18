@@ -47,17 +47,24 @@
 
 }
 + (void)showSaveVC:(id)item {
+    /* !! NSArray *itemsArray = @[];
+
+    // Check if "item" is already an array (non-mutable/mutable)
+    if ([item isKindOfClass:[NSArray class]] || [item isKindOfClass:[NSMutableArray class]]) {
+        itemsArray = [NSArray arrayWithArray:item];
+    }
+    // Otherwise create new array for item
+    else {
+        itemsArray = @[item];
+    } */
+
     UIActivityViewController *acVC = [[UIActivityViewController alloc] initWithActivityItems:@[item] applicationActivities:nil];
+    
     if (is_iPad()) {
         acVC.popoverPresentationController.sourceView = topMostController().view;
         acVC.popoverPresentationController.sourceRect = CGRectMake(topMostController().view.bounds.size.width / 2.0, topMostController().view.bounds.size.height / 2.0, 1.0, 1.0);
     }
+    
     [topMostController() presentViewController:acVC animated:true completion:nil];
-}
-+ (NSString *)getDownloadingPersent:(float)per {
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-    NSNumber *number = [NSNumber numberWithFloat:per];
-    return [numberFormatter stringFromNumber:number];
 }
 @end
