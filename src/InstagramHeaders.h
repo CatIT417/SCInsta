@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "Manager.h"
+#import "Download.h"
 #import "Controllers/SettingsViewController.h"
 #import "Controllers/SecurityViewController.h"
 #import "../modules/JGProgressHUD/JGProgressHUD.h"
@@ -15,12 +16,7 @@
 @end
 
 @interface IGMainFeedAppHeaderController : UIViewController
-- (void)_superPresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(id)completion;
-@end
-
-@class IGImageSpecifier;
-@interface IGImageSpecifier : NSObject
-@property(readonly, nonatomic) NSURL *url;
+- (void)_superPresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(id)completion; // new
 @end
 
 @interface IGShimmeringGridView : UIView
@@ -31,6 +27,9 @@
 
 @interface UIImage ()
 - (NSString *)ig_imageName;
+@end
+
+@interface IGProfileMenuSheetViewController :  IGViewController
 @end
 
 @interface IGTabBar: UIView
@@ -51,6 +50,10 @@
 - (UIView *)_rootView;
 @end
 
+@interface IGImageSpecifier : NSObject
+@property(readonly, nonatomic) NSURL *url;
+@end
+
 @interface IGVideo : NSObject
 @property(readonly, nonatomic) NSSet *allVideoURLs;
 @end
@@ -61,7 +64,6 @@
 @end
 
 @interface IGPhoto: NSObject
-- (id)imageURLForWidth:(CGFloat)width;
 @end
 
 @interface IGPostItem : NSObject
@@ -85,9 +87,35 @@
 @property(retain, nonatomic) IGImageSpecifier *imageSpecifier;
 @end
 
+@interface IGFeedItemPagePhotoCell : UICollectionViewCell
+@property (nonatomic, strong) id post;
+@end
+
+@interface IGProfilePicturePreviewViewController : UIViewController
+{
+    IGImageView *_profilePictureView;
+}
+@property (nonatomic, strong) JGProgressHUD *hud;
+- (void)addHandleLongPress; // new
+- (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
+@end
+
+@interface IGProfilePicturePreviewViewController () <SCIDownloadDelegate>
+@end
+
 @interface IGFeedItemMediaCell : UICollectionViewCell
 @property(retain, nonatomic) IGMedia *post;
 - (UIImage *)mediaCellCurrentlyDisplayedImage;
+@end
+
+@interface IGFeedItemPhotoCell : IGFeedItemMediaCell
+@end
+
+@interface IGFeedPhotoView : UIView
+@property (nonatomic, strong) id delegate;
+@property (nonatomic, strong) JGProgressHUD *hud;
+@end
+@interface IGFeedPhotoView () <SCIDownloadDelegate>
 @end
 
 @interface IGSundialViewerVideoCell : UIView
@@ -97,6 +125,9 @@
 @property(readonly, nonatomic) IGMedia *video;
 @end
 
+@interface IGSundialViewerVideoCell () <SCIDownloadDelegate>
+@end
+
 @interface IGModernFeedVideoCell : IGFeedItemMediaCell
 - (void)addHandleLongPress; // new
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
@@ -104,16 +135,22 @@
 @property (nonatomic, strong) id delegate;
 @end
 
+@interface IGModernFeedVideoCell () <SCIDownloadDelegate>
+@end
+
 @interface IGVideoPlayer : NSObject {
   IGVideo *_video;
 }
 @end
 
+
+/**
+ * For download story photo/video
+ */
 @protocol IGStoryPlayerMediaViewType
 @end
 
 @interface IGImageProgressView : UIView
-@property(nonatomic, readonly) UIImage *preloadedImage;
 @property(retain, nonatomic) IGImageSpecifier *imageSpecifier;
 @end
 
@@ -163,6 +200,13 @@
 - (void)hDownloadButtonPressed:(UIButton *)sender;
 @end
 
+@interface IGStoryViewerContainerView () <SCIDownloadDelegate>
+@end
+
+
+/**
+ * For HD profile picture
+ */
 @interface IGUser : NSObject
 @property NSInteger followStatus;
 @property(copy) NSString *username;
@@ -181,6 +225,9 @@
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
 @end
 
+/**
+ * Determine If User Is Following You
+ */
 @interface IGProfileBioModel
 @property (readonly, copy, nonatomic) IGUser *user;
 @end
@@ -191,8 +238,8 @@
 @end
 
 @interface IGProfileSimpleAvatarStatsCell : UICollectionViewCell
-@property (nonatomic, retain) UIView *isFollowingYouBadge; // new
-@property (nonatomic, retain) UILabel *isFollowingYouLabel; // new
+@property (nonatomic, retain) UIView *isFollowingYouBadge; // new property
+@property (nonatomic, retain) UILabel *isFollowingYouLabel; // new property
 - (void)addIsFollowingYouBadgeView; // new
 @end
 
@@ -279,22 +326,7 @@
 - (id)commandString;
 @end
 
-@interface IGFeedPhotoView : UICollectionViewCell
-@property (nonatomic, strong) id delegate;
-@property (nonatomic, strong) JGProgressHUD *hud; // new
-- (void)addHandleLongPress; // new
-- (void)handleLongPress:(UILongPressGestureRecognizer *)sender; // new
-@end
 
-@interface IGFeedItemPhotoCell : UICollectionViewCell
-@end
-
-@interface IGFeedItemPhotoCellConfiguration : NSObject
-@end
-
-@interface IGFeedItemPagePhotoCell : UICollectionViewCell
-@property (nonatomic, strong) IGPostItem *pagePhotoPost;
-@end
 
 
 
