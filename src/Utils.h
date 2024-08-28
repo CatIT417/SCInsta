@@ -10,6 +10,9 @@
 + (NSError *)errorWithDescription:(NSString *)errorDesc;
 + (NSError *)errorWithDescription:(NSString *)errorDesc code:(NSInteger)errorCode;
 
++ (JGProgressHUD)showErrorHUDWithDescription:(NSString *)errorDesc;
++ (JGProgressHUD)showErrorHUDWithDescription:(NSString *)errorDesc dismissAfterDelay:(CGFloat)dismissDelay;
+
 // Functions
 + (NSString *)IGVersionString;
 + (BOOL)isNotch;

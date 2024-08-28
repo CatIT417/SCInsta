@@ -14,8 +14,22 @@
     return [self errorWithDescription:errorDesc code:1];
 }
 + (NSError *)errorWithDescription:(NSString *)errorDesc code:(NSInteger)errorCode {
-    NSError *error = [ NSError errorWithDomain:@"com.socuul.scinsta" code:errorCode userInfo:@{NSLocalizedDescriptionKey: errorDesc} ];
+    NSError *error = [ NSError errorWithDomain:@"com.socuul.scinsta" code:errorCode userInfo:@{ NSLocalizedDescriptionKey: errorDesc } ];
     return error;
+}
+
++ (JGProgressHUD)showErrorHUDWithDescription:(NSString *)errorDesc {
+    return [self showErrorHUDWithDescription:errorDesc dismissDelay:4.0];
+}
++ (JGProgressHUD)showErrorHUDWithDescription:(NSString *)errorDesc dismissAfterDelay:(CGFloat)dismissDelay {
+    JGProgressHUD hud = [[JGProgressHUD alloc] init];
+    hud.textLabel.text = error ? error.localizedDescription : @"Error, try again later";
+    hud.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
+
+    [hud showInView:topMostController().view];
+    [hud dismissAfterDelay:4.0];
+
+    return hud;
 }
 
 // Functions
