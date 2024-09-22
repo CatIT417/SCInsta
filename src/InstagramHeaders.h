@@ -89,6 +89,7 @@
 
 @interface IGFeedItemPagePhotoCell : UICollectionViewCell
 @property (nonatomic, strong) id post;
+@property (nonatomic, strong) IGPostItem *pagePhotoPost;
 @end
 
 @interface IGProfilePicturePreviewViewController : UIViewController
@@ -109,6 +110,9 @@
 @end
 
 @interface IGFeedItemPhotoCell : IGFeedItemMediaCell
+@end
+
+@interface IGFeedItemPhotoCellConfiguration : NSObject
 @end
 
 @interface IGFeedPhotoView : UIView
@@ -325,20 +329,6 @@
 - (id)title;
 - (id)commandString;
 @end
-
-
-<<<<<<< HEAD
-=======
-@interface IGFeedItemPhotoCell : UICollectionViewCell
-@end
-
-@interface IGFeedItemPhotoCellConfiguration : NSObject
-@end
-
-@interface IGFeedItemPagePhotoCell : UICollectionViewCell
-@property (nonatomic, strong) IGPostItem *pagePhotoPost;
-@end
->>>>>>> 991cee9 (refactor: update insta headers)
 
 
 
