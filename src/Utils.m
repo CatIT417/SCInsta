@@ -18,12 +18,12 @@
     return error;
 }
 
-+ (JGProgressHUD)showErrorHUDWithDescription:(NSString *)errorDesc {
-    return [self showErrorHUDWithDescription:errorDesc dismissDelay:4.0];
++ (JGProgressHUD *)showErrorHUDWithDescription:(NSString *)errorDesc {
+    return [self showErrorHUDWithDescription:errorDesc dismissAfterDelay:4.0];
 }
-+ (JGProgressHUD)showErrorHUDWithDescription:(NSString *)errorDesc dismissAfterDelay:(CGFloat)dismissDelay {
-    JGProgressHUD hud = [[JGProgressHUD alloc] init];
-    hud.textLabel.text = error ? error.localizedDescription : @"Error, try again later";
++ (JGProgressHUD *)showErrorHUDWithDescription:(NSString *)errorDesc dismissAfterDelay:(CGFloat)dismissDelay {
+    JGProgressHUD *hud = [[JGProgressHUD alloc] init];
+    hud.textLabel.text = errorDesc;
     hud.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
 
     [hud showInView:topMostController().view];
