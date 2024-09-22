@@ -327,6 +327,18 @@
 @end
 
 
+<<<<<<< HEAD
+=======
+@interface IGFeedItemPhotoCell : UICollectionViewCell
+@end
+
+@interface IGFeedItemPhotoCellConfiguration : NSObject
+@end
+
+@interface IGFeedItemPagePhotoCell : UICollectionViewCell
+@property (nonatomic, strong) IGPostItem *pagePhotoPost;
+@end
+>>>>>>> 991cee9 (refactor: update insta headers)
 
 
 
