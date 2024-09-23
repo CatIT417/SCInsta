@@ -164,7 +164,6 @@
 @end
 
 @interface IGStoryVideoView : UIView<IGStoryPlayerMediaViewType>
-@property(retain, nonatomic) IGVideoPlayer *videoPlayer;
 @end
 
 @interface IGStoryFullscreenDefaultFooterView : UIView
