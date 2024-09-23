@@ -13,6 +13,12 @@ A feature-rich tweak for Instagram on iOS!\
 
 ---
 
+# Installation
+>[!IMPORTANT]
+> Which type of device are you planning on installing this tweak on?
+> - Jailbroken/TrollStore device -> [Download pre-built tweak](https://github.com/SoCuul/SCInsta/releases/latest)
+> - Standard iOS device -> [Visit the wiki to create an IPA file](https://github.com/SoCuul/SCInsta/wiki/Building-IPA)
+
 # Features
 ### General
 - Hide Meta AI
@@ -47,7 +53,7 @@ A feature-rich tweak for Instagram on iOS!\
 
 ### Story and messages
 - Keep deleted message
-- Unlimited replay of direct stories
+- Unlimited replay of direct stories (no video support currently)
 - Disabling sending read receipts
 - Remove screenshot alert
 - Disable story seen receipt
@@ -61,13 +67,7 @@ A feature-rich tweak for Instagram on iOS!\
 ### Built-in Tweak Settings
 > Long press on the **large Instagram logo** at the top of your feed to bring up the SCInsta tweak settings
 
-# Installation
->[!IMPORTANT]
-> Which type of device are you planning on installing this tweak on?
-> - Jailbroken/TrollStore device -> [Download pre-built tweak](https://github.com/SoCuul/SCInsta/releases/latest)
-> - Standard iOS device -> Read "Building" section below
-
-## Building
+# Building from source
 ### Prerequisites
 - XCode + Command-Line Developer Tools
 - [Homebrew](https://brew.sh/#install)
@@ -88,14 +88,6 @@ A feature-rich tweak for Instagram on iOS!\
 $ chmod +x build.sh
 $ ./build.sh <sideload/rootless/rootful>
 ```
-
-### Sideloading
-After building the tweak for sideloading, you can install the tweaked IPA file like any other sideloaded iOS app. If you have not done this before, here are some suggestions to get started.
-
-- [AltStore](https://altstore.io/#Downloads) (Free, No notifications*) *Notifications require $99/year Apple Developer Program
-- [Sideloadly](https://sideloadly.io/#download) (Free, No notifications*) *Notifications require $99/year Apple Developer Program
-- [Signulous](https://www.signulous.com/register) ($19.99/year, Receives notifications)
-- [UDID Registrations](https://www.udidregistrations.com/buy) ($9.99/year, Receives notifications)
 
 # In-App Screenshots
 
