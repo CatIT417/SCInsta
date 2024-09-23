@@ -1,6 +1,7 @@
 # Inspired heavily by the following workflows
 # https://github.com/arichornlover/uYouEnhanced/blob/main/.github/workflows/buildapp.yml
 # https://github.com/ISnackable/YTCubePlus/blob/main/.github/workflows/Build.yml
+# https://github.com/BandarHL/BHTwitter/actions/workflows/build.yml
 
 name: Build and Package SCInsta
 
@@ -10,16 +11,6 @@ on:
             decrypted_instagram_url:
                 description: "The direct URL to the decrypted Instagram IPA"
                 default: ""
-                required: true
-                type: string
-            bundle_id:
-                description: "Modify the bundle ID. Not recommended"
-                default: "com.burbn.instagram"
-                required: true
-                type: string
-            app_name:
-                description: "Modify the name of the app on the Home Screen. Not recommended"
-                default: "Instagram"
                 required: true
                 type: string
             upload_artifact:
@@ -40,7 +31,7 @@ jobs:
 
         steps:
             - name: Checkout Main
-              uses: actions/checkout@v4.1.1
+              uses: actions/checkout@v4
               with:
                 path: main
                 submodules: recursive
@@ -52,20 +43,20 @@ jobs:
               run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
 
             - name: Setup Theos
-              uses: actions/checkout@v4.1.1
+              uses: actions/checkout@v4
               with:
                 repository: theos/theos
                 ref: master
-                path: theos
+                path: ${{ github.workspace }}/theos
                 submodules: recursive
         
             - name: SDK Caching
               id: SDK
-              uses: actions/cache@v4.0.2
+              uses: actions/cache@v4
               env:
-                cache-name: iOS-14.5-SDK
+                cache-name: iPhoneOS14.5.sdk
               with:
-                path: theos/sdks/
+                path: ${{ github.workspace }}/theos/sdks/
                 key: ${{ env.cache-name }}
                 restore-keys: ${{ env.cache-name }}
 
@@ -77,46 +68,58 @@ jobs:
                 git sparse-checkout set --no-cone iPhoneOS14.5.sdk
                 git checkout
                 mv *.sdk $THEOS/sdks
-                env:
+              env:
                 THEOS: ${{ github.workspace }}/theos
-            
-            - name: Clone SCInsta Repo
-              run: |
-                git clone --recurse-submodules https://github.com/zeuikli/SCInsta
-                pwd
-                mkdir -p packages
 
             - name: Prepare Instagram IPA
               run: |
-                wget "$Instagram_URL" --no-verbose -O ${{ github.workspace }}/packages/com.burbn.instagram.ipa
+                cd main
+
+                mkdir -p packages
+                wget "$Instagram_URL" --no-verbose -O packages/com.burbn.instagram.ipa
+
+                ls -la packages
                 
-                env:
+              env:
                 THEOS: ${{ github.workspace }}/theos
                 Instagram_URL: ${{ inputs.decrypted_instagram_url }}
+
+            - name: Get SCInsta Version
+              id: scinsta_version
+              run: |
+                SCINSTA_VERSION=$(awk '/Version:/ {print $2}' main/control)
+
+                echo "SCINSTA_VERSION=${SCINSTA_VERSION}" >> "$GITHUB_ENV"
+                echo "version=${SCINSTA_VERSION}" >> "$GITHUB_OUTPUT"
             
             - name: Build SCInsta tweak for sideloading (as IPA)
               run: |
-                PROJECT_PATH=/Users/runner/work/SCInsta/SCInsta/SCInsta/
-                cd $PROJECT_PATH
-
                 bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
-
-                ipaFile="/Users/runner/work/SCInsta/SCInsta/packages/com.burbn.instagram.ipa"
-                echo "IPA File: $ipaFile"
-
-                ls -l
                 
+                cd main
+                ls -la
+
                 ./build.sh sideload
 
-                ls -l /Users/runner/work/SCInsta/SCInsta/SCInsta/packages
+                ls -la packages
                 
-                env:
+              env:
                 THEOS: ${{ github.workspace }}/theos
+
+            - name: Rename IPA to include version info
+              run: |
+                cd main/packages
+                mv "$(ls -t | head -n1)" "SCInsta_sideloaded_v${SCINSTA_VERSION}.ipa"
+
+            - name: Pass package name to upload action
+              id: package_name
+              run: |
+                echo "package=$(ls -t main/packages |  head -n1)" >> "$GITHUB_OUTPUT"
 
             - name: Upload Artifact
               if: ${{ inputs.upload_artifact }}
-              uses: actions/upload-artifact@v4.3.1
+              uses: actions/upload-artifact@v4
               with:
-                name: SCInsta_${{ github.run_number }}
-                path: /Users/runner/work/SCInsta/SCInsta/SCInsta/packages/SCInsta-sideloaded.ipa
+                name: SCInsta_sideloaded_v${{ steps.scinsta_version.outputs.version }}
+                path: ${{ github.workspace }}/main/packages/${{ steps.package_name.outputs.package }}
                 if-no-files-found: error
