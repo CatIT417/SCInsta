@@ -100,6 +100,7 @@
             // Section 2: Feed
             [self newSectionWithTitle:@"Feed" footer:nil],
             [self newSwitchCellWithTitle:@"Hide ads" detailTitle:@"Removes all ads from the Instagram app" key:@"hide_ads" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Hide entire feed" detailTitle:@"Removes all content from your home feed, including posts" key:@"hide_entire_feed" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Hide stories tray" detailTitle:@"Hides the story tray at the top and within your feed" key:@"hide_stories_tray" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"No suggested posts" detailTitle:@"Removes suggested posts from your feed" key:@"no_suggested_post" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"No suggested for you" detailTitle:@"Hides suggested accounts for you to follow" key:@"no_suggested_account" defaultValue:false changeAction:nil],
