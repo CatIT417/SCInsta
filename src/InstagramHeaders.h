@@ -329,6 +329,12 @@
 - (id)commandString;
 @end
 
+@interface IGGrowingTextView : UIView
+- (id)placeholderText;
+- (void)setPlaceholderText:(id)arg1;
+@end
+@end
+
 
 
 /////////////////////////////////////////////////////////////////////////////

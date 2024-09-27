@@ -221,6 +221,88 @@ static BOOL isAuthenticationShowed = FALSE;
 }
 %end
 
+// Explore page results
+%hook IGSearchListKitDataSource
+- (id)objectsForListAdapter:(id)arg1 {
+    NSMutableArray *newObjs = [%orig mutableCopy];
+
+    [newObjs enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        // Meta AI
+        if ([SCIManager getPref:@"hide_meta_ai"]) {
+
+            // Section header 
+            if ([obj isKindOfClass:%c(IGLabelItemViewModel)]) {
+
+                // "Ask Meta AI" search results header
+                if ([[obj labelTitle] isEqualToString:@"Ask Meta AI"]) {
+                    [newObjs removeObjectAtIndex:idx];
+                }
+
+            }
+
+            // Empty search bar upsell view
+            else if ([obj isKindOfClass:%c(IGSearchNullStateUpsellViewModel)]) {
+                [newObjs removeObjectAtIndex:idx];
+            }
+
+            // Meta AI search suggestions
+            else if ([obj isKindOfClass:%c(IGSearchResultNestedGroupViewModel)]) {
+                [newObjs removeObjectAtIndex:idx];
+            }
+
+            // Meta AI suggested search results
+            else if ([obj isKindOfClass:%c(IGSearchResultViewModel)]) {
+
+                // itemType 6 is meta ai suggestions
+                if ([obj itemType] == 6) {
+                    if ([SCIManager getPref:@"hide_meta_ai"]) {
+                        [newObjs removeObjectAtIndex:idx];
+                    }
+                    
+                }
+
+                // Meta AI user account in search results
+                else if ([[[obj title] string] isEqualToString:@"meta.ai"]) {
+                    if ([SCIManager getPref:@"hide_meta_ai"]) {
+                        [newObjs removeObjectAtIndex:idx];
+                    }
+                }
+
+            }
+            
+        }
+
+        // No suggested users
+        if ([SCIManager getPref:@"no_suggested_users"]) {
+
+            // Section header 
+            if ([obj isKindOfClass:%c(IGLabelItemViewModel)]) {
+
+                // "Suggested for you" search results header
+                if ([[obj labelTitle] isEqualToString:@"Suggested for you"]) {
+                    [newObjs removeObjectAtIndex:idx];
+                }
+
+            }
+
+            // Instagram users
+            else if ([obj isKindOfClass:%c(IGDiscoverPeopleItemConfiguration)]) {
+                [newObjs removeObjectAtIndex:idx];
+            }
+
+            // See all suggested users
+            else if ([obj isKindOfClass:%c(IGSeeAllItemConfiguration)]) {
+                [newObjs removeObjectAtIndex:idx];
+            }
+
+        }
+
+    }];
+
+    return [newObjs copy];
+}
+%end
+
 /////////////////////////////////////////////////////////////////////////////
 
 // FLEX explorer gesture handler
