@@ -1,6 +1,6 @@
 # SCInsta
 A feature-rich tweak for Instagram on iOS!\
-`Version v0.5.1` | `Tested on Instagram v349.1.11`
+`Version v0.6.0` | `Tested on Instagram v350.0.12`
 
 ---
 
@@ -24,6 +24,7 @@ A feature-rich tweak for Instagram on iOS!\
 - Hide Meta AI
 - Copy description
 - Hide reels tab
+- Disable scrolling reels
 - Do not save recent searches
 - Hide explore posts grid
 - Hide trending searches
@@ -31,6 +32,7 @@ A feature-rich tweak for Instagram on iOS!\
 
 ### Feed
 - Hide ads
+- Hide entire feed
 - Hide stories tray
 - No suggested posts
 - No suggested for you (accounts)
@@ -93,8 +95,8 @@ $ ./build.sh <sideload/rootless/rootful>
 
 |                                             |                                             |                                             |
 |:-------------------------------------------:|:-------------------------------------------:|:-------------------------------------------:|
-| <img src="https://i.imgur.com/w7k0Zh3.png"> | <img src="https://i.imgur.com/vKhM5hj.png"> | <img src="https://i.imgur.com/L6SPBgv.png"> |
-| <img src="https://i.imgur.com/E844fYy.png"> |
+| <img src="https://i.imgur.com/hr3v0fk.png"> | <img src="https://i.imgur.com/gQZdtWp.png"> | <img src="https://i.imgur.com/iXIFLxG.png"> |
+| <img src="https://i.imgur.com/HMZ9n4D.png"> | <img src="https://i.imgur.com/JQcySt6.png"> |
 
 # Contributing
 Contributions to this tweak are greatly appreciated. Feel free to create a pull request if you would like to contribute.
