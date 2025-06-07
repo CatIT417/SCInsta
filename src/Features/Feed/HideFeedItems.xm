@@ -268,7 +268,10 @@ static NSArray *removeItemsInList(NSArray *list, BOOL isFeed) {
 
         // Hide suggested for you text
         UILabel *_titleLabel = MSHookIvar<UILabel *>(self, "_titleLabel");
-        [_titleLabel setText:@""];
+
+        if (_titleLabel != nil) {
+            [_titleLabel setText:@""];
+        }
     }
 
     return;
