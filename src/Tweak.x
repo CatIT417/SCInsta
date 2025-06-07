@@ -53,12 +53,12 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
 
             [[NSUserDefaults standardUserDefaults] setValue:@"SCInstaFirstRun" forKey:@"SCInstaFirstRun"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_ads"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"copy_description"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"dw_videos"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"save_profile"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"remove_screenshot_alert"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"call_confirm"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_chats"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"no_suggested_threads"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"keep_deleted_message"];
 
             // Display settings modal on screen
             NSLog(@"[SCInsta] Displaying SCInsta first-time settings modal");
