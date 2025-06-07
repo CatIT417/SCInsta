@@ -76,32 +76,6 @@
 }
 %end
 
-// Meta AI direct search suggested topics clouds
-%hook IGDirectInboxSearchAIAgentsPillsContainerCell
-- (void)didMoveToWindow {
-    %orig;
-
-    if ([SCIManager getPref:@"hide_meta_ai"]) {
-        NSLog(@"[SCInsta] Hiding meta ai: direct search suggested topics clouds");
-
-        [self removeFromSuperview];
-    }
-}
-%end
-
-// Meta AI direct search prompt suggestions in search results
-%hook IGDirectInboxSearchAIAgentsSuggestedPromptRowCell
-- (void)didMoveToWindow {
-    %orig;
-
-    if ([SCIManager getPref:@"hide_meta_ai"]) {
-        NSLog(@"[SCInsta] Hiding meta ai: direct search ai prompt suggestions");
-
-        [self removeFromSuperview];
-    }
-}
-%end
-
 // Meta AI in message composer
 %hook IGDirectCommandSystemListViewController
 - (id)objectsForListAdapter:(id)arg1 {
@@ -326,6 +300,7 @@
             @catch (NSException *exception) {
                 NSLog(@"[SCInsta] WARNING: %@\n\nFull object: %@", exception.reason, config);
             }
+
         }
 
     }

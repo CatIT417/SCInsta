@@ -168,7 +168,7 @@ static BOOL isAuthenticationShowed = FALSE;
         if ([obj isKindOfClass:%c(IGLabelItemViewModel)]) {
 
             // Broadcast channels
-            if ([[obj labelTitle] isEqualToString:@"Suggested channels"]) {
+            if ([[obj uniqueIdentifier] isEqualToString:@"channels"]) {
                 if ([SCIManager getPref:@"no_suggested_chats"]) {
                     NSLog(@"[SCInsta] Hiding suggested chats (header)");
 
@@ -199,6 +199,7 @@ static BOOL isAuthenticationShowed = FALSE;
         // AI agents section
         else if (
             [obj isKindOfClass:%c(IGDirectInboxSearchAIAgentsPillsSectionViewModel)]
+         || [obj isKindOfClass:%c(IGDirectInboxSearchAIAgentsSuggestedPromptViewModel)]
          || [obj isKindOfClass:%c(IGDirectInboxSearchAIAgentsSuggestedPromptLoggingViewModel)]
         ) {
 

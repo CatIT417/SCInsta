@@ -277,6 +277,7 @@
 
 @interface IGLabelItemViewModel : NSObject
 - (id)labelTitle;
+- (id)uniqueIdentifier;
 @end
 
 @interface IGDirectInboxSuggestedThreadCellViewModel : NSObject
