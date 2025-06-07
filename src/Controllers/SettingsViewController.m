@@ -9,7 +9,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.title = @"SCInsta";
+        self.title = @"SCInsta Settings";
         [self.navigationController.navigationBar setPrefersLargeTitles:false];
     }
     return self;
