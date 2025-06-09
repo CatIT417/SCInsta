@@ -100,7 +100,7 @@
 
             // Section 2: Feed
             [self newSectionWithTitle:@"Feed" footer:nil],
-            [self newSwitchCellWithTitle:@"Hide ads" detailTitle:@"Removes all ads from the Instagram app" key:@"hide_ads" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Hide ads" detailTitle:@"Removes all ads from the Instagram app" key:@"hide_ads" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Hide entire feed" detailTitle:@"Removes all content from your home feed, including posts" key:@"hide_entire_feed" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Hide stories tray" detailTitle:@"Hides the story tray at the top and within your feed" key:@"hide_stories_tray" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"No suggested posts" detailTitle:@"Removes suggested posts from your feed" key:@"no_suggested_post" defaultValue:false changeAction:nil],
@@ -113,7 +113,7 @@
             [self newSwitchCellWithTitle:@"Confirm like: Posts" detailTitle:@"Shows an alert when you click the like button on posts to confirm the like" key:@"like_confirm" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Confirm like: Reels" detailTitle:@"Shows an alert when you click the like button on reels to confirm the like" key:@"like_confirm_reels" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Confirm follow" detailTitle:@"Shows an alert when you click the follow button to confirm the follow" key:@"follow_confirm" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Confirm call" detailTitle:@"Shows an alert when you click the audio/video call button to confirm before calling" key:@"call_confirm" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Confirm call" detailTitle:@"Shows an alert when you click the audio/video call button to confirm before calling" key:@"call_confirm" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Confirm voice messages" detailTitle:@"Shows an alert to confirm before sending a voice message" key:@"voice_message_confirm" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Confirm shh mode" detailTitle:@"Shows an alert to confirm before toggling disappearing messages" key:@"shh_mode_confirm" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Confirm sticker interaction" detailTitle:@"Shows an alert when you click a sticker on someone's story to confirm the action" key:@"sticker_interact_confirm" defaultValue:false changeAction:nil],
@@ -128,15 +128,15 @@
 
             // Section 5: Save media
             [self newSectionWithTitle:@"Save media" footer:nil],
-            [self newSwitchCellWithTitle:@"Download images/videos" detailTitle:@"Download images/videos on long press" key:@"dw_videos" defaultValue:true changeAction:nil],
-            [self newSwitchCellWithTitle:@"Save profile image" detailTitle:@"Save profile image on long press" key:@"save_profile" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Download images/videos" detailTitle:@"Download images/videos on long press" key:@"dw_videos" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"Save profile image" detailTitle:@"Save profile image on long press" key:@"save_profile" defaultValue:false changeAction:nil],
 
             // Section 6: Stories and Messages
             [self newSectionWithTitle:@"Story and messages" footer:nil],
-            [self newSwitchCellWithTitle:@"Keep deleted message" detailTitle:@"Keeps deleted direct messages in the chat" key:@"keep_deleted_message" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Keep deleted message" detailTitle:@"Keeps deleted direct messages in the chat" key:@"keep_deleted_message" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Unlimited replay of direct stories" detailTitle:@"Replays direct messages normal/once stories unlimited times" key:@"unlimited_replay" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Disable sending read receipts" detailTitle:@"Removes the seen text for others when you view a message" key:@"remove_lastseen" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Disable screenshot detection" detailTitle:@"Removes the screenshot-prevention features for visual messages" key:@"remove_screenshot_alert" defaultValue:true changeAction:nil],
+            [self newSwitchCellWithTitle:@"Disable screenshot detection" detailTitle:@"Removes the screenshot-prevention features for visual messages" key:@"remove_screenshot_alert" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Disable story seen receipt" detailTitle:@"Hides the notification for others when you view their story" key:@"no_seen_receipt" defaultValue:false changeAction:nil],
 
             // Section 7: Security
