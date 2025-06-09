@@ -75,33 +75,37 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
     NSLog(@"[SCInsta] Cleaning cache...");
     [SCIManager cleanCache];
 
+    [self authPrompt];
+
     return true;
 }
 
 // Biometric/passcode authentication
-static BOOL isAuthenticationShowed = FALSE;
+BOOL isAuthenticationBeingShown = NO;
 
-- (void)applicationDidBecomeActive:(id)arg1 {
+- (void)applicationDidEnterBackground:(id)arg1 {
     %orig;
 
-    // Padlock (biometric auth)
-    if ([SCIManager getPref:@"padlock"] && !isAuthenticationShowed) {
-        UIViewController *rootController = [[self window] rootViewController];
-        SCISecurityViewController *securityViewController = [SCISecurityViewController new];
-        securityViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        [rootController presentViewController:securityViewController animated:YES completion:nil];
-
-        isAuthenticationShowed = TRUE;
-
-        NSLog(@"[SCInsta] Padlock authentication: App enabled");
-    }
+    [self authPrompt];
 }
-
 - (void)applicationWillEnterForeground:(id)arg1 {
     %orig;
 
-    // Reset padlock status
-    isAuthenticationShowed = FALSE;
+    [self authPrompt];
+}
+
+%new - (void)authPrompt {
+    // Padlock (biometric auth)
+    if ([SCIManager getPref:@"padlock"] && !isAuthenticationBeingShown) {
+        UIViewController *rootController = [[self window] rootViewController];
+        SCISecurityViewController *securityViewController = [SCISecurityViewController new];
+        securityViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [rootController presentViewController:securityViewController animated:NO completion:nil];
+
+        isAuthenticationBeingShown = YES;
+
+        NSLog(@"[SCInsta] Padlock authentication: App enabled");
+    }
 }
 %end
 

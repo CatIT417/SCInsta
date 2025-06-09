@@ -1,12 +1,24 @@
-#import "../../modules/JGProgressHUD/JGProgressHUD.h"
-#import "../InstagramHeaders.h"
 #import "SecurityViewController.h"
 
 @implementation SCISecurityViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(authenticate)
+        name:UIApplicationWillEnterForegroundNotification
+        object:[UIApplication sharedApplication]
+    ];
+
+    return self;
+}
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewDidLoad {    
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     blurView.frame = self.view.bounds;
@@ -15,13 +27,9 @@
     UIButton *authenticateButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 20, 200, 60)];
     [authenticateButton setTitle:@"Click to unlock app" forState:UIControlStateNormal];
     authenticateButton.center = self.view.center;
-    [authenticateButton addTarget:self action:@selector(authenticateButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [authenticateButton addTarget:self action:@selector(authenticate) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:authenticateButton];
     
-    [self authenticate];
-}
-
-- (void)authenticateButtonTapped:(id)sender {
     [self authenticate];
 }
 
@@ -38,6 +46,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (success) {
                     [self dismissViewControllerAnimated:YES completion:nil];
+
+                    isAuthenticationBeingShown = NO;
 
                     NSLog(@"[SCInsta] Padlock authentication: Unlock success");
                 }
