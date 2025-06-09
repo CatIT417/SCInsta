@@ -361,6 +361,23 @@
 @interface IGDirectMediaPickerGalleryConfig : NSObject
 @end
 
+@interface IGStoryEyedropperToggleButton : UIControl
+@property (nonatomic, strong, readwrite) UIColor *color;
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
+
+- (UIViewController *)parentViewController; // new
+
+- (void)addLongPressGestureRecognizer; // new
+@end
+
+@interface IGStoryTextEntryViewController : UIViewController
+- (void)textViewControllerDidUpdateWithColor:(id)color;
+@end
+
+@interface IGStoryColorPaletteView : UIView
+@end
+
 
 
 /////////////////////////////////////////////////////////////////////////////

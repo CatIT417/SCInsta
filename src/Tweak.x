@@ -54,6 +54,7 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
             [[NSUserDefaults standardUserDefaults] setValue:@"SCInstaFirstRun" forKey:@"SCInstaFirstRun"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_ads"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"copy_description"];
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"detailed_color_picker"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"dw_videos"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"save_profile"];
             [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"remove_screenshot_alert"];
