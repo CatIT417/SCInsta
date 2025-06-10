@@ -105,8 +105,8 @@ $ ./build.sh <sideload/rootless/rootful>
 
 |                                             |                                             |                                             |
 |:-------------------------------------------:|:-------------------------------------------:|:-------------------------------------------:|
-| <img src="https://i.imgur.com/hr3v0fk.png"> | <img src="https://i.imgur.com/gQZdtWp.png"> | <img src="https://i.imgur.com/iXIFLxG.png"> |
-| <img src="https://i.imgur.com/HMZ9n4D.png"> | <img src="https://i.imgur.com/JQcySt6.png"> |
+| <img src="https://i.imgur.com/4409xKW.png"> | <img src="https://i.imgur.com/gb7uVEY.png"> | <img src="https://i.imgur.com/qrj4EBA.png"> |
+| <img src="https://i.imgur.com/3hFfZJB.png"> | <img src="https://i.imgur.com/8BiwZQN.png"> |
 
 # Contributing
 Contributions to this tweak are greatly appreciated. Feel free to create a pull request if you would like to contribute.
