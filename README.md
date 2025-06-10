@@ -1,14 +1,15 @@
 # SCInsta
 A feature-rich tweak for Instagram on iOS!\
-`Version v0.6.0` | `Tested on Instagram v350.0.12`
+`Version v0.7.0` | `Tested on Instagram 382.0.0`
 
 ---
 
 > [!NOTE]
+> ⚙️ &nbsp;To modify SCInsta's settings, check out [this page](https://github.com/SoCuul/SCInsta/wiki/Modify-Settings) for help\
 > ❓ &nbsp;If you have any questions or need help with the tweak, visit the [Discussions](https://github.com/SoCuul/SCInsta/discussions) tab
 >
-> ✨ &nbsp;If you have a feature request, [click here](https://github.com/SoCuul/SCInsta/issues/new?labels=enhancement&title=feat:%20replace%20this%20text%20with%20your%20feature%20request)\
-> 🐛 &nbsp;If you have a bug report, [click here](https://github.com/SoCuul/SCInsta/issues/new?labels=bug&title=bug:%20replace%20this%20with%20a%20summary%20of%20the%20issue%20you're%20experiencing)
+> ✨ &nbsp;If you have a feature request, [click here](https://github.com/SoCuul/SCInsta/issues/new/choose)\
+> 🐛 &nbsp;If you have a bug report, [click here](https://github.com/SoCuul/SCInsta/issues/new/choose)
 > 
 
 ---
@@ -24,13 +25,13 @@ A feature-rich tweak for Instagram on iOS!\
 - Hide Meta AI
 - Copy description
 - Use detailed color picker
-- Hide reels tab
 - Disable scrolling reels
 - Do not save recent searches
 - Hide explore posts grid
 - Hide trending searches
 - Hide friends map
 - No suggested chats (in dms)
+- No suggested users
 - Hide notes tray
 
 ### Feed
@@ -43,7 +44,7 @@ A feature-rich tweak for Instagram on iOS!\
 - No suggested threads posts
 
 ### Confirm actions
-- Confirm like: Posts
+- Confirm like: Posts (and stories)
 - Confirm like: Reels
 - Confirm follow
 - Confirm call
@@ -52,6 +53,11 @@ A feature-rich tweak for Instagram on iOS!\
 - Confirm sticker interaction
 - Confirm posting comment
 - Confirm changing theme
+
+### Hide navigation tabs
+- Hide explore tab
+- Hide create tab
+- Hide reels tab
 
 ### Save media (partially broken)
 - Download images/videos
@@ -71,7 +77,7 @@ A feature-rich tweak for Instagram on iOS!\
 - Automatically clears unneeded cache folders, reducing the size of your Instagram installation
 
 ### Built-in Tweak Settings
-> Long press on the **large Instagram logo** at the top of your feed to bring up the SCInsta tweak settings
+[How to modify SCInsta settings](https://github.com/SoCuul/SCInsta/wiki/Modify-Settings)
 
 # Building from source
 ### Prerequisites
