@@ -426,6 +426,22 @@ BOOL isAuthenticationBeingShown = NO;
 
 /////////////////////////////////////////////////////////////////////////////
 
+%hook HBLinkTableCell
+- (void)viewDidLoad {
+    %orig;
+
+    UILabel *titleLabel = [self titleLabel];
+    [titleLabel setTextColor:[SCIUtils SCIColour_Primary]];
+}
+- (void)loadIconIfNeeded {
+    if ([[self.specifier propertyForKey:@"iconTransparentBG"] isEqual:@(YES)]) {
+        self.iconView.backgroundColor = [UIColor clearColor];
+    }
+
+    %orig;
+}
+%end
+
 %hook HBForceCepheiPrefs
 + (BOOL)forceCepheiPrefsWhichIReallyNeedToAccessAndIKnowWhatImDoingISwear {
     return YES;

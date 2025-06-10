@@ -5,6 +5,42 @@
 @property (nonatomic, retain) NSMutableDictionary *dynamicSpecifiers;
 @end
 
+// Custom cell classes
+@implementation SCISwitchTableCell
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
+    if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier])) {
+        NSString *subTitle = [specifier.properties[@"subtitle"] copy];
+        BOOL isBig = specifier.properties[@"big"] ? ((NSNumber *)specifier.properties[@"big"]).boolValue : NO;
+        self.detailTextLabel.text = subTitle;
+        self.detailTextLabel.numberOfLines = isBig ? 0 : 1;
+        self.detailTextLabel.textColor = [UIColor secondaryLabelColor];
+
+        UISwitch *targetSwitch = ((UISwitch *)[self control]);
+        [targetSwitch setOnTintColor:[SCIUtils SCIColour_Primary]];
+        
+        if (specifier.properties[@"switchAction"]) {
+            NSString *strAction = [specifier.properties[@"switchAction"] copy];
+            [targetSwitch addTarget:[self cellTarget] action:NSSelectorFromString(strAction) forControlEvents:UIControlEventValueChanged];
+        }
+    }
+    return self;
+}
+@end
+
+@implementation SCIButtonTableViewCell
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier];
+    if (self) {
+        NSString *subTitle = [specifier.properties[@"subtitle"] copy];
+        BOOL isBig = specifier.properties[@"big"] ? ((NSNumber *)specifier.properties[@"big"]).boolValue : NO;
+        self.detailTextLabel.text = subTitle;
+        self.detailTextLabel.numberOfLines = isBig ? 0 : 1;
+        self.detailTextLabel.textColor = [UIColor secondaryLabelColor];
+    }
+    return self;
+}
+@end
+
 @implementation SCISettingsViewController
 - (instancetype)init {
     self = [super init];
@@ -63,7 +99,7 @@
 }
 
 // Pref Link Cell
-- (PSSpecifier *)newLinkCellWithTitle:(NSString *)titleText detailTitle:(NSString *)detailText url:(NSString *)url iconURL:(NSString *)iconURL {
+- (PSSpecifier *)newLinkCellWithTitle:(NSString *)titleText detailTitle:(NSString *)detailText url:(NSString *)url iconURL:(NSString *)iconURL iconTransparentBG:(BOOL)iconTransparentBG {
     PSSpecifier *LinkCell = [PSSpecifier preferenceSpecifierNamed:titleText target:self set:@selector(setPreferenceValue:specifier:) get:@selector(readPreferenceValue:) detail:nil cell:PSButtonCell edit:nil];
     
     [LinkCell setButtonAction:@selector(hb_openURL:)];
@@ -77,7 +113,9 @@
         [LinkCell setProperty:@YES forKey:@"iconCircular"];
         [LinkCell setProperty:@YES forKey:@"big"];
         [LinkCell setProperty:@56 forKey:@"height"];
+        [LinkCell setProperty:@(iconTransparentBG) forKey:@"iconTransparentBG"];
     }
+
     return LinkCell;
 }
 
@@ -85,6 +123,8 @@
 - (NSArray *)specifiers {
     if (!_specifiers) {        
         _specifiers = [NSMutableArray arrayWithArray:@[
+            [self newLinkCellWithTitle:@"Donate" detailTitle:@"Consider donating to support this tweak <3" url:@"https://ko-fi.com/socuul" iconURL:@"https://i.imgur.com/g4U5AMi.png" iconTransparentBG:YES],
+
             // Section 1: General
             [self newSectionWithTitle:@"General" footer:nil],
             [self newSwitchCellWithTitle:@"Hide Meta AI" detailTitle:@"Hides the meta ai buttons within the app" key:@"hide_meta_ai" defaultValue:false changeAction:nil],
@@ -135,8 +175,8 @@
             // Section 6: Stories and Messages
             [self newSectionWithTitle:@"Story and messages" footer:nil],
             [self newSwitchCellWithTitle:@"Keep deleted message" detailTitle:@"Keeps deleted direct messages in the chat" key:@"keep_deleted_message" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Unlimited replay of direct stories" detailTitle:@"Replays direct messages normal/once stories unlimited times" key:@"unlimited_replay" defaultValue:false changeAction:nil],
-            [self newSwitchCellWithTitle:@"Disable sending read receipts" detailTitle:@"Removes the seen text for others when you view a message" key:@"remove_lastseen" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"Unlimited replay of direct stories" detailTitle:@"Replays direct messages normal/once stories unlimited times (toggle with image check icon)" key:@"unlimited_replay" defaultValue:false changeAction:nil],
+            [self newSwitchCellWithTitle:@"Disable sending read receipts" detailTitle:@"Removes the seen text for others when you view a message (toggle with message check icon)" key:@"remove_lastseen" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Disable screenshot detection" detailTitle:@"Removes the screenshot-prevention features for visual messages" key:@"remove_screenshot_alert" defaultValue:false changeAction:nil],
             [self newSwitchCellWithTitle:@"Disable story seen receipt" detailTitle:@"Hides the notification for others when you view their story" key:@"no_seen_receipt" defaultValue:false changeAction:nil],
 
@@ -150,9 +190,8 @@
 
             // Section 9: Credits
             [self newSectionWithTitle:@"Credits" footer:[NSString stringWithFormat:@"SCInsta %@\n\nInstagram v%@", SCIVersionString, [SCIUtils IGVersionString]]],
-            [self newLinkCellWithTitle:@"Developer" detailTitle:@"SoCuul" url:@"https://socuul.dev" iconURL:@"https://i.imgur.com/WSFMSok.png"],
-            [self newLinkCellWithTitle:@"Donate" detailTitle:@"Consider donating if you enjoy this tweak!" url:@"https://ko-fi.com/socuul" iconURL:nil],
-            [self newLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/SoCuul/SCInsta" iconURL:nil]
+            [self newLinkCellWithTitle:@"Developer" detailTitle:@"SoCuul" url:@"https://socuul.dev" iconURL:@"https://i.imgur.com/WSFMSok.png" iconTransparentBG:NO],
+            [self newLinkCellWithTitle:@"View Repo" detailTitle:@"View the tweak's source code on GitHub" url:@"https://github.com/SoCuul/SCInsta" iconURL:@"https://i.imgur.com/BBUNzeP.png" iconTransparentBG:YES]
         ]];
         
         [self collectDynamicSpecifiersFromArray:_specifiers];
@@ -302,39 +341,5 @@
 
         NSLog(@"[SCInsta] FLEX explorer: Disabled");
     }
-}
-@end
-
-@implementation SCIButtonTableViewCell
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier];
-    if (self) {
-        NSString *subTitle = [specifier.properties[@"subtitle"] copy];
-        BOOL isBig = specifier.properties[@"big"] ? ((NSNumber *)specifier.properties[@"big"]).boolValue : NO;
-        self.detailTextLabel.text = subTitle;
-        self.detailTextLabel.numberOfLines = isBig ? 0 : 1;
-        self.detailTextLabel.textColor = [UIColor secondaryLabelColor];
-    }
-    return self;
-}
-
-@end
-
-@implementation SCISwitchTableCell
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier specifier:(PSSpecifier *)specifier {
-    if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier specifier:specifier])) {
-        NSString *subTitle = [specifier.properties[@"subtitle"] copy];
-        BOOL isBig = specifier.properties[@"big"] ? ((NSNumber *)specifier.properties[@"big"]).boolValue : NO;
-        self.detailTextLabel.text = subTitle;
-        self.detailTextLabel.numberOfLines = isBig ? 0 : 1;
-        self.detailTextLabel.textColor = [UIColor secondaryLabelColor];
-        
-        if (specifier.properties[@"switchAction"]) {
-            UISwitch *targetSwitch = ((UISwitch *)[self control]);
-            NSString *strAction = [specifier.properties[@"switchAction"] copy];
-            [targetSwitch addTarget:[self cellTarget] action:NSSelectorFromString(strAction) forControlEvents:UIControlEventValueChanged];
-        }
-    }
-    return self;
 }
 @end

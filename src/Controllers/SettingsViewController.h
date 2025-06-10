@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, DynamicSpecifierOperatorType) {
 - (PSSpecifier *)newSectionWithTitle:(NSString *)header footer:(NSString *)footer;
 - (PSSpecifier *)newSwitchCellWithTitle:(NSString *)titleText detailTitle:(NSString *)detailText key:(NSString *)keyText defaultValue:(BOOL)defValue changeAction:(SEL)changeAction;
 - (PSSpecifier *)newButtonCellWithTitle:(NSString *)titleText detailTitle:(NSString *)detailText dynamicRule:(NSString *)rule action:(SEL)action;
-- (PSSpecifier *)newLinkCellWithTitle:(NSString *)titleText detailTitle:(NSString *)detailText url:(NSString *)url iconURL:(NSString *)iconURL;
+- (PSSpecifier *)newLinkCellWithTitle:(NSString *)titleText detailTitle:(NSString *)detailText url:(NSString *)url iconURL:(NSString *)iconURL iconTransparentBG:(BOOL)iconTransparentBG;
 - (void)reloadSpecifiers;
 - (void)collectDynamicSpecifiersFromArray:(NSArray *)array;
 - (BOOL)shouldHideSpecifier:(PSSpecifier *)specifier;
