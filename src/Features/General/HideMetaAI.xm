@@ -31,51 +31,6 @@
 }
 %end
 
-// Meta AI suggested user in direct new message view
-%hook IGDirectThreadCreationViewController
-- (id)objectsForListAdapter:(id)arg1 {
-    NSArray *originalObjs = %orig();
-    NSMutableArray *filteredObjs = [NSMutableArray arrayWithCapacity:[originalObjs count]];
-
-    for (id obj in originalObjs) {
-        BOOL shouldHide = NO;
-
-        if ([SCIManager getPref:@"hide_meta_ai"]) {
-            
-            if ([obj isKindOfClass:%c(IGDirectCreateChatCellViewModel)]) {
-
-                // "AI Chats"
-                if ([[obj valueForKey:@"title"] isEqualToString:@"AI chats"]) {
-                    NSLog(@"[SCInsta] Hiding meta ai: direct thread creation ai chats section");
-
-                    shouldHide = YES;
-                }
-
-            }
-
-            else if ([obj isKindOfClass:%c(IGDirectRecipientCellViewModel)]) {
-
-                // Meta AI suggested user
-                if ([[[obj recipient] threadName] isEqualToString:@"Meta AI"]) {
-                    NSLog(@"[SCInsta] Hiding meta ai: direct thread creation ai suggestion");
-
-                    shouldHide = YES;
-                }
-
-            }
-            
-        }
-
-        // Populate new objs array
-        if (!shouldHide) {
-            [filteredObjs addObject:obj];
-        }
-    }
-
-    return [filteredObjs copy];
-}
-%end
-
 // Meta AI in message composer
 %hook IGDirectCommandSystemListViewController
 - (id)objectsForListAdapter:(id)arg1 {
