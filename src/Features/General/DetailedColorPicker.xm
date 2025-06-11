@@ -1,4 +1,5 @@
 #import "../../InstagramHeaders.h"
+#import "../../Manager.h"
 
 %hook IGStoryEyedropperToggleButton
 - (void)didMoveToWindow {
@@ -9,17 +10,6 @@
     }
 
     return;
-}
-
-%new - (UIViewController *)parentViewController {
-    UIResponder *responder = [self nextResponder];
-    while (responder != nil) {
-        if ([responder isKindOfClass:[UIViewController class]]) {
-            return (UIViewController *)responder;
-        }
-        responder = [responder nextResponder];
-    }
-    return nil;
 }
 
 %new - (void)addLongPressGestureRecognizer {

@@ -51,6 +51,16 @@
 
     return nil;
 };
++ (UIViewController *)parentViewControllerForView:(UIView *)view {
+    UIResponder *responder = [view nextResponder];
+    while (responder != nil) {
+        if ([responder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)responder;
+        }
+        responder = [responder nextResponder];
+    }
+    return nil;
+}
 + (void)prepareAlertPopoverIfNeeded:(UIAlertController*)alert inView:(UIView*)view {
     if (alert.popoverPresentationController) {
         // UIAlertController is a popover on iPad. Display it in the center of a view.

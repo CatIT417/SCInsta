@@ -367,8 +367,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 
-- (UIViewController *)parentViewController; // new
-
 - (void)addLongPressGestureRecognizer; // new
 @end
 

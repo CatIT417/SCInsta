@@ -19,6 +19,7 @@
 + (BOOL)isNotch;
 
 + (BOOL)showConfirmation:(void(^)(void))okHandler;
++ (UIViewController *)parentViewControllerForView:(UIView *)view;
 + (void)prepareAlertPopoverIfNeeded:(UIAlertController*)alert inView:(UIView*)view;
 
 @end
