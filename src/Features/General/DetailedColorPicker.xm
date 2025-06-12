@@ -1,5 +1,6 @@
 #import "../../InstagramHeaders.h"
 #import "../../Manager.h"
+#import "../../Utils.h"
 
 %hook IGStoryEyedropperToggleButton
 - (void)didMoveToWindow {
@@ -28,7 +29,7 @@
     colorPickerController.modalPresentationStyle = UIModalPresentationPopover;
     colorPickerController.selectedColor = self.color;
     
-    UIViewController *presentingVC = [self parentViewController];
+    UIViewController *presentingVC = [SCIUtils parentViewControllerForView:self];
     
     if (presentingVC != nil) {
         [presentingVC presentViewController:colorPickerController animated:YES completion:nil];
@@ -47,7 +48,7 @@
     [self setSelected:YES animated:YES];
 
     // Trigger change for text color
-    IGStoryTextEntryViewController *presentingVC = [self parentViewController];
+    IGStoryTextEntryViewController *presentingVC = [SCIUtils parentViewControllerForView:self];
     [presentingVC textViewControllerDidUpdateWithColor:color];
 };
 %end

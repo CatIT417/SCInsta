@@ -1,4 +1,5 @@
 #import "Manager.h"
+#include "QuickLook.h"
 #import "InstagramHeaders.h"
 
 @implementation SCIManager
@@ -13,10 +14,11 @@
     NSMutableArray<NSError *> *deletionErrors = [NSMutableArray array];
 
     // Temp folder
-    NSError *tempFolderError;
-    [fileManager removeItemAtURL:[NSURL fileURLWithPath:NSTemporaryDirectory()] error:&tempFolderError];
+    // * disabled bc app crashed trying to delete certain files inside it
+    //NSError *tempFolderError;
+    //[fileManager removeItemAtURL:[NSURL fileURLWithPath:NSTemporaryDirectory()] error:&tempFolderError];
 
-    if (tempFolderError) [deletionErrors addObject:tempFolderError];
+    //if (tempFolderError) [deletionErrors addObject:tempFolderError];
 
     // Analytics folder
     NSError *analyticsFolderError;
@@ -46,18 +48,22 @@
     }
 
 }
-+ (void)showSaveVC:(id)item {
+
+// View Controllers
++ (void)showQuickLookVC:(NSArray<id> *)items {
+    QLPreviewController *previewController = [[QLPreviewController alloc] init];
+    QuickLookDelegate *quickLookDelegate = [[QuickLookDelegate alloc] initWithPreviewItemURLs:items];
+
+    previewController.dataSource = quickLookDelegate;
+    
+    [topMostController() presentViewController:previewController animated:true completion:nil];
+}
++ (void)showShareVC:(id)item {
     UIActivityViewController *acVC = [[UIActivityViewController alloc] initWithActivityItems:@[item] applicationActivities:nil];
     if (is_iPad()) {
         acVC.popoverPresentationController.sourceView = topMostController().view;
         acVC.popoverPresentationController.sourceRect = CGRectMake(topMostController().view.bounds.size.width / 2.0, topMostController().view.bounds.size.height / 2.0, 1.0, 1.0);
     }
     [topMostController() presentViewController:acVC animated:true completion:nil];
-}
-+ (NSString *)getDownloadingPersent:(float)per {
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterPercentStyle];
-    NSNumber *number = [NSNumber numberWithFloat:per];
-    return [numberFormatter stringFromNumber:number];
 }
 @end
