@@ -76,14 +76,21 @@
 %end
 
 // DM stories viewed logic
-%hook IGStoryPhotoView
-- (void)progressImageView:(id)arg1 didLoadImage:(id)arg2 loadSource:(id)arg3 networkRequestSummary:(id)arg4 {
+%hook IGDirectVisualMessageViewerEventHandler
+- (void)visualMessageViewerController:(id)arg1 didBeginPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 {
     if ([SCIManager getPref:@"unlimited_replay"]) {
         // Check if dm stories should be marked as viewed
-        if (dmVisualMsgsViewedButtonEnabled) {}
-        else return;
+        if (dmVisualMsgsViewedButtonEnabled) {
+            %orig;
+        }
     }
-
-    return %orig;
+}
+- (void)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 mediaCurrentTime:(CGFloat)arg4 forNavType:(NSInteger)arg5 {
+    if ([SCIManager getPref:@"unlimited_replay"]) {
+        // Check if dm stories should be marked as viewed
+        if (dmVisualMsgsViewedButtonEnabled) {
+            %orig;
+        }
+    }
 }
 %end
