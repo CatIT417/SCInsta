@@ -184,7 +184,7 @@
 
 // Suggested AI searches in comment section
 %hook IGCommentThreadAICarousel
-- (id)initWithLauncherSet:(id)arg1 {
+- (id)initWithLauncherSet:(id)arg1 hasSearchPrefix:(BOOL)arg2 {
     if ([SCIManager getPref:@"hide_meta_ai"]) {
         NSLog(@"[SCInsta] Hiding meta ai: suggested ai searches comment carousel");
 
