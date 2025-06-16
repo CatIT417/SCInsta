@@ -3,10 +3,15 @@
 #import "InstagramHeaders.h"
 
 @implementation SCIManager
-+ (BOOL)getPref:(NSString *)key {
-    if (!key) return false;
++ (BOOL)getBoolPref:(NSString *)key {
+    if (![key length] || [[NSUserDefaults standardUserDefaults] objectForKey:key] == nil) return false;
 
     return [[NSUserDefaults standardUserDefaults] boolForKey:key];
+}
++ (double)getDoublePref:(NSString *)key {
+    if (![key length] || [[NSUserDefaults standardUserDefaults] objectForKey:key] == nil) return 0;
+
+    return [[NSUserDefaults standardUserDefaults] doubleForKey:key];
 }
 
 + (void)cleanCache {

@@ -6,7 +6,8 @@
 
 @interface SCIManager : NSObject
 
-+ (BOOL)getPref:(NSString *)key;
++ (BOOL)getBoolPref:(NSString *)key;
++ (double)getDoublePref:(NSString *)key;
 + (void)cleanCache;
 
 // View Controllers

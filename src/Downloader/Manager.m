@@ -16,10 +16,17 @@
     // Properties
     self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];
     self.task = [self.session downloadTaskWithURL:url];
-    self.fileExtension = fileExtension;
+    
+    // Default to jpg if no other reasonable length extension is provided
+    self.fileExtension = [fileExtension length] >= 3 ? fileExtension : @"jpg";
 
     [self.task resume];
     [self.delegate downloadDidStart];
+}
+
+- (void)cancelDownload {
+    [self.task cancel];
+    [self.delegate downloadDidCancel];
 }
 
 // URLSession methods
@@ -27,6 +34,7 @@
     NSLog(@"Task wrote %lld bytes of %lld bytes", bytesWritten, totalBytesExpectedToWrite);
     
     float progress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
+
     [self.delegate downloadDidProgress:progress];
 }
 
@@ -46,16 +54,6 @@
 // Rename downloaded file & move from documents dir -> cache dir
 - (NSURL *)moveFileToCacheDir:(NSURL *)oldPath {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    // Verify oldPath exists
-    /* if (![fileManager fileExistsAtPath:oldPath.path]) {
-        NSLog(@"[SCInsta] Download Handler: File does not exist at path: %@", oldPath.absoluteString);
-
-        NSError *error = [NSError errorWithDomain:@"com.socuul.scinsta" code:1 userInfo:@{NSLocalizedDescriptionKey: @"File does not exist at requested path"}];
-        [self.delegate downloadDidFinishWithError:error];
-
-        return nil;
-    } */
 
     NSString *cacheDirectoryPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
     NSURL *newPath = [[NSURL fileURLWithPath:cacheDirectoryPath] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", NSUUID.UUID.UUIDString, self.fileExtension]];

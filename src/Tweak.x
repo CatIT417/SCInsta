@@ -3,7 +3,6 @@
 #import "Tweak.h"
 #import "Utils.h"
 #import "Manager.h"
-#import "Download.h"
 
 #import "Controllers/SecurityViewController.h"
 #import "Controllers/SettingsViewController.h"

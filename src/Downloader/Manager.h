@@ -5,6 +5,7 @@
 
 // Methods
 - (void)downloadDidStart;
+- (void)downloadDidCancel;
 - (void)downloadDidProgress:(float)progress;
 - (void)downloadDidFinishWithError:(NSError *)error;
 - (void)downloadDidFinishWithFileURL:(NSURL *)fileURL;
@@ -23,6 +24,9 @@
 - (instancetype)initWithDelegate:(id<SCIDownloadDelegateProtocol>)downloadDelegate;
 
 - (void)downloadFileWithURL:(NSURL *)url fileExtension:(NSString *)fileExtension;
+
+- (void)cancelDownload;
+
 - (NSURL *)moveFileToCacheDir:(NSURL *)oldPath;
 
 @end

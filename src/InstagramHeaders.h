@@ -157,6 +157,22 @@
 - (void)addLongPressGestureRecognizer; // new
 @end
 
+@interface IGStoryFullscreenOverlayView : UIView
+@property (nonatomic, weak, readwrite) id gestureDelegate;
+- (id)gestureDelegate;
+- (void)addLongPressGestureRecognizer; // new
+@end
+
+@interface IGDirectVisualMessageViewerController : UIViewController
+@end
+
+@interface IGDirectVisualMessageViewerViewModeAwareDataSource : NSObject
+@end
+
+@interface IGDirectVisualMessage : NSObject
+- (id)rawVideo;
+@end
+
 @interface IGUser : NSObject
 @property NSInteger followStatus;
 @property(copy) NSString *username;

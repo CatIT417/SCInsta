@@ -29,6 +29,12 @@
 
         self.hud.indicatorView = indicatorView;
         self.hud.detailTextLabel.text = [NSString stringWithFormat:@"00%% Complete"];
+
+        // Allow dismissing longer downloads (requiring progress updates)
+        __weak typeof(self) weakSelf = self;
+        self.hud.tapOutsideBlock = ^(JGProgressHUD * _Nonnull HUD) {
+            [weakSelf.downloadManager cancelDownload];
+        };
     }
 
     [self.hud showInView:topMostController().view];
@@ -43,6 +49,11 @@
 - (void)downloadDidStart {
     NSLog(@"[SCInsta] Download: Download started");
 }
+- (void)downloadDidCancel {
+    [self.hud dismiss];
+
+    NSLog(@"[SCInsta] Download: Download cancelled");
+}
 - (void)downloadDidProgress:(float)progress {
     NSLog(@"[SCInsta] Download: Download progress: %f", progress);
     
@@ -55,10 +66,8 @@
 }
 - (void)downloadDidFinishWithError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
-        // Dismiss downloading on-screen gui
-        [self.hud dismiss];
-
-        if (error) {
+        // Check if it actually errored (not cancelled)
+        if (error && error.code != NSURLErrorCancelled) {
             NSLog(@"[SCInsta] Download: Download failed with error: \"%@\"", error);
             [SCIUtils showErrorHUDWithDescription:@"Error, try again later"];
         }
@@ -66,7 +75,7 @@
 }
 - (void)downloadDidFinishWithFileURL:(NSURL *)fileURL {
     dispatch_async(dispatch_get_main_queue(), ^{
-        //[self.hud dismiss];
+        [self.hud dismiss];
 
         NSLog(@"[SCInsta] Download: Download finished with url: \"%@\"", [fileURL absoluteString]);
         NSLog(@"[SCInsta] Download: Completed with action %d", (int)self.action);

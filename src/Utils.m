@@ -49,10 +49,7 @@
     return [SCIUtils getPhotoUrl:photo];
 }
 
-+ (NSURL *)getVideoUrlForMedia:(IGMedia *)media {
-    if (!media) return nil;
-
-    IGVideo *video = media.video;
++ (NSURL *)getVideoUrl:(IGVideo *)video {
     if (!video) return nil;
 
     // Sort videos by quality
@@ -64,6 +61,37 @@
 
     return videoUrl;
 }
++ (NSURL *)getVideoUrlForMedia:(IGMedia *)media {
+    if (!media) return nil;
+
+    IGVideo *video = media.video;
+    if (!video) return nil;
+
+    return [SCIUtils getVideoUrl:video];
+}
+
+// View Controllers
++ (UIViewController *)viewControllerForView:(UIView *)view {
+    NSString *viewDelegate = @"viewDelegate";
+    if ([view respondsToSelector:NSSelectorFromString(viewDelegate)]) {
+        return [view valueForKey:viewDelegate];
+    }
+
+    return nil;
+}
+
++ (UIViewController *)viewControllerForAncestralView:(UIView *)view {
+    NSString *_viewControllerForAncestor = @"_viewControllerForAncestor";
+    if ([view respondsToSelector:NSSelectorFromString(_viewControllerForAncestor)]) {
+        return [view valueForKey:_viewControllerForAncestor];
+    }
+
+    return nil;
+}
+
++ (UIViewController *)nearestViewControllerForView:(UIView *)view {
+    return [self viewControllerForView:view] ?: [self viewControllerForAncestralView:view];
+}
 
 // Functions
 + (NSString *)IGVersionString {
@@ -73,6 +101,17 @@
     return [[[UIApplication sharedApplication] keyWindow] safeAreaInsets].bottom > 0;
 };
 
++ (BOOL)existingLongPressGestureRecognizerForView:(UIView *)view {
+    NSArray *allRecognizers = view.gestureRecognizers;
+
+    for (UIGestureRecognizer *recognizer in allRecognizers) {
+        if ([[recognizer class] isSubclassOfClass:[UILongPressGestureRecognizer class]]) {
+            return YES;
+        }
+    }
+
+    return NO;
+}
 + (BOOL)showConfirmation:(void(^)(void))okHandler {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Are you sure?" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -84,16 +123,6 @@
 
     return nil;
 };
-+ (UIViewController *)parentViewControllerForView:(UIView *)view {
-    UIResponder *responder = [view nextResponder];
-    while (responder != nil) {
-        if ([responder isKindOfClass:[UIViewController class]]) {
-            return (UIViewController *)responder;
-        }
-        responder = [responder nextResponder];
-    }
-    return nil;
-}
 + (void)prepareAlertPopoverIfNeeded:(UIAlertController*)alert inView:(UIView*)view {
     if (alert.popoverPresentationController) {
         // UIAlertController is a popover on iPad. Display it in the center of a view.
