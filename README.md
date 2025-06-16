@@ -69,6 +69,7 @@ A feature-rich tweak for Instagram on iOS!\
 - Disabling sending read receipts
 - Remove screenshot alert
 - Disable story seen receipt
+- Disable view-once limitations
 
 ### Security
 - Padlock (require biometric authentication to open the app)
