@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: '💬 Browse Q&A'
-    url: https://github.com/SoCuul/SCInsta/discussions
+    url: https://github.com/SoCuul/SCInsta/wiki/FAQ
     about: Find answers to the most commonly asked questions
   - name: '❓ Need Help?'
     url: https://github.com/SoCuul/SCInsta/discussions
