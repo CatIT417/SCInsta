@@ -5,7 +5,7 @@
 %hook IGCoreTextView
 - (id)initWithWidth:(CGFloat)width {
     self = %orig;
-    if ([SCIManager getPref:@"copy_description"]) {
+    if ([SCIManager getBoolPref:@"copy_description"]) {
         [self addHandleLongPress];
     }
     return self;

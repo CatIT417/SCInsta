@@ -9,7 +9,7 @@
     for (id obj in originalObjs) {
         BOOL shouldHide = NO;
 
-        if ([SCIManager getPref:@"hide_friends_map"]) {
+        if ([SCIManager getBoolPref:@"hide_friends_map"]) {
 
             if ([obj isKindOfClass:%c(IGDirectNotesTrayUserViewModel)]) {
 

@@ -6,7 +6,7 @@
 // Confirmation handlers
 
 #define CONFIRMPOSTLIKE(orig)                             \
-    if ([SCIManager getPref:@"like_confirm"]) {           \
+    if ([SCIManager getBoolPref:@"like_confirm"]) {           \
         NSLog(@"[SCInsta] Confirm post like triggered");  \
                                                           \
         [SCIUtils showConfirmation:^(void) { orig; }];    \
@@ -16,7 +16,7 @@
     }                                                     \
 
 #define CONFIRMREELSLIKE(orig)                            \
-    if ([SCIManager getPref:@"like_confirm_reels"]) {     \
+    if ([SCIManager getBoolPref:@"like_confirm_reels"]) {     \
         NSLog(@"[SCInsta] Confirm reels like triggered"); \
                                                           \
         [SCIUtils showConfirmation:^(void) { orig; }];    \

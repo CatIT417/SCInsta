@@ -11,7 +11,7 @@
     NSMutableArray *new_items = [items mutableCopy];
 
     // Messages seen
-    if ([SCIManager getPref:@"remove_lastseen"]) {
+    if ([SCIManager getBoolPref:@"remove_lastseen"]) {
         UIBarButtonItem *seenButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"checkmark.message"] style:UIBarButtonItemStylePlain target:self action:@selector(seenButtonHandler:)];
         [new_items addObject:seenButton];
 
@@ -23,7 +23,7 @@
     }
 
     // DM visual messages viewed
-    if ([SCIManager getPref:@"unlimited_replay"]) {
+    if ([SCIManager getBoolPref:@"unlimited_replay"]) {
         UIBarButtonItem *dmVisualMsgsViewedButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"photo.badge.checkmark"] style:UIBarButtonItemStylePlain target:self action:@selector(dmVisualMsgsViewedButtonHandler:)];
         [new_items addObject:dmVisualMsgsViewedButton];
 
@@ -62,7 +62,7 @@
 // Messages seen logic
 %hook IGDirectThreadViewListAdapterDataSource
 - (BOOL)shouldUpdateLastSeenMessage {
-    if ([SCIManager getPref:@"remove_lastseen"]) {
+    if ([SCIManager getBoolPref:@"remove_lastseen"]) {
         // Check if messages should be shown as seen
         if (seenButtonEnabled) {
             return %orig;
@@ -78,7 +78,7 @@
 // DM stories viewed logic
 %hook IGDirectVisualMessageViewerEventHandler
 - (void)visualMessageViewerController:(id)arg1 didBeginPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 {
-    if ([SCIManager getPref:@"unlimited_replay"]) {
+    if ([SCIManager getBoolPref:@"unlimited_replay"]) {
         // Check if dm stories should be marked as viewed
         if (dmVisualMsgsViewedButtonEnabled) {
             %orig;
@@ -86,7 +86,7 @@
     }
 }
 - (void)visualMessageViewerController:(id)arg1 didEndPlaybackForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 mediaCurrentTime:(CGFloat)arg4 forNavType:(NSInteger)arg5 {
-    if ([SCIManager getPref:@"unlimited_replay"]) {
+    if ([SCIManager getBoolPref:@"unlimited_replay"]) {
         // Check if dm stories should be marked as viewed
         if (dmVisualMsgsViewedButtonEnabled) {
             %orig;

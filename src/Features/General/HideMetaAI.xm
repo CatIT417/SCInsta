@@ -6,7 +6,7 @@
 // Meta AI button functionality on direct search bar
 %hook IGDirectInboxViewController
 - (void)searchBarMetaAIButtonTappedOnSearchBar:(id)arg1 {
-    if ([SCIManager getPref:@"hide_meta_ai"])
+    if ([SCIManager getBoolPref:@"hide_meta_ai"])
 {
         NSLog(@"[SCInsta] Hiding meta ai: direct search bar functionality");
 
@@ -20,7 +20,7 @@
 // AI agents in direct new message view
 %hook IGDirectRecipientGenAIBotsResult
 - (id)initWithGenAIBots:(id)arg1 lastFetchedTimestamp:(id)arg2 {
-    if ([SCIManager getPref:@"hide_meta_ai"])
+    if ([SCIManager getBoolPref:@"hide_meta_ai"])
 {
         NSLog(@"[SCInsta] Hiding meta ai: direct recipient ai agents");
 
@@ -40,7 +40,7 @@
     for (id obj in originalObjs) {
         BOOL shouldHide = NO;
 
-        if ([SCIManager getPref:@"hide_meta_ai"]) {
+        if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
 
             if ([obj isKindOfClass:%c(IGDirectCommandSystemViewModel)]) {
                 IGDirectCommandSystemViewModel *typedObj = (IGDirectCommandSystemViewModel *)obj;
@@ -88,7 +88,7 @@
         userSession:(id)arg5
     loggingDelegate:(id)arg6
 {
-    if ([SCIManager getPref:@"hide_meta_ai"]) {
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
         NSLog(@"[SCInsta] Hiding meta ai: suggested ai chats in direct inbox header");
 
         @try {
@@ -115,7 +115,7 @@
      localSendSpeedLogger:(id)arg8
    sendAttributionFactory:(id)arg9 
 {
-    if ([SCIManager getPref:@"hide_meta_ai"]) {
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
         NSLog(@"[SCInsta] Hiding meta ai: imagine tile in media picker");
 
         @try {
@@ -148,7 +148,7 @@
         // Meta AI summary
         if ([obj isKindOfClass:%c(IGSearchMetaAIHCMModel)]) {
             
-            if ([SCIManager getPref:@"hide_meta_ai"]) {
+            if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                 NSLog(@"[SCInsta] Hiding explore meta ai search summary");
 
                 shouldHide = YES;
@@ -172,7 +172,7 @@
 - (void)didMoveToWindow {
     %orig;
 
-    if ([SCIManager getPref:@"hide_meta_ai"]) {
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
         [self removeFromSuperview];
     }
 }
@@ -185,7 +185,7 @@
 // Suggested AI searches in comment section
 %hook IGCommentThreadAICarousel
 - (id)initWithLauncherSet:(id)arg1 hasSearchPrefix:(BOOL)arg2 {
-    if ([SCIManager getPref:@"hide_meta_ai"]) {
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
         NSLog(@"[SCInsta] Hiding meta ai: suggested ai searches comment carousel");
 
         return nil;
@@ -216,7 +216,7 @@
 }
 
 %new - (IGSearchBarConfig *)sanitizePlaceholderForConfig:(IGSearchBarConfig *)config {
-    if ([SCIManager getPref:@"hide_meta_ai"]) {
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
 
         NSLog(@"[SCInsta] Hiding meta ai: reconfiguring search bar");
 
@@ -271,7 +271,7 @@
 - (void)didMoveToWindow {
     %orig;
 
-    if ([SCIManager getPref:@"hide_meta_ai"]) {
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
 
         // Hide buttons that are associated with meta ai
         if ([self.accessibilityIdentifier containsString:@"meta_ai"]) {
@@ -288,7 +288,7 @@
 %hook IGFloatingActionButton.IGFloatingActionButton
 - (void)didMoveToSuperview {
     %orig;
-    if ([SCIManager getPref:@"hide_meta_ai"]) {
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
         [self removeFromSuperview];
         NSLog(@"[SCInsta] Hiding meta ai: home feed meta ai button"); 
     }

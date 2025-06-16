@@ -132,4 +132,24 @@
     }
 };
 
+// Math
++ (NSUInteger)decimalPlacesInDouble:(double)value {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setMaximumFractionDigits:15]; // Allow enough digits for double precision
+    [formatter setMinimumFractionDigits:0];
+    [formatter setDecimalSeparator:@"."]; // Force dot for internal logic, then respect locale for final display if needed
+
+    NSString *stringValue = [formatter stringFromNumber:@(value)];
+
+    // Find decimal separator
+    NSRange decimalRange = [stringValue rangeOfString:formatter.decimalSeparator];
+
+    if (decimalRange.location == NSNotFound) {
+        return 0;
+    } else {
+        return stringValue.length - (decimalRange.location + decimalRange.length);
+    }
+}
+
 @end

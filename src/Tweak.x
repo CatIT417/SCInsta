@@ -9,13 +9,10 @@
 
 ///////////////////////////////////////////////////////////
 
-// Direct story & screenshot handlers
+// Screenshot handlers
 
-#define VOID_HANDLESCREENSHOT(orig) [SCIManager getPref:@"remove_screenshot_alert"] ? nil : orig;
+#define VOID_HANDLESCREENSHOT(orig) [SCIManager getBoolPref:@"remove_screenshot_alert"] ? nil : orig;
 #define NONVOID_HANDLESCREENSHOT(orig) return VOID_HANDLESCREENSHOT(orig)
-
-#define VOID_HANDLEREPLAY(orig) [SCIManager getPref:@"unlimited_replay"] ? nil : orig;
-#define NONVOID_HANDLEREPLAY(orig) return VOID_HANDLEREPLAY(orig)
 
 ///////////////////////////////////////////////////////////
 
@@ -31,43 +28,37 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
 - (_Bool)application:(UIApplication *)application didFinishLaunchingWithOptions:(id)arg2 {
     %orig;
 
-    NSLog(@"[SCInsta] First run, initializing");
+    // Default SCInsta config
+    NSDictionary *sciDefaults = @{
+        @"hide_ads": @(YES),
+        @"copy_description": @(YES),
+        @"detailed_color_picker": @(YES),
+        @"remove_screenshot_alert": @(YES),
+        @"call_confirm": @(YES),
+        @"keep_deleted_message": @(YES),
+        @"dw_feed_posts": @(YES),
+        @"dw_reels": @(YES),
+        @"dw_story": @(YES),
+        @"save_profile": @(YES),
+        @"dw_finger_count": @(3),
+        @"dw_finger_duration": @(0.5)
+    };
+    [[NSUserDefaults standardUserDefaults] registerDefaults:sciDefaults];
 
-    // Set default config values (if first-run key doesn't exist)
+    // Open settings for first-time users
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SCInstaFirstRun"] == nil) {
+        NSLog(@"[SCInsta] First run, initializing");
 
-        // Legacy (BHInsta) user migration
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"BHInstaFirstRun"] != nil) {
+        // Display settings modal on screen
+        NSLog(@"[SCInsta] Displaying SCInsta first-time settings modal");
+        UIViewController *rootController = [[self window] rootViewController];
+        SCISettingsViewController *settingsViewController = [SCISettingsViewController new];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+        
+        [rootController presentViewController:navigationController animated:YES completion:nil];
 
-            // Set new first-run key
-            [[NSUserDefaults standardUserDefaults] setValue:@"SCInstaFirstRun" forKey:@"SCInstaFirstRun"];
-
-            // Remove deprecated first-run key
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"BHInstaFirstRun"];
-
-        }
-
-        else {
-            NSLog(@"[SCInsta] Setting default values");
-
-            [[NSUserDefaults standardUserDefaults] setValue:@"SCInstaFirstRun" forKey:@"SCInstaFirstRun"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"hide_ads"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"copy_description"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"detailed_color_picker"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"dw_videos"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"save_profile"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"remove_screenshot_alert"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"call_confirm"];
-            [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"keep_deleted_message"];
-
-            // Display settings modal on screen
-            NSLog(@"[SCInsta] Displaying SCInsta first-time settings modal");
-            UIViewController *rootController = [[self window] rootViewController];
-            SCISettingsViewController *settingsViewController = [SCISettingsViewController new];
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-            
-            [rootController presentViewController:navigationController animated:YES completion:nil];
-        }
+        // Done with first-time setup
+        [[NSUserDefaults standardUserDefaults] setValue:@"SCInstaFirstRun" forKey:@"SCInstaFirstRun"];
 
     }
 
@@ -95,7 +86,7 @@ BOOL isAuthenticationBeingShown = NO;
 
 %new - (void)authPrompt {
     // Padlock (biometric auth)
-    if ([SCIManager getPref:@"padlock"] && !isAuthenticationBeingShown) {
+    if ([SCIManager getBoolPref:@"padlock"] && !isAuthenticationBeingShown) {
         UIViewController *rootController = [[self window] rootViewController];
         SCISecurityViewController *securityViewController = [SCISecurityViewController new];
         securityViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
@@ -129,7 +120,7 @@ BOOL isAuthenticationBeingShown = NO;
 
 %hook IGDirectVisualMessageScreenshotSafetyLogger
 - (id)initWithUserSession:(id)arg1 entryPoint:(NSInteger)arg2 {
-    if ([SCIManager getPref:@"remove_screenshot_alert"]) {
+    if ([SCIManager getBoolPref:@"remove_screenshot_alert"]) {
         NSLog(@"[SCInsta] Disable visual message screenshot safety logger");
         return nil;
     }
@@ -181,7 +172,7 @@ BOOL isAuthenticationBeingShown = NO;
 
             // Broadcast channels
             if ([[obj uniqueIdentifier] isEqualToString:@"channels"]) {
-                if ([SCIManager getPref:@"no_suggested_chats"]) {
+                if ([SCIManager getBoolPref:@"no_suggested_chats"]) {
                     NSLog(@"[SCInsta] Hiding suggested chats (header)");
 
                     shouldHide = YES;
@@ -190,7 +181,7 @@ BOOL isAuthenticationBeingShown = NO;
 
             // Ask Meta AI
             else if ([[obj labelTitle] isEqualToString:@"Ask Meta AI"]) {
-                if ([SCIManager getPref:@"hide_meta_ai"]) {
+                if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                     NSLog(@"[SCInsta] Hiding meta ai suggested chats (header)");
 
                     shouldHide = YES;
@@ -199,7 +190,7 @@ BOOL isAuthenticationBeingShown = NO;
 
             // AI
             else if ([[obj labelTitle] isEqualToString:@"AI"]) {
-                if ([SCIManager getPref:@"hide_meta_ai"]) {
+                if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                     NSLog(@"[SCInsta] Hiding ai suggested chats (header)");
 
                     shouldHide = YES;
@@ -215,7 +206,7 @@ BOOL isAuthenticationBeingShown = NO;
          || [obj isKindOfClass:%c(IGDirectInboxSearchAIAgentsSuggestedPromptLoggingViewModel)]
         ) {
 
-            if ([SCIManager getPref:@"hide_meta_ai"]) {
+            if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                 NSLog(@"[SCInsta] Hiding suggested chats (ai agents)");
 
                 shouldHide = YES;
@@ -228,7 +219,7 @@ BOOL isAuthenticationBeingShown = NO;
 
             // Broadcast channels
             if ([[obj recipient] isBroadcastChannel]) {
-                if ([SCIManager getPref:@"no_suggested_chats"]) {
+                if ([SCIManager getBoolPref:@"no_suggested_chats"]) {
                     NSLog(@"[SCInsta] Hiding suggested chats (broadcast channels recipient)");
 
                     shouldHide = YES;
@@ -237,7 +228,7 @@ BOOL isAuthenticationBeingShown = NO;
             
             // Meta AI (special section types)
             else if (([obj sectionType] == 20) || [obj sectionType] == 18) {
-                if ([SCIManager getPref:@"hide_meta_ai"]) {
+                if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                     NSLog(@"[SCInsta] Hiding meta ai suggested chats (meta ai recipient)");
 
                     shouldHide = YES;
@@ -246,7 +237,7 @@ BOOL isAuthenticationBeingShown = NO;
 
             // Meta AI (catch-all)
             else if ([[[obj recipient] threadName] isEqualToString:@"Meta AI"]) {
-                if ([SCIManager getPref:@"hide_meta_ai"]) {
+                if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                     NSLog(@"[SCInsta] Hiding meta ai suggested chats (meta ai recipient)");
 
                     shouldHide = YES;
@@ -275,7 +266,7 @@ BOOL isAuthenticationBeingShown = NO;
         BOOL shouldHide = NO;
 
         // Meta AI suggested user in direct new message view
-        if ([SCIManager getPref:@"hide_meta_ai"]) {
+        if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
             
             if ([obj isKindOfClass:%c(IGDirectCreateChatCellViewModel)]) {
 
@@ -302,7 +293,7 @@ BOOL isAuthenticationBeingShown = NO;
         }
 
         // Invite friends to insta contacts upsell
-        if ([SCIManager getPref:@"no_suggested_users"]) {
+        if ([SCIManager getBoolPref:@"no_suggested_users"]) {
             if ([obj isKindOfClass:%c(IGContactInvitesSearchUpsellViewModel)]) {
                 NSLog(@"[SCInsta] Hiding suggested users: invite contacts upsell");
 
@@ -330,7 +321,7 @@ BOOL isAuthenticationBeingShown = NO;
         BOOL shouldHide = NO;
 
         // Meta AI
-        if ([SCIManager getPref:@"hide_meta_ai"]) {
+        if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
 
             // Section header 
             if ([obj isKindOfClass:%c(IGLabelItemViewModel)]) {
@@ -357,7 +348,7 @@ BOOL isAuthenticationBeingShown = NO;
 
                 // itemType 6 is meta ai suggestions
                 if ([obj itemType] == 6) {
-                    if ([SCIManager getPref:@"hide_meta_ai"]) {
+                    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                         shouldHide = YES;
                     }
                     
@@ -365,7 +356,7 @@ BOOL isAuthenticationBeingShown = NO;
 
                 // Meta AI user account in search results
                 else if ([[[obj title] string] isEqualToString:@"meta.ai"]) {
-                    if ([SCIManager getPref:@"hide_meta_ai"]) {
+                    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                         shouldHide = YES;
                     }
                 }
@@ -375,7 +366,7 @@ BOOL isAuthenticationBeingShown = NO;
         }
 
         // No suggested users
-        if ([SCIManager getPref:@"no_suggested_users"]) {
+        if ([SCIManager getBoolPref:@"no_suggested_users"]) {
 
             // Section header 
             if ([obj isKindOfClass:%c(IGLabelItemViewModel)]) {

@@ -35,4 +35,7 @@
 + (BOOL)showConfirmation:(void(^)(void))okHandler;
 + (void)prepareAlertPopoverIfNeeded:(UIAlertController*)alert inView:(UIView*)view;
 
+// Math
++ (NSUInteger)decimalPlacesInDouble:(double)value;
+
 @end

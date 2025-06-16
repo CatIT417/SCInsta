@@ -3,7 +3,7 @@
 
 %hook IGStoryViewerTapTarget
 - (void)_didTap:(id)arg1 forEvent:(id)arg2 {
-    if ([SCIManager getPref:@"sticker_interact_confirm"]) {
+    if ([SCIManager getBoolPref:@"sticker_interact_confirm"]) {
         NSLog(@"[SCInsta] Confirm sticker interact triggered");
 
         [SCIUtils showConfirmation:^(void) { %orig; }];

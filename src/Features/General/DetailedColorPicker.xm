@@ -6,7 +6,7 @@
 - (void)didMoveToWindow {
     %orig;
 
-    if ([SCIManager getPref:@"detailed_color_picker"]) {
+    if ([SCIManager getBoolPref:@"detailed_color_picker"]) {
         [self addLongPressGestureRecognizer];
     }
 
