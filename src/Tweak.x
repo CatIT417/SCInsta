@@ -99,6 +99,12 @@ BOOL isAuthenticationBeingShown = NO;
 }
 %end
 
+// Disable sending modded insta bug reports
+%hook IGWindow
+- (void)showDebugMenu {
+    return;
+}
+%end
 
 // Disable anti-screenshot feature on visual messages
 %hook IGStoryViewerContainerView
