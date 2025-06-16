@@ -29,7 +29,7 @@
     colorPickerController.modalPresentationStyle = UIModalPresentationPopover;
     colorPickerController.selectedColor = self.color;
     
-    UIViewController *presentingVC = [SCIUtils parentViewControllerForView:self];
+    UIViewController *presentingVC = [SCIUtils nearestViewControllerForView:self];
     
     if (presentingVC != nil) {
         [presentingVC presentViewController:colorPickerController animated:YES completion:nil];
@@ -48,7 +48,7 @@
     [self setSelected:YES animated:YES];
 
     // Trigger change for text color
-    IGStoryTextEntryViewController *presentingVC = [SCIUtils parentViewControllerForView:self];
+    IGStoryTextEntryViewController *presentingVC = [SCIUtils nearestViewControllerForView:self];
     [presentingVC textViewControllerDidUpdateWithColor:color];
 };
 %end
