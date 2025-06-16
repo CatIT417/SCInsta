@@ -80,6 +80,13 @@ A feature-rich tweak for Instagram on iOS!\
 ### Built-in Tweak Settings
 [How to modify SCInsta settings](https://github.com/SoCuul/SCInsta/wiki/Modify-Settings)
 
+# In-App Screenshots
+
+|                                             |                                             |                                             |
+|:-------------------------------------------:|:-------------------------------------------:|:-------------------------------------------:|
+| <img src="https://i.imgur.com/EZIktAw.png"> | <img src="https://i.imgur.com/aA3g1Vw.png"> | <img src="https://i.imgur.com/QdyFbo4.png"> |
+| <img src="https://i.imgur.com/Ydd61cZ.png"> | <img src="https://i.imgur.com/XGOn3lY.png"> | <img src="https://i.imgur.com/n4GFWl8.png"> |
+
 # Building from source
 ### Prerequisites
 - XCode + Command-Line Developer Tools
@@ -102,13 +109,6 @@ $ chmod +x build.sh
 $ ./build.sh <sideload/rootless/rootful>
 ```
 
-# In-App Screenshots
-
-|                                             |                                             |                                             |
-|:-------------------------------------------:|:-------------------------------------------:|:-------------------------------------------:|
-| <img src="https://i.imgur.com/4409xKW.png"> | <img src="https://i.imgur.com/gb7uVEY.png"> | <img src="https://i.imgur.com/qrj4EBA.png"> |
-| <img src="https://i.imgur.com/3hFfZJB.png"> | <img src="https://i.imgur.com/8BiwZQN.png"> |
-
 # Contributing
 Contributions to this tweak are greatly appreciated. Feel free to create a pull request if you would like to contribute.
 
@@ -123,4 +123,4 @@ There's many other ways to support this project however, by simply sharing a lin
 Seeing people use this tweak is what keeps me motivated to keep working on it ❤️
 
 # Credits
-- Huge thanks to [@BandarHL](https://github.com/BandarHL) for creating the original BHInstagram/BHInsta project, which SCInsta is based upon.
+- Huge thanks to [@BandarHL](https://github.com/BandarHL) for creating the original BHInstagram project, which SCInsta is based upon.
