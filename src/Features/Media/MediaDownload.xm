@@ -3,8 +3,17 @@
 #import "../../Utils.h"
 #import "../../Downloader/Download.h"
 
-static SCIDownloadDelegate *imageDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:quickLook showProgress:NO];
-static SCIDownloadDelegate *videoDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:share showProgress:YES];
+static SCIDownloadDelegate *imageDownloadDelegate;
+static SCIDownloadDelegate *videoDownloadDelegate;
+
+static void initDownloaders () {
+    // Init downloaders only once
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        imageDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:quickLook showProgress:NO];
+        videoDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:share showProgress:YES];
+    });
+}
 
 /* * Feed * */
 
@@ -54,7 +63,7 @@ static SCIDownloadDelegate *videoDownloadDelegate = [[SCIDownloadDelegate alloc]
     }
 
     // Download image & show in share menu
-    imageDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:quickLook showProgress:NO];
+    initDownloaders();
     [imageDownloadDelegate downloadFileWithURL:photoUrl
                                      fileExtension:[[photoUrl lastPathComponent]pathExtension]
                                           hudLabel:nil
@@ -93,7 +102,7 @@ static SCIDownloadDelegate *videoDownloadDelegate = [[SCIDownloadDelegate alloc]
     }
 
     // Download video & show in share menu
-    videoDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:share showProgress:YES];
+    initDownloaders();
     [videoDownloadDelegate downloadFileWithURL:videoUrl
                                  fileExtension:[[videoUrl lastPathComponent] pathExtension]
                                       hudLabel:nil];
@@ -136,7 +145,7 @@ static SCIDownloadDelegate *videoDownloadDelegate = [[SCIDownloadDelegate alloc]
     }
 
     // Download image & show in share menu
-    imageDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:quickLook showProgress:NO];
+    initDownloaders();
     [imageDownloadDelegate downloadFileWithURL:photoUrl
                                      fileExtension:[[photoUrl lastPathComponent]pathExtension]
                                           hudLabel:nil
@@ -175,7 +184,7 @@ static SCIDownloadDelegate *videoDownloadDelegate = [[SCIDownloadDelegate alloc]
     }
 
     // Download video & show in share menu
-    videoDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:share showProgress:YES];
+    initDownloaders();
     [videoDownloadDelegate downloadFileWithURL:videoUrl
                                      fileExtension:[[videoUrl lastPathComponent] pathExtension]
                                           hudLabel:nil];
@@ -216,7 +225,7 @@ static SCIDownloadDelegate *videoDownloadDelegate = [[SCIDownloadDelegate alloc]
     }
 
     // Download image & show in share menu
-    imageDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:quickLook showProgress:NO];
+    initDownloaders();
     [imageDownloadDelegate downloadFileWithURL:photoUrl
                                      fileExtension:[[photoUrl lastPathComponent]pathExtension]
                                           hudLabel:nil
@@ -277,7 +286,7 @@ static SCIDownloadDelegate *videoDownloadDelegate = [[SCIDownloadDelegate alloc]
     }
 
     // Download video & show in share menu
-    videoDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:share showProgress:YES];
+    initDownloaders();
     [videoDownloadDelegate downloadFileWithURL:videoUrl
                                      fileExtension:[[videoUrl lastPathComponent] pathExtension]
                                           hudLabel:nil];
@@ -313,7 +322,7 @@ static SCIDownloadDelegate *videoDownloadDelegate = [[SCIDownloadDelegate alloc]
     if (!imageUrl) return;
 
     // Download image & preview in quick look
-    imageDownloadDelegate = [[SCIDownloadDelegate alloc] initWithAction:quickLook showProgress:NO];
+    initDownloaders();
     [imageDownloadDelegate downloadFileWithURL:imageUrl
                             fileExtension:[[imageUrl lastPathComponent] pathExtension]
                                  hudLabel:@"Loading"];
