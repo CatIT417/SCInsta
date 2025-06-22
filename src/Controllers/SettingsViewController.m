@@ -161,6 +161,7 @@
             // Section 9: Debugging
             [self newSectionWithTitle:@"Debugging" footer:nil],
             [self newSwitchCellWithTitle:@"Enable FLEX gesture" detailTitle:@"Allows you to hold 5 fingers on the screen to open the FLEX explorer" key:@"flex_instagram" changeAction:@selector(FLEXAction:)],
+            [self newSwitchCellWithTitle:@"Disable safe mode" detailTitle:@"Makes Instagram not reset settings after subsequent crashes" key:@"disable_safe_mode" changeAction:nil],
 
             // Section 10: Credits
             [self newSectionWithTitle:@"Credits" footer:[NSString stringWithFormat:@"SCInsta %@\n\nInstagram v%@", SCIVersionString, [SCIUtils IGVersionString]]],

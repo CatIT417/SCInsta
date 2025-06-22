@@ -429,6 +429,16 @@ BOOL isAuthenticationBeingShown = NO;
 }
 %end
 
+// Disable safe mode (defaults reset upon subsequent crashes)
+%hook IGSafeModeChecker
+- (unsigned long long)crashCount {
+    if ([SCIManager getBoolPref:@"disable_safe_mode"]) {
+        return 0;
+    }
+
+    return %orig;
+}
+%end
 
 /////////////////////////////////////////////////////////////////////////////
 
