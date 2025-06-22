@@ -422,7 +422,9 @@ BOOL isAuthenticationBeingShown = NO;
 }
 %new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        [[objc_getClass("FLEXManager") sharedManager] showExplorer];
+        if ([SCIManager getBoolPref:@"flex_instagram"]) {
+            [[objc_getClass("FLEXManager") sharedManager] showExplorer];
+        }
     }
 }
 %end
