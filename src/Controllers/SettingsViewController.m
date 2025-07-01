@@ -114,7 +114,7 @@
             [self newSectionWithTitle:@"Save media" footer:nil],
             [self newSwitchCellWithTitle:@"Download feed posts" detailTitle:@"Long-press with finger(s) to download posts in the home tab" key:@"dw_feed_posts" changeAction:nil],
             [self newSwitchCellWithTitle:@"Download reels" detailTitle:@"Long-press with finger(s) on a reel to download" key:@"dw_reels" changeAction:nil],
-            [self newSwitchCellWithTitle:@"Download reels" detailTitle:@"Long-press with finger(s) while viewing someone's story to download" key:@"dw_story" changeAction:nil],
+            [self newSwitchCellWithTitle:@"Download stories" detailTitle:@"Long-press with finger(s) while viewing someone's story to download" key:@"dw_story" changeAction:nil],
             [self newSwitchCellWithTitle:@"Save profile picture" detailTitle:@"On someone's profile, click their profile picture to enlarge it, then hold to download" key:@"save_profile" changeAction:nil],
             [self newStepperCellWithTitle:@"Use %@ %@ for long-press" key:@"dw_finger_count" min:1 max:5 step:1 label:@"fingers" singularLabel:@"finger"],
             [self newStepperCellWithTitle:@"%@ %@ press to download" key:@"dw_finger_duration" min:0 max:10 step:0.25 label:@"sec" singularLabel:@"sec"],
