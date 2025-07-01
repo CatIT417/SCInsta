@@ -111,6 +111,18 @@ BOOL isAuthenticationBeingShown = NO;
 }
 %end
 
+%hook IGBugReportUploader
+- (id)initWithNetworker:(id)arg1
+         pandoGraphQLService:(id)arg2
+             analyticsLogger:(id)arg3
+                userDefaults:(id)arg4
+         launcherSetProvider:(id)arg5
+shouldPersistLastBugReportId:(id)arg6
+{
+    return nil;
+}
+%end
+
 // Disable anti-screenshot feature on visual messages
 %hook IGStoryViewerContainerView
 - (void)setShouldBlockScreenshot:(BOOL)arg1 viewModel:(id)arg2 { VOID_HANDLESCREENSHOT(%orig); }
