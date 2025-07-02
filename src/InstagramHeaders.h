@@ -328,6 +328,10 @@
 - (id)url;
 @end
 
+@interface _TtC27IGGalleryDestinationToolbar31IGGalleryDestinationToolbarView : UIView
+@property(nonatomic, copy, readwrite) NSArray *tools;
+@end
+
 
 /////////////////////////////////////////////////////////////////////////////
 

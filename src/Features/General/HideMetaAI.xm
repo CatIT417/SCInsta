@@ -197,6 +197,29 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
+// Story
+
+// AI images "add to story" suggestion
+// Demangled name: IGGalleryDestinationToolbar.IGGalleryDestinationToolbarView
+%hook _TtC27IGGalleryDestinationToolbar31IGGalleryDestinationToolbarView
+- (void)setTools:(id)tools {
+    NSArray *newTools = [tools copy];
+
+    NSLog(@"[SCInsta] Hiding meta ai: ai images add to story suggestion");
+
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (SELF == %@)", @(11)];
+        newTools = [tools filteredArrayUsingPredicate:predicate];
+    }
+
+    %orig(newTools);
+
+    return;
+}
+%end
+
+/////////////////////////////////////////////////////////////////////////////
+
 // Other
 
 // Meta AI-branded search bars
