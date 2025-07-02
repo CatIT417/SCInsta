@@ -270,16 +270,16 @@
 
 // Meta AI-branded search bars
 %hook IGSearchBar
-- (id)initWithConfig:(IGSearchBarConfig *)arg1 {
-    return %orig([self sanitizePlaceholderForConfig:arg1]);
+- (id)initWithConfig:(IGSearchBarConfig *)config {
+    return %orig([self sanitizePlaceholderForConfig:config]);
 }
 
-- (id)initWithConfig:(IGSearchBarConfig *)arg1 userSession:(id)arg2 {
-    return %orig([self sanitizePlaceholderForConfig:arg1], arg2);
+- (id)initWithConfig:(IGSearchBarConfig *)config userSession:(id)arg2 {
+    return %orig([self sanitizePlaceholderForConfig:config], arg2);
 }
 
-- (void)setConfig:(IGSearchBarConfig *)arg1 {
-    %orig([self sanitizePlaceholderForConfig:arg1]);
+- (void)setConfig:(IGSearchBarConfig *)config {
+    %orig([self sanitizePlaceholderForConfig:config]);
 
     return;
 }
