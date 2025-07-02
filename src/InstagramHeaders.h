@@ -293,6 +293,13 @@
 @interface IGSearchBarConfig : NSObject
 @end
 
+@interface IGDirectComposer : UIView
+- (NSObject *)patchConfig:(NSObject *)config; // new
+@end
+
+@interface IGDirectComposerConfig : NSObject
+@end
+
 @interface IGAnimatablePlaceholderTextFieldContainer : UIView
 @end
 

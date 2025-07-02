@@ -132,6 +132,52 @@
 }
 %end
 
+// Write with meta ai in message composer
+%hook IGDirectComposer
+- (id)initWithLayoutSpecProvider:(id)arg1
+        userLauncherSetProviding:(id)arg2
+                          config:(IGDirectComposerConfig *)config
+                           style:(id)arg4
+                            text:(id)arg5
+{
+    return %orig(arg1, arg2, [self patchConfig:config], arg4, arg5);
+}
+
+- (id)initWithLayoutSpecProvider:(id)arg1
+        userLauncherSetProviding:(id)arg2
+                          config:(IGDirectComposerConfig *)config
+                           style:(id)arg4
+                            text:(id)arg5
+           shouldUpdateModeLater:(BOOL)arg6
+{
+    return %orig(arg1, arg2, [self patchConfig:config], arg4, arg5, arg6);
+}
+
+- (void)setConfig:(IGDirectComposerConfig *)config {
+    %orig([self patchConfig:config]);
+
+    return;
+}
+
+%new - (IGDirectComposerConfig *)patchConfig:(IGDirectComposerConfig *)config {
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
+
+        NSLog(@"[SCInsta] Hiding meta ai: reconfiguring direct composer");
+
+        // writeWithAIEnabled
+        @try {
+            [config setValue:0 forKey:@"writeWithAIEnabled"];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"[SCInsta] WARNING: %@\n\nFull object: %@", exception.reason, config);
+        }
+
+    }
+
+    return [config copy];
+}
+%end
+
 /////////////////////////////////////////////////////////////////////////////
 
 // Explore
