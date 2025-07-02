@@ -1,6 +1,6 @@
 name: 🐛 Bug Report
 description: "Notice something isn't working quite right? Help improve the tweak by reporting issues that you experience."
-title: '[bug]: '
+title: 'bug: '
 labels:
   - bug
 assignees:

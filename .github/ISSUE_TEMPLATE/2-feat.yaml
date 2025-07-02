@@ -1,6 +1,6 @@
 name: ✨ Feature Request
 description: Have an idea for a new feature/enhancement? Let us know!
-title: '[feat]: '
+title: 'feat: '
 labels:
   - enhancement
 assignees:
