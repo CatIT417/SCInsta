@@ -161,7 +161,7 @@
             // Section 9: Debugging
             [self newSectionWithTitle:@"Debugging" footer:nil],
             [self newSwitchCellWithTitle:@"Enable FLEX gesture" detailTitle:@"Allows you to hold 5 fingers on the screen to open the FLEX explorer" key:@"flex_instagram" changeAction:@selector(FLEXAction:)],
-            [self newSwitchCellWithTitle:@"Open FLEX on app start" detailTitle:@"Automatically opens the FLEX explorer when the app launches" key:@"flex_app_start" changeAction:nil],
+            [self newSwitchCellWithTitle:@"Open FLEX on app focus" detailTitle:@"Automatically opens the FLEX explorer when the app is focused" key:@"flex_app_start" changeAction:nil],
             [self newSwitchCellWithTitle:@"Disable safe mode" detailTitle:@"Makes Instagram not reset settings after subsequent crashes" key:@"disable_safe_mode" changeAction:nil],
 
             // Section 10: Credits

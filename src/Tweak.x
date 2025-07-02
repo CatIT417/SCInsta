@@ -68,10 +68,6 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
 
     [self authPrompt];
 
-    if ([SCIManager getBoolPref:@"flex_app_start"]) {
-        [[objc_getClass("FLEXManager") sharedManager] showExplorer];
-    }
-
     return true;
 }
 
@@ -87,6 +83,11 @@ BOOL isAuthenticationBeingShown = NO;
     %orig;
 
     [self authPrompt];
+}
+- (void)applicationDidBecomeActive:(id)arg1 {
+    if ([SCIManager getBoolPref:@"flex_app_start"]) {
+        [[objc_getClass("FLEXManager") sharedManager] showExplorer];
+    }
 }
 
 %new - (void)authPrompt {
