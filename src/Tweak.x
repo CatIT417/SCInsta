@@ -41,8 +41,7 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
         @"dw_story": @(YES),
         @"save_profile": @(YES),
         @"dw_finger_count": @(3),
-        @"dw_finger_duration": @(0.5),
-        @"flex_app_start": @(YES)
+        @"dw_finger_duration": @(0.5)
     };
     [[NSUserDefaults standardUserDefaults] registerDefaults:sciDefaults];
 
