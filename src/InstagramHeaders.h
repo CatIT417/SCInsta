@@ -333,9 +333,19 @@
 
 @interface IGImageRequest : NSObject
 - (id)url;
+@end
 
 @interface IGDiscoveryGridItem : NSObject
 - (id)model;
+@end
+
+@interface IGStoryTextEntryControlsOverlayView : UIView
+
+@property (readonly, nonatomic) NSMutableArray *animationTypes;
+@property (readonly, nonatomic) NSMutableArray *effectTypes;
+
+- (void)reloadData;
+
 @end
 
 @interface _TtC27IGGalleryDestinationToolbar31IGGalleryDestinationToolbarView : UIView

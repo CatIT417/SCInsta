@@ -96,6 +96,7 @@
             [self newSwitchCellWithTitle:@"Hide Meta AI" detailTitle:@"Hides the meta ai buttons/functionality within the app" key:@"hide_meta_ai" changeAction:nil],
             [self newSwitchCellWithTitle:@"Copy description" detailTitle:@"Copy the text descriptions by long pressing" key:@"copy_description" changeAction:nil],
             [self newSwitchCellWithTitle:@"Use detailed color picker" detailTitle:@"Long press on the eyedropper tool in stories to customize the text color more precisely" key:@"detailed_color_picker" changeAction:nil],
+            [self newSwitchCellWithTitle:@"Enable hidden text effects/styles" detailTitle:@"Unlocks the use of every effect/style for text in stories" key:@"enable_hidden_texteffectsstyles" changeAction:nil],
             [self newSwitchCellWithTitle:@"Do not save recent searches" detailTitle:@"Search bars will no longer save your recent searches" key:@"no_recent_searches" changeAction:nil],
             [self newSwitchCellWithTitle:@"Hide notes tray" detailTitle:@"Hides the notes tray in the dm inbox" key:@"hide_notes_tray" changeAction:nil],
             [self newSwitchCellWithTitle:@"Hide friends map" detailTitle:@"Hides the friends map icon in the notes tray" key:@"hide_friends_map" changeAction:nil],
