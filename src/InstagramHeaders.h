@@ -333,6 +333,9 @@
 
 @interface IGImageRequest : NSObject
 - (id)url;
+
+@interface IGDiscoveryGridItem : NSObject
+- (id)model;
 @end
 
 @interface _TtC27IGGalleryDestinationToolbar31IGGalleryDestinationToolbarView : UIView
