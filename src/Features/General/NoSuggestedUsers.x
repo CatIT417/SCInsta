@@ -24,3 +24,30 @@
     return %orig;
 } 
 %end
+
+// Suggested users in profile header
+%hook IGProfileHeaderView
+- (id)objectsForListAdapter:(id)arg1 {
+    NSArray *originalObjs = %orig();
+    NSMutableArray *filteredObjs = [NSMutableArray arrayWithCapacity:[originalObjs count]];
+
+    for (id obj in originalObjs) {
+        BOOL shouldHide = NO;
+
+        if ([SCIManager getBoolPref:@"no_suggested_users"]) {
+            if ([obj isKindOfClass:%c(IGProfileChainingModel)]) {
+                NSLog(@"[SCInsta] Hiding suggested users: profile header");
+
+                shouldHide = YES;
+            }
+        }
+
+        // Populate new objs array
+        if (!shouldHide) {
+            [filteredObjs addObject:obj];
+        }
+    }
+
+    return [filteredObjs copy];
+}
+%end
