@@ -17,7 +17,7 @@
 ///////////////////////////////////////////////////////////
 
 // * Tweak version *
-NSString *SCIVersionString = @"v0.8.0-dev";
+NSString *SCIVersionString = @"v0.8.0";
 
 // Variables that work across features
 BOOL seenButtonEnabled = false;
