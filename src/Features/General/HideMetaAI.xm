@@ -132,6 +132,52 @@
 }
 %end
 
+// Write with meta ai in message composer
+%hook IGDirectComposer
+- (id)initWithLayoutSpecProvider:(id)arg1
+        userLauncherSetProviding:(id)arg2
+                          config:(IGDirectComposerConfig *)config
+                           style:(id)arg4
+                            text:(id)arg5
+{
+    return %orig(arg1, arg2, [self patchConfig:config], arg4, arg5);
+}
+
+- (id)initWithLayoutSpecProvider:(id)arg1
+        userLauncherSetProviding:(id)arg2
+                          config:(IGDirectComposerConfig *)config
+                           style:(id)arg4
+                            text:(id)arg5
+           shouldUpdateModeLater:(BOOL)arg6
+{
+    return %orig(arg1, arg2, [self patchConfig:config], arg4, arg5, arg6);
+}
+
+- (void)setConfig:(IGDirectComposerConfig *)config {
+    %orig([self patchConfig:config]);
+
+    return;
+}
+
+%new - (IGDirectComposerConfig *)patchConfig:(IGDirectComposerConfig *)config {
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
+
+        NSLog(@"[SCInsta] Hiding meta ai: reconfiguring direct composer");
+
+        // writeWithAIEnabled
+        @try {
+            [config setValue:0 forKey:@"writeWithAIEnabled"];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"[SCInsta] WARNING: %@\n\nFull object: %@", exception.reason, config);
+        }
+
+    }
+
+    return [config copy];
+}
+%end
+
 /////////////////////////////////////////////////////////////////////////////
 
 // Explore
@@ -197,20 +243,43 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
+// Story
+
+// AI images "add to story" suggestion
+// Demangled name: IGGalleryDestinationToolbar.IGGalleryDestinationToolbarView
+%hook _TtC27IGGalleryDestinationToolbar31IGGalleryDestinationToolbarView
+- (void)setTools:(id)tools {
+    NSArray *newTools = [tools copy];
+
+    NSLog(@"[SCInsta] Hiding meta ai: ai images add to story suggestion");
+
+    if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (SELF == %@)", @(11)];
+        newTools = [tools filteredArrayUsingPredicate:predicate];
+    }
+
+    %orig(newTools);
+
+    return;
+}
+%end
+
+/////////////////////////////////////////////////////////////////////////////
+
 // Other
 
 // Meta AI-branded search bars
 %hook IGSearchBar
-- (id)initWithConfig:(IGSearchBarConfig *)arg1 {
-    return %orig([self sanitizePlaceholderForConfig:arg1]);
+- (id)initWithConfig:(IGSearchBarConfig *)config {
+    return %orig([self sanitizePlaceholderForConfig:config]);
 }
 
-- (id)initWithConfig:(IGSearchBarConfig *)arg1 userSession:(id)arg2 {
-    return %orig([self sanitizePlaceholderForConfig:arg1], arg2);
+- (id)initWithConfig:(IGSearchBarConfig *)config userSession:(id)arg2 {
+    return %orig([self sanitizePlaceholderForConfig:config], arg2);
 }
 
-- (void)setConfig:(IGSearchBarConfig *)arg1 {
-    %orig([self sanitizePlaceholderForConfig:arg1]);
+- (void)setConfig:(IGSearchBarConfig *)config {
+    %orig([self sanitizePlaceholderForConfig:config]);
 
     return;
 }

@@ -50,7 +50,9 @@
     NSLog(@"[SCInsta] Download: Download started");
 }
 - (void)downloadDidCancel {
-    [self.hud dismiss];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.hud dismiss];
+    });
 
     NSLog(@"[SCInsta] Download: Download cancelled");
 }

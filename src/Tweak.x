@@ -17,7 +17,7 @@
 ///////////////////////////////////////////////////////////
 
 // * Tweak version *
-NSString *SCIVersionString = @"v0.7.1";
+NSString *SCIVersionString = @"v0.8.0";
 
 // Variables that work across features
 BOOL seenButtonEnabled = false;
@@ -83,6 +83,11 @@ BOOL isAuthenticationBeingShown = NO;
 
     [self authPrompt];
 }
+- (void)applicationDidBecomeActive:(id)arg1 {
+    if ([SCIManager getBoolPref:@"flex_app_start"]) {
+        [[objc_getClass("FLEXManager") sharedManager] showExplorer];
+    }
+}
 
 %new - (void)authPrompt {
     // Padlock (biometric auth)
@@ -103,6 +108,18 @@ BOOL isAuthenticationBeingShown = NO;
 %hook IGWindow
 - (void)showDebugMenu {
     return;
+}
+%end
+
+%hook IGBugReportUploader
+- (id)initWithNetworker:(id)arg1
+         pandoGraphQLService:(id)arg2
+             analyticsLogger:(id)arg3
+                userDefaults:(id)arg4
+         launcherSetProvider:(id)arg5
+shouldPersistLastBugReportId:(id)arg6
+{
+    return nil;
 }
 %end
 
@@ -422,11 +439,23 @@ BOOL isAuthenticationBeingShown = NO;
 }
 %new - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        [[objc_getClass("FLEXManager") sharedManager] showExplorer];
+        if ([SCIManager getBoolPref:@"flex_instagram"]) {
+            [[objc_getClass("FLEXManager") sharedManager] showExplorer];
+        }
     }
 }
 %end
 
+// Disable safe mode (defaults reset upon subsequent crashes)
+%hook IGSafeModeChecker
+- (unsigned long long)crashCount {
+    if ([SCIManager getBoolPref:@"disable_safe_mode"]) {
+        return 0;
+    }
+
+    return %orig;
+}
+%end
 
 /////////////////////////////////////////////////////////////////////////////
 

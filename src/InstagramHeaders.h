@@ -293,6 +293,13 @@
 @interface IGSearchBarConfig : NSObject
 @end
 
+@interface IGDirectComposer : UIView
+- (NSObject *)patchConfig:(NSObject *)config; // new
+@end
+
+@interface IGDirectComposerConfig : NSObject
+@end
+
 @interface IGAnimatablePlaceholderTextFieldContainer : UIView
 @end
 
@@ -326,6 +333,23 @@
 
 @interface IGImageRequest : NSObject
 - (id)url;
+@end
+
+@interface IGDiscoveryGridItem : NSObject
+- (id)model;
+@end
+
+@interface IGStoryTextEntryControlsOverlayView : UIView
+
+@property (readonly, nonatomic) NSMutableArray *animationTypes;
+@property (readonly, nonatomic) NSMutableArray *effectTypes;
+
+- (void)reloadData;
+
+@end
+
+@interface _TtC27IGGalleryDestinationToolbar31IGGalleryDestinationToolbarView : UIView
+@property(nonatomic, copy, readwrite) NSArray *tools;
 @end
 
 
