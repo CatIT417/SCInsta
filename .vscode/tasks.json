@@ -4,12 +4,25 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build SCInsta for development",
+            "label": "Compile tweak and deploy to LiveContainer",
+            "type": "shell",
+            "command": "./build-dev.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "Build SCInsta and deploy with IPA",
             "type": "shell",
             "command": "./build-dev.sh true",
             "group": {
                 "kind": "build",
-                "isDefault": true
             },
             "presentation": {
                 "reveal": "always",

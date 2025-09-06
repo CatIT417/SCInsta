@@ -49,4 +49,6 @@ packages
 
 .pyzule*
 .cyan*
+.ipapatch*
 dumps
+livecontainer
