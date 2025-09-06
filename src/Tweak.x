@@ -84,6 +84,8 @@ BOOL isAuthenticationBeingShown = NO;
     [self authPrompt];
 }
 - (void)applicationDidBecomeActive:(id)arg1 {
+    %orig;
+    
     if ([SCIManager getBoolPref:@"flex_app_start"]) {
         [[objc_getClass("FLEXManager") sharedManager] showExplorer];
     }
